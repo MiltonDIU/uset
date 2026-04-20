@@ -2,16 +2,17 @@
 
 namespace App\Providers\Filament;
 
-use Filament\Http\Middleware\Authenticate;
 use BezhanSalleh\FilamentShield\FilamentShieldPlugin;
+use Biostate\FilamentMenuBuilder\FilamentMenuBuilderPlugin;
+use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
+use Filament\Navigation\NavigationItem;
 use Filament\Pages\Dashboard;
 use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
-use Filament\Navigation\NavigationItem;
 use Filament\Widgets\AccountWidget;
 use Filament\Widgets\FilamentInfoWidget;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
@@ -57,6 +58,7 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->plugins([
                 FilamentShieldPlugin::make(),
+                FilamentMenuBuilderPlugin::make(),
             ])
             ->authMiddleware([
                 Authenticate::class,
@@ -76,16 +78,16 @@ class AdminPanelProvider extends PanelProvider
 
         foreach (Module::allEnabled() as $module) {
             $panel->discoverResources(
-                in: $module->getPath() . '/Filament/Resources',
-                for: 'Modules\\' . $module->getStudlyName() . '\\Filament\\Resources'
+                in: $module->getPath().'/Filament/Resources',
+                for: 'Modules\\'.$module->getStudlyName().'\\Filament\\Resources'
             );
             $panel->discoverPages(
-                in: $module->getPath() . '/Filament/Pages',
-                for: 'Modules\\' . $module->getStudlyName() . '\\Filament\\Pages'
+                in: $module->getPath().'/Filament/Pages',
+                for: 'Modules\\'.$module->getStudlyName().'\\Filament\\Pages'
             );
             $panel->discoverWidgets(
-                in: $module->getPath() . '/Filament/Widgets',
-                for: 'Modules\\' . $module->getStudlyName() . '\\Filament\\Widgets'
+                in: $module->getPath().'/Filament/Widgets',
+                for: 'Modules\\'.$module->getStudlyName().'\\Filament\\Widgets'
             );
         }
 

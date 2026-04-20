@@ -1,8 +1,13 @@
 <?php
 
+use Illuminate\Auth\AuthenticationException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
+use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
+use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -14,22 +19,22 @@ return Application::configure(basePath: dirname(__DIR__))
         //
     })
     ->withExceptions(function (Exceptions $exceptions): void {
-        $exceptions->render(function (\Throwable $e, \Illuminate\Http\Request $request) {
+        $exceptions->render(function (Throwable $e, Request $request) {
             if ($request->is('api/*')) {
                 $code = 500;
                 $message = $e->getMessage() ?: 'Internal Server Error';
                 $errors = [];
 
-                if ($e instanceof \Illuminate\Validation\ValidationException) {
+                if ($e instanceof ValidationException) {
                     $code = 422;
                     $message = $e->getMessage();
                     $errors = $e->errors();
-                } elseif ($e instanceof \Symfony\Component\HttpKernel\Exception\HttpExceptionInterface) {
+                } elseif ($e instanceof HttpExceptionInterface) {
                     $code = $e->getStatusCode();
-                } elseif ($e instanceof \Illuminate\Auth\AuthenticationException) {
+                } elseif ($e instanceof AuthenticationException) {
                     $code = 401;
                     $message = 'Unauthenticated';
-                } elseif ($e instanceof \Illuminate\Database\Eloquent\ModelNotFoundException) {
+                } elseif ($e instanceof ModelNotFoundException) {
                     $code = 404;
                     $message = 'Resource not found';
                 }
@@ -37,7 +42,7 @@ return Application::configure(basePath: dirname(__DIR__))
                 return response()->json([
                     'success' => false,
                     'message' => $message,
-                    'errors'  => $errors,
+                    'errors' => $errors,
                 ], $code);
             }
         });

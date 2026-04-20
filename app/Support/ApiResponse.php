@@ -16,7 +16,7 @@ class ApiResponse
         return response()->json([
             'success' => true,
             'message' => $message,
-            'data'    => $data,
+            'data' => $data,
         ], $code);
     }
 
@@ -30,7 +30,7 @@ class ApiResponse
             'message' => $message,
         ];
 
-        if (!empty($errors)) {
+        if (! empty($errors)) {
             $response['errors'] = $errors;
         }
 
@@ -45,9 +45,9 @@ class ApiResponse
         return response()->json([
             'success' => true,
             'message' => $message,
-            'data'    => $resource->response()->getData()->data,
-            'meta'    => $resource->response()->getData()->meta ?? null,
-            'links'   => $resource->response()->getData()->links ?? null,
+            'data' => $resource->response()->getData()->data,
+            'meta' => $resource->response()->getData()->meta ?? null,
+            'links' => $resource->response()->getData()->links ?? null,
         ], $code);
     }
 }
