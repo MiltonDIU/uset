@@ -120,31 +120,28 @@ class UniversityMenuSeeder extends Seeder
         $children = $itemData['children'] ?? [];
         unset($itemData['children']);
 
-        $itemData['menu_id'] = $menu->id;
+        $name = $itemData['name'];
+        unset($itemData['name']);
+
+        $menuItem = MenuItem::updateOrCreate(
+            [
+                'menu_id' => $menu->id,
+                'name' => $name,
+            ],
+            $itemData
+        );
+
         if ($parent) {
-            $itemData['parent_id'] = $parent->id;
-        }
-
-        $menuItem = MenuItem::where('menu_id', $menu->id)
-            ->where('name', $itemData['name'])
-            ->first();
-
-        if ($menuItem) {
-            $menuItem->fill($itemData);
+            $menuItem->appendToNode($parent)->save();
         } else {
-            $menuItem = new MenuItem($itemData);
+            $menuItem->makeRoot()->save();
         }
 
-        $menuItem->menu_id = $menu->id;
-        $menuItem->parent_id = $parent?->id;
-        $menuItem->save();
-
-        // Refresh the node to ensure it HAS _lft and _rgt populated.
-        // This is crucial for kalnoy/nestedset when using the model as a parent in the next recursive call.
+        // We MUST refresh to get updated lft/rgt for the next recursive calls
         $menuItem->refresh();
 
         foreach ($children as $childData) {
-            $this->saveMenuItem($menu, $childData, $menuItem);
+            $this->saveMenuItem($menu, $childData, $menuItem->fresh());
         }
     }
 }
