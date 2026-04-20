@@ -19,7 +19,13 @@ class UniversityMenuSeeder extends Seeder
             ['name' => 'Main Navigation']
         );
 
+        // Clear existing items for this menu to avoid tree corruption
+        MenuItem::where('menu_id', $headerMenu->id)->delete();
+
         $this->createMenuItems($headerMenu);
+
+        // Fix tree to ensure all coordinates are correct
+        MenuItem::fixTree();
     }
 
     private function createMenuItems(Menu $menu): void
@@ -120,28 +126,13 @@ class UniversityMenuSeeder extends Seeder
         $children = $itemData['children'] ?? [];
         unset($itemData['children']);
 
-        $name = $itemData['name'];
-        unset($itemData['name']);
+        $itemData['menu_id'] = $menu->id;
+        $itemData['parent_id'] = $parent?->id;
 
-        $menuItem = MenuItem::updateOrCreate(
-            [
-                'menu_id' => $menu->id,
-                'name' => $name,
-            ],
-            $itemData
-        );
-
-        if ($parent) {
-            $menuItem->appendToNode($parent)->save();
-        } else {
-            $menuItem->makeRoot()->save();
-        }
-
-        // We MUST refresh to get updated lft/rgt for the next recursive calls
-        $menuItem->refresh();
+        $menuItem = MenuItem::create($itemData);
 
         foreach ($children as $childData) {
-            $this->saveMenuItem($menu, $childData, $menuItem->fresh());
+            $this->saveMenuItem($menu, $childData, $menuItem);
         }
     }
 }
