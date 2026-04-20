@@ -9,9 +9,6 @@ use Illuminate\Database\Seeder;
 
 class UniversityMenuSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
         $headerMenu = Menu::updateOrCreate(
@@ -19,120 +16,110 @@ class UniversityMenuSeeder extends Seeder
             ['name' => 'Main Navigation']
         );
 
-        // Clear existing items for this menu to avoid tree corruption
+        // Clear existing items completely
         MenuItem::where('menu_id', $headerMenu->id)->delete();
 
-        $this->createMenuItems($headerMenu);
+        $menuId = $headerMenu->id;
 
-        // Fix tree to ensure all coordinates are correct
-        MenuItem::fixTree();
-    }
-
-    private function createMenuItems(Menu $menu): void
-    {
-        // Primary Menu Items
-        $menuItems = [
+        $tree = [
             [
-                'name' => 'Home',
-                'type' => MenuItemType::Link,
-                'url' => '/',
-                'target' => '_self',
+                'name'    => 'Home',
+                'type'    => MenuItemType::Link->value,
+                'url'     => '/',
+                'target'  => '_self',
+                'menu_id' => $menuId,
             ],
             [
-                'name' => 'About',
-                'type' => MenuItemType::Link,
-                'url' => '/about',
-                'target' => '_self',
+                'name'    => 'About',
+                'type'    => MenuItemType::Link->value,
+                'url'     => '/about',
+                'target'  => '_self',
+                'menu_id' => $menuId,
             ],
             [
-                'name' => 'Academics',
-                'type' => MenuItemType::Link,
-                'url' => '#',
-                'target' => '_self',
+                'name'     => 'Academics',
+                'type'     => MenuItemType::Link->value,
+                'url'      => '#',
+                'target'   => '_self',
+                'menu_id'  => $menuId,
                 'children' => [
                     [
-                        'name' => 'Academic Programs',
-                        'type' => MenuItemType::Link,
-                        'url' => '/academics',
-                        'target' => '_self',
+                        'name'    => 'Academic Programs',
+                        'type'    => MenuItemType::Link->value,
+                        'url'     => '/academics',
+                        'target'  => '_self',
+                        'menu_id' => $menuId,
                     ],
                     [
-                        'name' => 'Admission',
-                        'type' => MenuItemType::Link,
-                        'url' => '/admission',
-                        'target' => '_self',
+                        'name'    => 'Admission',
+                        'type'    => MenuItemType::Link->value,
+                        'url'     => '/admission',
+                        'target'  => '_self',
+                        'menu_id' => $menuId,
                     ],
                     [
-                        'name' => 'Faculty',
-                        'type' => MenuItemType::Link,
-                        'url' => '/faculty',
-                        'target' => '_self',
+                        'name'    => 'Faculty',
+                        'type'    => MenuItemType::Link->value,
+                        'url'     => '/faculty',
+                        'target'  => '_self',
+                        'menu_id' => $menuId,
                     ],
                     [
-                        'name' => 'Student Life',
-                        'type' => MenuItemType::Link,
-                        'url' => '/student-life',
-                        'target' => '_self',
+                        'name'    => 'Student Life',
+                        'type'    => MenuItemType::Link->value,
+                        'url'     => '/student-life',
+                        'target'  => '_self',
+                        'menu_id' => $menuId,
                     ],
                 ],
             ],
             [
-                'name' => 'News & Events',
-                'type' => MenuItemType::Link,
-                'url' => '/news-events',
-                'target' => '_self',
+                'name'    => 'News & Events',
+                'type'    => MenuItemType::Link->value,
+                'url'     => '/news-events',
+                'target'  => '_self',
+                'menu_id' => $menuId,
             ],
             [
-                'name' => 'Contact',
-                'type' => MenuItemType::Link,
-                'url' => '/contact',
-                'target' => '_self',
+                'name'    => 'Contact',
+                'type'    => MenuItemType::Link->value,
+                'url'     => '/contact',
+                'target'  => '_self',
+                'menu_id' => $menuId,
             ],
             [
-                'name' => 'Portals',
-                'type' => MenuItemType::Link,
-                'url' => '#',
-                'target' => '_self',
+                'name'     => 'Portals',
+                'type'     => MenuItemType::Link->value,
+                'url'      => '#',
+                'target'   => '_self',
+                'menu_id'  => $menuId,
                 'children' => [
                     [
-                        'name' => 'Student Portal',
-                        'type' => MenuItemType::Link,
-                        'url' => 'https://studentportal.uset.ac/',
-                        'target' => '_blank',
+                        'name'    => 'Student Portal',
+                        'type'    => MenuItemType::Link->value,
+                        'url'     => 'https://studentportal.uset.ac/',
+                        'target'  => '_blank',
+                        'menu_id' => $menuId,
                     ],
                     [
-                        'name' => 'Academic Result',
-                        'type' => MenuItemType::Link,
-                        'url' => 'https://studentportal.uset.ac/academic-result',
-                        'target' => '_blank',
+                        'name'    => 'Academic Result',
+                        'type'    => MenuItemType::Link->value,
+                        'url'     => 'https://studentportal.uset.ac/academic-result',
+                        'target'  => '_blank',
+                        'menu_id' => $menuId,
                     ],
                     [
-                        'name' => 'Teacher Portal',
-                        'type' => MenuItemType::Link,
-                        'url' => 'https://teacherportal.uset.ac/',
-                        'target' => '_blank',
+                        'name'    => 'Teacher Portal',
+                        'type'    => MenuItemType::Link->value,
+                        'url'     => 'https://teacherportal.uset.ac/',
+                        'target'  => '_blank',
+                        'menu_id' => $menuId,
                     ],
                 ],
             ],
         ];
 
-        foreach ($menuItems as $itemData) {
-            $this->saveMenuItem($menu, $itemData);
-        }
-    }
-
-    private function saveMenuItem(Menu $menu, array $itemData, ?MenuItem $parent = null): void
-    {
-        $children = $itemData['children'] ?? [];
-        unset($itemData['children']);
-
-        $itemData['menu_id'] = $menu->id;
-        $itemData['parent_id'] = $parent?->id;
-
-        $menuItem = MenuItem::create($itemData);
-
-        foreach ($children as $childData) {
-            $this->saveMenuItem($menu, $childData, $menuItem);
-        }
+        // rebuildTree handles all lft/rgt calculation internally
+        MenuItem::rebuildTree($tree, false);
     }
 }
