@@ -24,6 +24,15 @@ class ThemeServiceProvider extends ModuleServiceProvider
     }
 
     /**
+     * Bootstrap any application services.
+     */
+    public function boot(): void
+    {
+        parent::boot();
+        $this->loadMigrationsFrom(module_path($this->name, 'Database/migrations'));
+    }
+
+    /**
      * The lowercase version of the module name.
      */
     protected string $nameLower = 'theme';
