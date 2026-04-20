@@ -13,6 +13,9 @@ class ThemeService
     {
         if (! $this->theme) {
             $slug = Cache::rememberForever('active_theme_slug', function () {
+                if (!\Illuminate\Support\Facades\Schema::hasTable('themes')) {
+                    return 'default';
+                }
                 $theme = Theme::active() ?? Theme::where('slug', 'default')->first();
 
                 return $theme?->slug ?? 'default';

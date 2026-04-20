@@ -1,245 +1,158 @@
 @extends(app(\Modules\Theme\app\Services\ThemeService::class)->view('layouts.master'))
 
 @section('content')
-    <!-- Hero Section -->
-    <section class="hero-slider">
-
-        <div class="hero-slide" style="background-image: url('{{ theme_asset('img/new_banner_1.jpeg') }}')">
-            <div class="container hero-content">
-                <div class="row">
-                    <div class="col-lg-8">
-                        <h1 class="display-4 font-weight-bold mb-4 mt-4">
-                            USET Chairman Meets and Congratulates Newly Appointed UGC Chairman
-                        </h1>
-                        <p class="lead">
-                            Join our vibrant community of learners and innovators
-                        </p>
-                        <div class="d-flex flex-wrap">
-                            <a href="#" class="btn btn-success btn-lg mr-3 mb-3">Campus Life</a>
-                            <a href="#" class="btn btn-outline-light btn-lg mb-3">Join Us</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="hero-slide" style="background-image: url('{{ theme_asset('img/AcademicCM.jpg') }}')">
-            <div class="container hero-content">
-                <div class="row">
-                    <div class="col-lg-8">
-                        <h1 class="display-4 font-weight-bold mb-4 mt-4">
-                            1st Academic Council Meeting of USET
-                        </h1>
-                        <p class="lead">
-                            The first Academic Council Meeting of the University of
-                            Science and Engineering Technology (USET) marked a significant
-                            milestone in shaping the institution’s academic framework.
-                        </p>
-                        <div class="d-flex flex-wrap">
-                            <a href="#" class="btn btn-outline-light btn-lg mb-3">Learn More</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="hero-slide" style="background-image: url('{{ theme_asset('img/10001.jpeg') }}')">
-            <div class="container hero-content">
-                <div class="row">
-                    <div class="col-lg-8">
-                        <div class="carousel-content">
-                            <h1 class="display-4 font-weight-bold mb-4 university-name mt-4">
-                                University of Skill Enrichment & Technology
+    @if(isset($page) && is_array($page->content))
+        @foreach($page->content as $block)
+            @php
+                $blockType = $block['type'];
+                $blockData = $block['data'] ?? $block;
+                $viewPath = app(\Modules\Theme\app\Services\ThemeService::class)->view('sections.' . $blockType);
+            @endphp
+            
+            @if(view()->exists($viewPath))
+                @include($viewPath, ['content' => $blockData])
+            @endif
+        @endforeach
+    @else
+        <!-- Fallback to static content if no CMS page is found -->
+        <!-- Hero Section -->
+        <section class="hero-slider">
+            <div class="hero-slide" style="background-image: url('{{ theme_asset('img/new_banner_1.jpeg') }}')">
+                <div class="container hero-content">
+                    <div class="row">
+                        <div class="col-lg-8">
+                            <h1 class="display-4 font-weight-bold mb-4 mt-4">
+                                USET Chairman Meets and Congratulates Newly Appointed UGC Chairman
                             </h1>
-                            <p class="lead university-slogan">
-                                Bangladesh's First Skill-Based University
+                            <p class="lead">
+                                Join our vibrant community of learners and innovators
                             </p>
                             <div class="d-flex flex-wrap">
-                                <a href="#" class="btn btn-success btn-lg mr-3 mb-3">Apply Now</a>
-                                <a href="#" class="btn btn-outline-light btn-lg mb-3">Explore
-                                    Programs</a>
+                                <a href="#" class="btn btn-success btn-lg mr-3 mb-3">Campus Life</a>
+                                <a href="#" class="btn btn-outline-light btn-lg mb-3">Join Us</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+            <!-- ... other slides ... -->
+            <div class="hero-slide" style="background-image: url('{{ theme_asset('img/AcademicCM.jpg') }}')">
+                <div class="container hero-content">
+                    <div class="row">
+                        <div class="col-lg-8">
+                            <h1 class="display-4 font-weight-bold mb-4 mt-4">
+                                1st Academic Council Meeting of USET
+                            </h1>
+                            <p class="lead">
+                                The first Academic Council Meeting of the University of
+                                Science and Engineering Technology (USET) marked a significant
+                                milestone in shaping the institution’s academic framework.
+                            </p>
+                            <div class="d-flex flex-wrap">
+                                <a href="#" class="btn btn-outline-light btn-lg mb-3">Learn More</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-        <div class="hero-slide" style="background-image: url('{{ theme_asset('img/b-004.jpeg') }}')">
-            <div class="container hero-content">
+        <!-- why-choose-section -->
+        <section class="why-choose-section">
+            <div class="container">
+                <div class="text-center mb-5">
+                    <span class="badge badge-success px-3 py-2 mb-3">Why USET?</span>
+                    <h2 class="section-title h1 mb-3">What Makes Us Different</h2>
+                    <p class="lead text-muted mb-0 mx-auto" style="max-width: 700px">
+                        USET offers a unique approach to higher education in Bangladesh,
+                        focusing on practical skills and industry relevance. Discover what
+                        sets us apart.
+                    </p>
+                </div>
+                <div class="row" id="value-propositions"></div>
+                <div class="text-center mt-5">
+                    <a href="#" class="btn btn-outline-success btn-lg">
+                        Learn More About USET
+                        <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Programs -->
+        <section class="featured-programs-section py-5">
+            <div class="container">
+                <div class="text-center mb-5">
+                    <span class="badge badge-success px-3 py-2 mb-3">Our Programs</span>
+                    <h2 class="section-title h1 mb-3">Featured Academic Programs</h2>
+                    <p class="lead text-muted mb-0 mx-auto" style="max-width: 700px">
+                        Discover our industry-relevant academic programs designed to
+                        prepare you for professional success in the modern workplace.
+                    </p>
+                </div>
+                <div class="row" id="featured-programs"></div>
+                <div class="text-center mt-5">
+                    <a href="#" class="btn btn-outline-success btn-lg">
+                        Explore All Programs
+                        <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Statistics Section -->
+        <section class="py-5 stats-section bg-primary-700">
+            <div class="container">
+                <div class="text-center mb-5">
+                    <h2 class="h1 mb-3 text-white">USET By The Numbers</h2>
+                    <p class="lead mb-0 text-white">Our growth and impact in numbers</p>
+                </div>
                 <div class="row">
-                    <div class="col-lg-8">
-                        <h1 class="display-4 font-weight-bold mb-4 mt-4">
-                            Innovation & Research
-                        </h1>
-                        <p class="lead">
-                            Pioneering the future through cutting-edge research
-                        </p>
-                        <div class="d-flex flex-wrap">
-                            <a href="#" class="btn btn-success btn-lg mr-3 mb-3">Research Centers</a>
-                            <a href="#" class="btn btn-outline-light btn-lg mb-3">Learn More</a>
+                    <!-- Stat items -->
+                    <div class="col-6 col-md-3 mb-4">
+                        <div class="stat-item text-center">
+                            <div class="stat-value text-white" data-target="2020">0</div>
+                            <div class="stat-label text-white">Established</div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3 mb-4">
+                        <div class="stat-item text-center">
+                            <div class="stat-value text-white" data-target="1000">0</div>
+                            <div class="stat-label text-white">Students</div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- why-choose-section -->
-    <section class="why-choose-section">
-        <div class="container">
-            <div class="text-center mb-5">
-                <span class="badge badge-success px-3 py-2 mb-3">Why USET?</span>
-                <h2 class="section-title h1 mb-3">What Makes Us Different</h2>
-                <p class="lead text-muted mb-0 mx-auto" style="max-width: 700px">
-                    USET offers a unique approach to higher education in Bangladesh,
-                    focusing on practical skills and industry relevance. Discover what
-                    sets us apart.
-                </p>
-            </div>
-
-            <div class="row" id="value-propositions">
-                <!-- Value propositions will be loaded dynamically -->
-            </div>
-
-            <div class="text-center mt-5">
-                <a href="#" class="btn btn-outline-success btn-lg">
-                    Learn More About USET
-                    <i class="fas fa-arrow-right ml-2"></i>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Featured Programs -->
-    <section class="featured-programs-section py-5">
-        <div class="container">
-            <div class="text-center mb-5">
-                <span class="badge badge-success px-3 py-2 mb-3">Our Programs</span>
-                <h2 class="section-title h1 mb-3">Featured Academic Programs</h2>
-                <p class="lead text-muted mb-0 mx-auto" style="max-width: 700px">
-                    Discover our industry-relevant academic programs designed to
-                    prepare you for professional success in the modern workplace.
-                </p>
-            </div>
-
-            <div class="row" id="featured-programs">
-                <!-- Programs will be loaded dynamically via JavaScript -->
-            </div>
-
-            <div class="text-center mt-5">
-                <a href="#" class="btn btn-outline-success btn-lg">
-                    Explore All Programs
-                    <i class="fas fa-arrow-right ml-2"></i>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Statistics Section -->
-    <section class="py-5 stats-section bg-primary-700">
-        <div class="container">
-            <div class="text-center mb-5">
-                <h2 class="h1 mb-3 text-white">USET By The Numbers</h2>
-                <p class="lead mb-0 text-white">Our growth and impact in numbers</p>
-            </div>
-
-            <div class="row">
-                <div class="col-6 col-md-3 mb-4">
-                    <div class="stat-item text-center">
-                        <div class="stat-value text-white" data-target="2020">0</div>
-                        <div class="stat-label text-white">Established</div>
-                    </div>
+        <!-- News & Events -->
+        <section class="news-events-section py-5">
+            <div class="container">
+                <div class="text-center mb-5">
+                    <span class="badge badge-success px-3 py-2 mb-3">Stay Updated</span>
+                    <h2 class="section-title h1 mb-3">Latest News & Events</h2>
                 </div>
-                <div class="col-6 col-md-3 mb-4">
-                    <div class="stat-item text-center">
-                        <div class="stat-value text-white" data-target="1000">0</div>
-                        <div class="stat-label text-white">Students</div>
+                <div class="row">
+                    <div class="col-lg-6 mb-5 mb-lg-0">
+                        <div id="recent-news"></div>
                     </div>
-                </div>
-                <div class="col-6 col-md-3 mb-4">
-                    <div class="stat-item text-center">
-                        <div class="stat-value text-white" data-target="50">0</div>
-                        <div class="stat-label text-white">Faculty Members</div>
-                    </div>
-                </div>
-                <div class="col-6 col-md-3 mb-4">
-                    <div class="stat-item text-center">
-                        <div class="stat-value text-white" data-target="4">0</div>
-                        <div class="stat-label text-white">Academic Departments</div>
+                    <div class="col-lg-6">
+                        <div id="upcoming-events"></div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- News & Events -->
-    <section class="news-events-section py-5">
-        <div class="container">
-            <div class="text-center mb-5">
-                <span class="badge badge-success px-3 py-2 mb-3">Stay Updated</span>
-                <h2 class="section-title h1 mb-3">Latest News & Events</h2>
-                <p class="lead text-muted mb-0 mx-auto" style="max-width: 700px">
-                    Stay connected with the latest happenings and upcoming events at
-                    USET
-                </p>
-            </div>
-
-            <div class="row">
-                <!-- News Column -->
-                <div class="col-lg-6 mb-5 mb-lg-0">
-                    <div class="section-header d-flex justify-content-between align-items-center mb-4">
-                        <h3 class="h4 mb-0">Recent News</h3>
-                        <a href="#" class="text-success">View All News</a>
-                    </div>
-                    <div id="recent-news">
-                        <!-- News items will be loaded here via JavaScript -->
-                    </div>
-                </div>
-
-                <!-- Events Column -->
-                <div class="col-lg-6">
-                    <div class="section-header d-flex justify-content-between align-items-center mb-4">
-                        <h3 class="h4 mb-0">Upcoming Events</h3>
-                        <a href="#" class="text-success">View All Events</a>
-                    </div>
-                    <div id="upcoming-events">
-                        <!-- Event items will be loaded here via JavaScript -->
-                    </div>
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <div class="container">
+                <div class="cta-wrapper text-center">
+                    <h2 class="h1 text-white mb-4">Ready to Start Your Educational Journey?</h2>
+                    <a href="#" class="btn btn-light btn-lg text-success">Apply Now</a>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section class="cta-section">
-        <div class="container">
-            <div class="cta-wrapper text-center">
-                <div class="row justify-content-center">
-                    <div class="col-lg-8">
-                        <span class="badge badge-light px-3 py-2 mb-4">Join USET</span>
-                        <h2 class="h1 text-white mb-4">
-                            Ready to Start Your Educational Journey?
-                        </h2>
-                        <p class="lead text-white-75 mb-5">
-                            Join USET and gain the practical skills and knowledge needed
-                            for professional success. Take the first step towards your
-                            future today.
-                        </p>
-                        <div class="cta-buttons d-flex justify-content-center flex-wrap">
-                            <a href="#" class="btn btn-light btn-lg text-success mr-3 mb-3">
-                                <i class="fas fa-paper-plane mr-2"></i>
-                                Apply Now
-                            </a>
-                            <a href="#" class="btn btn-outline-light btn-lg mb-3">
-                                <i class="fas fa-envelope mr-2"></i>
-                                Contact Us
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+        </section>
+    @endif
 @endsection
 
 @push('scripts')

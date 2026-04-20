@@ -1,0 +1,11 @@
+{
+    "name": "CMS",
+    "alias": "cms",
+    "description": "Content Management System module with page builder support.",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\CMS\\app\\Providers\\CMSServiceProvider"
+    ],
+    "files": []
+}
