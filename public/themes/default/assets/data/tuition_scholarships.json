@@ -1,0 +1,268 @@
+{
+  "tuitionFees": {
+    "programCredits": {
+      "BA_English": 140,
+      "BSc_CSE": 154,
+      "BSS_Economics": 140,
+      "BBA": 140,
+      "BSc_EEE": 140
+    },
+    "totalTuitionFee": {
+        "BSc_CSE": 347700,
+        "BSS_Economics": 243000,
+        "BBA": 268000,
+        "BSc_EEE": 320800,
+        "BA_English": 241200
+    },
+    "undergraduatePerCredit": {
+      "BA_English": 2000,
+      "BSc_CSE": 2200,
+      "BSS_Economics": 2000,
+      "BBA": 2000,
+      "BSc_EEE": 2200
+    },
+    "otherFees": {
+      "admissionFee": 15000,
+      "registrationFeePerSemester": {
+        "BA_English": 11000,
+        "BSc_CSE": 14000,
+        "BSS_Economics": 11000,
+        "BBA": 11000,
+        "BSc_EEE": 14000
+      },
+      "projectFees": {
+        "BA_English": 12000,
+        "BSc_CSE": 15000,
+        "BSS_Economics": 10000,
+        "BBA": 15000,
+        "BSc_EEE": 12000
+      }
+    }
+  },
+  "scholarships": [
+    {
+      "type": "Merit-Based",
+      "criteria": "SSC & HSC Results",
+      "benefits": [
+        {
+          "requirement": "Golden 5.00 in SSC & HSC both",
+          "discount": 100,
+          "description": "Full tuition waiver"
+        },
+        {
+          "requirement": "Both 5.00 in SSC & HSC",
+          "discount": 90,
+          "description": "90% tuition waiver"
+        },
+        {
+          "requirement": "Golden 5.00 in HSC",
+          "discount": 80,
+          "description": "80% tuition waiver"
+        },
+        {
+          "requirement": "5.00 in HSC",
+          "discount": 70,
+          "description": "70% tuition waiver"
+        },
+        {
+          "requirement": "4.76-4.99 in HSC",
+          "discount": 60,
+          "description": "60% tuition waiver"
+        },
+        {
+          "requirement": "4.51-4.75 in HSC",
+          "discount": 55,
+          "description": "55% tuition waiver"
+        },
+        {
+          "requirement": "4.26-4.49 in HSC",
+          "discount": 50,
+          "description": "50% tuition waiver"
+        },
+        {
+          "requirement": "4.00-4.25 in HSC",
+          "discount": 45,
+          "description": "45% tuition waiver"
+        },
+        {
+          "requirement": "3.76-3.99 in HSC",
+          "discount": 40,
+          "description": "40% tuition waiver"
+        },
+        {
+          "requirement": "3.51-3.75 in HSC",
+          "discount": 30,
+          "description": "30% tuition waiver"
+        },
+        {
+          "requirement": "3.26-3.50 in HSC",
+          "discount": 20,
+          "description": "20% tuition waiver"
+        },
+        {
+          "requirement": "3.00-3.25 in HSC",
+          "discount": 10,
+          "description": "10% tuition waiver"
+        }
+      ]
+    },
+    {
+      "type": "Merit-Based",
+      "criteria": "Diploma Results",
+      "benefits": [
+        {
+          "requirement": "4.00 in Diploma",
+          "discount": 100,
+          "description": "Full tuition waiver"
+        },
+        {
+          "requirement": "3.90-3.99 in Diploma",
+          "discount": 90,
+          "description": "90% tuition waiver"
+        },
+        {
+          "requirement": "3.80-3.89 in Diploma",
+          "discount": 80,
+          "description": "80% tuition waiver"
+        },
+        {
+          "requirement": "3.71-3.79 in Diploma",
+          "discount": 70,
+          "description": "70% tuition waiver"
+        },
+        {
+          "requirement": "3.66-3.70 in Diploma",
+          "discount": 60,
+          "description": "60% tuition waiver"
+        },
+        {
+          "requirement": "3.60-3.65 in Diploma",
+          "discount": 55,
+          "description": "55% tuition waiver"
+        },
+        {
+          "requirement": "3.56-3.59 in Diploma",
+          "discount": 50,
+          "description": "50% tuition waiver"
+        },
+        {
+          "requirement": "3.50-3.55 in Diploma",
+          "discount": 45,
+          "description": "45% tuition waiver"
+        },
+        {
+          "requirement": "3.40-3.49 in Diploma",
+          "discount": 40,
+          "description": "40% tuition waiver"
+        },
+        {
+          "requirement": "3.25-3.39 in Diploma",
+          "discount": 30,
+          "description": "30% tuition waiver"
+        },
+        {
+          "requirement": "3.00-3.25 in Diploma",
+          "discount": 20,
+          "description": "20% tuition waiver"
+        },
+        {
+          "requirement": "2.50-2.99 in Diploma",
+          "discount": 10,
+          "description": "10% tuition waiver"
+        }
+      ]
+    },
+    {
+      "type": "Merit-Based",
+      "criteria": "English Medium Results (O Level & A Level)",
+      "benefits": [
+        {
+          "requirement": "All A* in O Level & A Level",
+          "discount": 100,
+          "description": "Full tuition waiver"
+        },
+        {
+          "requirement": "2 A* in A Level",
+          "discount": 90,
+          "description": "90% tuition waiver"
+        },
+        {
+          "requirement": "2 A in A Level",
+          "discount": 80,
+          "description": "80% tuition waiver"
+        },
+        {
+          "requirement": "1A & 1B in A Level",
+          "discount": 70,
+          "description": "70% tuition waiver"
+        },
+        {
+          "requirement": "5A in O Level & 2B in A Level",
+          "discount": 60,
+          "description": "60% tuition waiver"
+        },
+        {
+          "requirement": "3A, 2B in O Level & 2B in A Level",
+          "discount": 50,
+          "description": "50% tuition waiver"
+        },
+        {
+          "requirement": "5B in O Level & 2B in A Level",
+          "discount": 40,
+          "description": "40% tuition waiver"
+        },
+        {
+          "requirement": "5B in O Level & 2C in A Level",
+          "discount": 30,
+          "description": "30% tuition waiver"
+        },
+        {
+          "requirement": "4B & 3C in O Level & A Level",
+          "discount": 20,
+          "description": "20% tuition waiver"
+        }
+      ]
+    },
+    {
+      "type": "Continuing Student",
+      "criteria": "SGPA at University",
+      "benefits": [
+        {
+          "requirement": "SGPA 4.00",
+          "discount": 75,
+          "description": "75% tuition waiver for next semester"
+        },
+        {
+          "requirement": "SGPA 3.90-3.99",
+          "discount": 60,
+          "description": "60% tuition waiver for next semester"
+        },
+        {
+          "requirement": "SGPA 3.85-3.89",
+          "discount": 50,
+          "description": "50% tuition waiver for next semester"
+        },
+        {
+          "requirement": "SGPA 3.80-3.84",
+          "discount": 40,
+          "description": "40% tuition waiver for next semester"
+        },
+        {
+          "requirement": "SGPA 3.71-3.80",
+          "discount": 30,
+          "description": "30% tuition waiver for next semester"
+        },
+        {
+          "requirement": "SGPA 3.60-3.70",
+          "discount": 20,
+          "description": "20% tuition waiver for next semester"
+        },
+        {
+          "requirement": "SGPA 3.50-3.59",
+          "discount": 10,
+          "description": "10% tuition waiver for next semester"
+        }
+      ]
+    }
+  ]
+}

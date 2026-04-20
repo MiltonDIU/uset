@@ -1,0 +1,704 @@
+/* Life at USET Section Styles */
+.life-at-uset {
+    background-color: #f8f9fa;
+}
+
+.badge.bg-success-light {
+    background-color: rgba(40, 167, 69, 0.1);
+    font-size: 0.9rem;
+    padding: 0.5rem 1.25rem;
+    border-radius: 30px;
+    font-weight: 500;
+    color: #28a745;
+}
+
+.section-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.divider-line {
+    height: 2px;
+    width: 40px;
+    background-color: #28a745;
+    display: inline-block;
+}
+
+.life-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease;
+    height: 100%;
+}
+
+.life-card:hover {
+    transform: translateY(-5px);
+}
+
+.life-card-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+}
+
+.life-card-icon i {
+    font-size: 1.5rem;
+}
+
+.life-card h3 {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+    color: #212529;
+}
+
+.life-features {
+    list-style: none;
+    padding: 0;
+    margin-top: 1.5rem;
+}
+
+.life-features li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.75rem;
+    color: #495057;
+}
+
+.life-features i {
+    color: #28a745;
+    margin-right: 0.75rem;
+    font-size: 0.9rem;
+}
+
+.life-stats {
+    padding-top: 3rem;
+    border-top: 1px solid #e9ecef;
+}
+
+.stat-item h4 {
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: #28a745;
+    margin-bottom: 0.5rem;
+}
+
+.stat-item p {
+    color: #6c757d;
+    font-size: 1rem;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+@media (max-width: 768px) {
+    .life-card {
+        padding: 1.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .stat-item h4 {
+        font-size: 2rem;
+    }
+}
+
+/* Explore Student Life Styles */
+
+.explore-student-life {
+    padding: 5rem 0;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.section-header h2 {
+    font-size: 3rem;
+    font-weight: 700;
+    color: #1f2937;
+    letter-spacing: -0.5px;
+}
+
+.student-life-tabs .nav-tabs {
+    position: sticky;
+    top: 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 0.75rem;
+    border: none;
+    border-radius: 12px;
+    z-index: 10;
+    margin-bottom: 3rem;
+    justify-content: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.student-life-tabs .nav-link {
+    position: relative;
+    border: none;
+    border-radius: 10px;
+    padding: 0.8rem 1.8rem;
+    font-weight: 500;
+    font-size: 1.1rem;
+    color: #6b7280;
+    background-color: #e5e7eb;
+    margin: 0 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.student-life-tabs .nav-link:hover {
+    background-color: #d1d5db;
+    color: #374151;
+    transform: translateY(-2px);
+}
+
+.student-life-tabs .nav-link.active {
+    background-color: #2dd4bf;
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(45, 212, 191, 0.3);
+    border: none;
+}
+
+.student-life-tabs .nav-link.active::after {
+    content: '';
+    position: absolute;
+    bottom: -0.75rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50%;
+    height: 3px;
+    background: #2dd4bf;
+    border-radius: 2px;
+    transition: width 0.3s ease;
+}
+
+.club-card {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 16px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    animation: slideUp 0.6s ease forwards;
+    padding: 1.2rem;
+    overflow: hidden;
+    height: 350px;
+}
+.club-card img{
+    height: 310px;
+    width: 100%;
+    object-fit: cover;
+}
+
+.club-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    border-color: #2dd4bf;
+    box-shadow: 0 12px 24px rgba(45, 212, 191, 0.2);
+}
+
+.club-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #ecfeff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+.club-icon i {
+    font-size: 1.2rem;
+    color: #2dd4bf;
+}
+
+.tab-content {
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+    padding: 3rem;
+    border-radius: 15px;
+}
+
+.tab-pane {
+    display: none;
+    transition: opacity 0.3s ease;
+}
+
+.tab-pane.active {
+    display: block;
+    animation: fadeIn 0.6s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.progress {
+    height: 1.5rem;
+    border-radius: 0.75rem;
+    background-color: #e5e7eb;
+}
+
+.progress-bar {
+    background-color: #2dd4bf;
+    transition: width 1.5s ease-in-out;
+}
+
+.badge {
+    background-color: #ecfeff;
+    color: #2dd4bf;
+    padding: 0.5rem 1.2rem;
+    border-radius: 1.5rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.bg-light {
+    background-color: #f8fafc !important;
+    border-radius: 12px;
+    padding: 2rem;
+}
+
+.text-success {
+    color: #2dd4bf !important;
+}
+
+.list-unstyled li i {
+    color: #2dd4bf;
+}
+
+@media (max-width: 768px) {
+    .section-header h2 {
+        font-size: 2.2rem;
+    }
+
+    .student-life-tabs .nav-tabs {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: 0.75rem;
+        scrollbar-width: thin;
+    }
+
+    .student-life-tabs .nav-link {
+        white-space: nowrap;
+        font-size: 0.95rem;
+        padding: 0.6rem 1.4rem;
+        margin: 0 0.2rem;
+    }
+
+    .tab-content {
+        padding: 1.5rem;
+    }
+
+    .club-card {
+        padding: 1rem;
+    }
+}
+
+/* Custom Pills Navigation Styles */
+
+.tab-navigation-wrapper {
+    background: #fff;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.custom-pills {
+    border-radius: 10px;
+    display: flex;
+}
+
+.custom-pills .nav-item {
+    flex: 1;
+    margin: 0 0.25rem;
+}
+
+.custom-pills .nav-link {
+    width: 100%;
+    text-align: center;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    color: #495057;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+}
+
+.custom-pills .nav-link i {
+    font-size: 1rem;
+    margin-right: 0.5rem;
+}
+
+.custom-pills .nav-link.active {
+    background-color: #28a745;
+    color: white;
+    box-shadow: 0 2px 8px rgba(40, 167, 69, 0.2);
+}
+
+.custom-pills .nav-link:hover:not(.active) {
+    background-color: rgba(40, 167, 69, 0.1);
+    color: #28a745;
+}
+
+@media (max-width: 768px) {
+    .tabs-container {
+        padding: 0.5rem;
+    }
+
+    .custom-pills {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        padding: 0.5rem;
+    }
+
+    .custom-pills .nav-item {
+        min-width: 120px;
+    }
+
+    .custom-pills .nav-link {
+        padding: 0.5rem;
+        font-size: 0.9rem;
+        white-space: nowrap;
+    }
+
+    .custom-pills::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .tab-navigation-wrapper {
+        border-radius: 15px;
+        padding: 0.25rem;
+    }
+
+    .custom-pills {
+        flex-wrap: wrap;
+        gap: 0.25rem;
+    }
+
+    .custom-pills .nav-link {
+        padding: 0.75rem 1rem;
+        font-size: 0.9rem;
+    }
+}
+
+.tabs-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background: #fff;
+    border-radius: 15px;
+    padding: 0.75rem;
+}
+
+@media (max-width: 768px) {
+    .tabs-container {
+        padding: 0.5rem;
+    }
+
+    .custom-pills {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        padding: 0.5rem;
+    }
+
+    .custom-pills .nav-item {
+        min-width: 120px;
+    }
+
+    .custom-pills .nav-link {
+        padding: 0.5rem;
+        font-size: 0.9rem;
+        white-space: nowrap;
+    }
+}
+
+.feature-icon {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.feature-icon i {
+    font-size: 1.5rem;
+}
+
+.features-list {
+    margin-top: 2rem;
+}
+
+.feature-item {
+    transition: transform 0.3s ease;
+}
+
+.feature-item:hover {
+    transform: translateX(5px);
+}
+
+/* Testimonials Section Styles */
+.testimonials {
+    background: linear-gradient(180deg, #f8f9fa 0%, #e9ecef 100%);
+}
+.section-divider {
+    margin: 1.5rem 0;
+}
+
+.divider-line {
+    display: inline-block;
+    width: 50px;
+    height: 3px;
+    background: #28a745;
+    vertical-align: middle;
+    transition: width 0.3s ease;
+}
+
+.section-header:hover .divider-line {
+    width: 70px;
+}
+
+.bg-success-light {
+    background-color: #d4edda !important;
+    border-radius: 15px;
+}
+
+.testimonial-card {
+    background: #fff;
+    border-radius: 10px;
+    padding: 25px;
+    text-align: left;
+    opacity: 0;
+    transform: translateY(20px);
+    max-width: 450px;
+    height: 200px;
+}
+
+.testimonial-card.animate-in {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.testimonial-img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #28a745;
+    transition: border-color 0.3s ease;
+    flex-shrink: 0;
+}
+
+.testimonial-card:hover .testimonial-img {
+    border-color: #218838;
+}
+
+.quote-icon {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    background: #28a745;
+    color: #fff;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: background 0.3s ease;
+}
+
+.testimonial-card:hover .quote-icon {
+    background: #218838;
+}
+
+.testimonial-header {
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+
+.testimonial-info {
+    flex-grow: 1;
+    min-width: 0;
+}
+
+.testimonial-text {
+    font-size: 1rem;
+    color: #34495e;
+    line-height: 1.5;
+}
+
+.student-name {
+    font-size: 1.1rem;
+    color: #2c3e50;
+}
+
+.student-info {
+    font-size: 0.85rem;
+    color: #6c757d;
+}
+
+.slick-prev,
+.slick-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+    transition: background 0.3s ease;
+}
+
+.slick-prev:hover,
+.slick-next:hover {
+    background: #218838;
+}
+
+.slick-prev {
+    left: -50px;
+}
+
+.slick-next {
+    right: -50px;
+}
+
+.slick-prev i,
+.slick-next i {
+    font-size: 1.2rem;
+}
+
+.slick-dots {
+    bottom: -30px;
+}
+
+.slick-dots li button:before {
+    font-size: 10px;
+    color: #28a745;
+    opacity: 0.5;
+}
+
+.slick-dots li.slick-active button:before {
+    color: #28a745;
+    opacity: 1;
+}
+
+.slick-slide {
+    margin: 0 10px;
+}
+
+.slick-list {
+    margin: 0 -10px;
+}
+
+@media (max-width: 991px) {
+    .slick-prev {
+        left: -30px;
+    }
+
+    .slick-next {
+        right: -30px;
+    }
+
+    .testimonial-card {
+        max-width: 350px;
+    }
+
+    .slick-slide {
+        margin: 0 8px;
+    }
+
+    .slick-list {
+        margin: 0 -8px;
+    }
+}
+
+@media (max-width: 767px) {
+    .section-header h2 {
+        font-size: 1.8rem;
+    }
+
+    .testimonial-img {
+        width: 40px;
+        height: 40px;
+    }
+
+    .testimonial-text {
+        font-size: 0.9rem;
+    }
+
+    .student-name {
+        font-size: 1rem;
+    }
+
+    .student-info {
+        font-size: 0.8rem;
+    }
+
+    .slick-prev,
+    .slick-next {
+        width: 35px;
+        height: 35px;
+    }
+
+    .slick-prev i,
+    .slick-next i {
+        font-size: 1rem;
+    }
+
+    .testimonial-card {
+        max-width: 100%;
+    }
+
+    .slick-slide {
+        margin: 0 5px;
+    }
+
+    .slick-list {
+        margin: 0 -5px;
+    }
+}
+

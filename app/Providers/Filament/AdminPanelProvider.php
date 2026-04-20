@@ -78,16 +78,16 @@ class AdminPanelProvider extends PanelProvider
 
         foreach (Module::allEnabled() as $module) {
             $panel->discoverResources(
-                in: $module->getPath().'/Filament/Resources',
-                for: 'Modules\\'.$module->getStudlyName().'\\Filament\\Resources'
+                in: $module->getPath().'/app/Filament/Resources',
+                for: 'Modules\\'.$module->getStudlyName().'\\app\\Filament\\Resources'
             );
             $panel->discoverPages(
-                in: $module->getPath().'/Filament/Pages',
-                for: 'Modules\\'.$module->getStudlyName().'\\Filament\\Pages'
+                in: $module->getPath().'/app/Filament/Pages',
+                for: 'Modules\\'.$module->getStudlyName().'\\app\\Filament\\Pages'
             );
             $panel->discoverWidgets(
-                in: $module->getPath().'/Filament/Widgets',
-                for: 'Modules\\'.$module->getStudlyName().'\\Filament\\Widgets'
+                in: $module->getPath().'/app/Filament/Widgets',
+                for: 'Modules\\'.$module->getStudlyName().'\\app\\Filament\\Widgets'
             );
         }
 

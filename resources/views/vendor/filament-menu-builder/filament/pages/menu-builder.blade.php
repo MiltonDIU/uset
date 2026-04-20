@@ -3,6 +3,7 @@
         <div class="col-span-4">
             @livewire('menu-item-form', ['menuId' => $this->record->id])
         </div>
+<br>
         <div class="col-span-8">
             @livewire('menu-builder', ['menuId' => $this->record->id])
         </div>

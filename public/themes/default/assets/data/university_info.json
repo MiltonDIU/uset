@@ -1,0 +1,51 @@
+{
+  "name": "University of Skill Enrichment & Technology",
+  "shortName": "USET",
+  "slogan": "Bangladesh's First Skill-Based University",
+  "established": "2020",
+  "location": {
+    "address": "672, Kazi Bari Bus Stand, Bhuigar, Fatullah, Narayanganj-1421",
+    "city": "Narayanganj",
+    "region": "Dhaka",
+    "country": "Bangladesh",
+    "coordinates": {
+      "lat": 23.63063,
+      "lng": 90.50602
+    }
+  },
+  "contact": {
+    "phone": "+8801733360664",
+    "email": "info@uset.ac",
+    "facebook": "https://www.facebook.com/uset.bd",
+    "twitter": "https://twitter.com/uset_bd",
+    "linkedin": "https://www.linkedin.com/school/uset-bangladesh",
+    "instagram": "https://www.instagram.com/uset_bd"
+  },
+  "valuePropositions": [
+    {
+      "title": "First Skill-Based University in Bangladesh",
+      "description": "Pioneering approach to practical, skill-enrichment education with focus on workforce-ready graduates",
+      "icon": "academic-cap"
+    },
+    {
+      "title": "Serving Disadvantaged Areas",
+      "description": "Bringing higher education opportunities to rural and underserved areas with a commitment to educational access",
+      "icon": "map"
+    },
+    {
+      "title": "Industry-Relevant Education",
+      "description": "Practical curriculum designed for employability following the dual technical education system of EU models",
+      "icon": "briefcase"
+    },
+    {
+      "title": "Supporting National Development Goals",
+      "description": "Addressing key challenges in science & technology, contributing to Bangladesh's journey to developed nation status by 2041",
+      "icon": "flag"
+    },
+    {
+      "title": "International Standards with Local Relevance",
+      "description": "International curricula adapted for Bangladesh, focusing on 21st-century skill development",
+      "icon": "globe-alt"
+    }
+  ]
+}

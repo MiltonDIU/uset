@@ -1,0 +1,98 @@
+{
+  "departments": [
+    {
+      "id": "computer-science",
+      "name": "Department of Computer Science and Engineering",
+      "faculty": [
+        {
+          "name": "Farhana Akter Badhon",
+          "position": "Lecturer",
+          "image": "img/Farhana Akter Badhon.jpg"
+        },
+        {
+          "name": "Jamim Hossain Chowdhury",
+          "position": "Lecturer",
+          "image": "img/Jamim Hossain Chowdhury.jpg"
+        },
+        {
+          "name": "Md. Arifur Rahman",
+          "position": "Lecturer",
+          "image": "img/Md. Arifur Rahman.jpg"
+        },
+        {
+          "name": "Moumita Kabir",
+          "position": "Lecturer (on study leave)",
+          "image": "img/Moumita Kabir.jpg"
+        },
+        {
+          "name": "Shamim Ahmed",
+          "position": "Lecturer",
+          "image": "img/shamim ahmed.avif"
+        },
+        {
+          "name": "Zannatul Ferdous Zannat",
+          "position": "Lecturer",
+          "image": "img/Zannatul Ferdous Zannat.jpg"
+        }
+      ]
+    },
+    {
+      "id": "business-admin",
+      "name": "Department of Business Administration",
+      "faculty": [
+        {
+          "name": "Md Abdur Rashid",
+          "position": "Associate Professor, Department Head",
+          "image": "img/Md Abdur Rashid.jpg"
+        },
+        {
+          "name": "Md. Hafizul Islam",
+          "position": "Lecturer",
+          "image": "img/Md. Hafizul Islam.jpg"
+        },
+        {
+          "name": "Abdullah Bin Seraj",
+          "position": "Lecturer",
+          "image": "img/Abdullah Bin Seraj.jpg"
+        },
+        {
+          "name": "Sadia Ahmed Urmi",
+          "position": "Lecturer",
+          "image": "img/Sadia Ahmed Urmi.jpg"
+        }
+      ]
+    },
+    {
+      "id": "english",
+      "name": "Department of English",
+      "faculty": [
+        {
+          "name": "Imrose Afrine",
+          "position": "Lecturer",
+          "image": "img/Imrose Afrine.jpg"
+        },
+        {
+          "name": "Md. Mahbub Alam Khan",
+          "position": "Lecturer",
+          "image": "img/Md. Mahbub Alam Khan.jpg"
+        },
+        {
+          "name": "Zinat Alfaz Pinky",
+          "position": "Lecturer",
+          "image": "img/Zinat Alfaz Pinky.jpg"
+        }
+      ]
+    },
+    {
+      "id": "economics",
+      "name": "Department of Economics",
+      "faculty": [
+        {
+          "name": "Nawazeesh Muhammad Ali",
+          "position": "Lecturer",
+          "image": "img/Nawazeesh Muhammad Ali.jpg"
+        }
+      ]
+    }
+  ]
+}

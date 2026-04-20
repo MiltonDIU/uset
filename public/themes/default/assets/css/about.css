@@ -1,0 +1,676 @@
+/* Page Header Styles */
+.page-header {
+    background: linear-gradient(rgba(40, 167, 69, 0.9), rgba(40, 167, 69, 0.8)), url('../img/about-header.jpg');
+    background-size: cover;
+    background-position: center;
+    padding: 160px 0 80px;
+    position: relative;
+    margin-bottom: 80px;
+}
+
+.page-header::after {
+    content: '';
+    position: absolute;
+    bottom: -50px;
+    left: 0;
+    right: 0;
+    height: 100px;
+    background: #fff;
+    transform: skewY(-3deg);
+    z-index: 1;
+}
+
+/* Hero Section */
+.about-hero {
+    background: linear-gradient(rgba(0, 68, 27, 0.9), rgba(0, 68, 27, 0.8)), url('../img/about-hero.jpg');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    padding: 120px 0 80px;
+    margin-top: 76px;
+    text-align: center;
+}
+
+.about-hero h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    animation: fadeInDown 1s ease;
+}
+
+.about-hero p {
+    font-size: 1.25rem;
+    max-width: 800px;
+    margin: 0 auto;
+    animation: fadeInUp 1s ease;
+}
+
+/* Tabs Section */
+.tabs-section {
+    background-color: #f8f9fa;
+    position: sticky;
+    top: 76px;
+    z-index: 100;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.tab-navigation {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    padding: 1rem 0;
+    flex-wrap: wrap;
+}
+
+.tab-btn {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    background: #f8f9fa;
+    color: #555;
+    border-radius: 30px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.tab-btn:hover {
+    background: rgba(40,167,69,0.1);
+    color: #28a745;
+}
+
+.tab-btn.active {
+    background: #28a745;
+    color: #fff;
+    box-shadow: 0 4px 15px rgba(40,167,69,0.2);
+}
+
+/* Tab Content */
+.tab-content {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.tab-content.active {
+    display: block;
+    opacity: 1;
+}
+
+/* Content Box Styles */
+.content-box {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+    padding: 2rem;
+    margin: 2rem 0;
+}
+
+/* University Overview Styles */
+.about-img {
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+    border-radius: 15px;
+}
+
+.about-img:hover {
+    transform: translateY(-10px);
+}
+
+/* Mission & Vision Section */
+.mission-box, .vision-box {
+    background: #fff;
+    padding: 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+    height: 100%;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.mission-box::before, .vision-box::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(to right, #28a745, #34ce57);
+}
+
+.mission-box h2, .vision-box h2 {
+    color: #28a745;
+    font-size: 1.75rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+    display: inline-block;
+}
+
+.mission-box p, .vision-box p {
+    color: #555;
+    line-height: 1.8;
+    margin-bottom: 1.25rem;
+}
+
+/* Core Values Section */
+.core-values {
+    padding: 60px 0;
+    background-color: #f8f9fa;
+}
+
+.values-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.value-item {
+    background-color: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.value-item h3 {
+    color: #00441B;
+    margin-bottom: 1rem;
+}
+
+/* Facilities Section */
+.facility-card {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+    height: 100%;
+}
+
+.facility-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+}
+
+.facility-icon {
+    width: 80px;
+    height: 80px;
+    background: rgba(40,167,69,0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.facility-card:hover .facility-icon {
+    transform: scale(1.1) rotate(5deg);
+    background: rgba(40,167,69,0.2);
+}
+
+.facility-icon i {
+    font-size: 2rem;
+    color: #28a745;
+}
+
+.facility-card h3 {
+    color: #333;
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.facility-card p {
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 0;
+}
+
+/* History Timeline Styles */
+.timeline {
+    position: relative;
+    padding: 40px 0;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    width: 2px;
+    height: 100%;
+    background: #28a745;
+    transform: translateX(-50%);
+}
+
+.timeline-item {
+    margin-bottom: 40px;
+    position: relative;
+    width: 50%;
+    padding: 0 40px;
+}
+
+.timeline-item:nth-child(odd) {
+    left: 0;
+    text-align: right;
+}
+
+.timeline-item:nth-child(even) {
+    left: 50%;
+}
+
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    top: 20px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 2px solid #28a745;
+    background: #fff;
+    z-index: 1;
+}
+
+.timeline-item:nth-child(odd)::before {
+    right: -8px;
+}
+
+.timeline-item:nth-child(even)::before {
+    left: -8px;
+}
+
+.timeline-content {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+}
+
+.milestone-header {
+    position: relative;
+    background: rgba(40, 167, 69, 0.05);
+    margin: -20px -20px 20px;
+    padding: 15px 20px;
+    border-radius: 8px 8px 0 0;
+}
+
+.year {
+    background: #28a745;
+    color: #fff;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.milestone-icon {
+    width: 40px;
+    height: 40px;
+    background: rgba(40, 167, 69, 0.1);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.milestone-icon i {
+    color: #28a745;
+    font-size: 20px;
+}
+
+/* Leadership Section Styles */
+.leadership-section {
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+}
+
+.leader-card {
+    background: #fff;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    transition: all 0.4s ease;
+    height: 100%;
+}
+
+.leader-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(40,167,69,0.15);
+}
+
+.leader-image {
+    position: relative;
+    padding-top: 100%;
+    overflow: hidden;
+}
+
+.leader-image img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: all 0.5s ease;
+}
+
+.leader-card:hover .leader-image img {
+    transform: scale(1.05);
+}
+
+.social-links {
+    position: absolute;
+    bottom: -40px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    padding: 15px;
+    background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+    transition: all 0.3s ease;
+}
+
+.leader-card:hover .social-links {
+    bottom: 0;
+}
+
+.social-link {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #28a745;
+    transition: all 0.3s ease;
+}
+
+.social-link:hover {
+    background: #28a745;
+    color: #fff;
+    transform: translateY(-3px);
+}
+
+.leader-info {
+    padding: 2rem;
+    text-align: center;
+}
+
+.leader-role {
+    color: #28a745;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 0.5rem;
+}
+
+.leader-info h3 {
+    color: #333;
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.leader-education {
+    color: #666;
+    font-weight: 500;
+    margin-bottom: 0.25rem;
+}
+
+.leader-university {
+    color: #888;
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+}
+
+.leader-quote {
+    position: relative;
+    padding: 1.5rem;
+    background: rgba(40,167,69,0.05);
+    border-radius: 10px;
+    margin-top: 1.5rem;
+}
+
+.leader-quote i {
+    color: #28a745;
+    font-size: 1.5rem;
+    opacity: 0.3;
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+}
+
+.leader-quote p {
+    color: #555;
+    font-style: italic;
+    margin: 0;
+    padding-left: 2rem;
+}
+
+/* Location Section Styles */
+.location-section {
+    background: linear-gradient(135deg, rgba(40, 167, 69, 0.05) 0%, rgba(255, 255, 255, 1) 100%);
+    padding: 5rem 0;
+}
+
+.location-container {
+    position: relative;
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+}
+
+.location-info-wrapper {
+    padding: 3rem;
+    position: relative;
+    z-index: 2;
+}
+
+.info-card {
+    background: #fff;
+    border-radius: 15px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 10px 30px rgba(40, 167, 69, 0.08);
+    transition: all 0.3s ease;
+}
+
+.info-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(40, 167, 69, 0.12);
+}
+
+.info-card-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.info-icon {
+    width: 50px;
+    height: 50px;
+    background: rgba(40, 167, 69, 0.1);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 1rem;
+}
+
+.info-icon i {
+    font-size: 1.5rem;
+    color: #28a745;
+}
+
+.info-title {
+    font-size: 1.25rem;
+    color: #333;
+    margin: 0;
+}
+
+.contact-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding: 0.75rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.contact-item:hover {
+    background: rgba(40, 167, 69, 0.05);
+    transform: translateX(5px);
+}
+
+.contact-item i {
+    width: 24px;
+    color: #28a745;
+    margin-right: 1rem;
+}
+
+.contact-item span {
+    color: #555;
+}
+
+.map-container {
+    position: relative;
+    height: 100%;
+    min-height: 500px;
+    overflow: hidden;
+    border-radius: 20px;
+}
+
+.map-container iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.direction-buttons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.direction-btn {
+    flex: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.btn-primary {
+    background: #28a745;
+    color: white;
+}
+
+.btn-outline {
+    border: 2px solid #28a745;
+    color: #28a745;
+}
+
+.direction-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(40, 167, 69, 0.15);
+    text-decoration: none;
+}
+
+.btn-primary:hover {
+    background: #218838;
+    color: white;
+}
+
+.btn-outline:hover {
+    background: rgba(40, 167, 69, 0.1);
+    border-color: #218838;
+}
+
+@media (max-width: 768px) {
+    .about-hero {
+        padding: 100px 0 60px;
+        margin-top: 60px;
+    }
+
+    .about-hero h1 {
+        font-size: 2.5rem;
+    }
+
+    .tabs-section {
+        top: 60px;
+    }
+
+    .tab-navigation {
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+
+    .tab-btn {
+        padding: 0.5rem 1rem;
+        font-size: 1rem;
+    }
+
+    .content-box {
+        padding: 1.5rem;
+        margin: 1rem 0;
+    }
+
+    .leader-card {
+        margin-bottom: 2rem;
+    }
+
+    .location-info {
+        margin-bottom: 2rem;
+    }
+
+    .map-container iframe {
+        height: 350px;
+    }
+
+    .timeline::before {
+        left: 30px;
+    }
+    
+    .timeline-item {
+        width: 100%;
+        padding-left: 60px;
+        padding-right: 15px;
+    }
+    
+    .timeline-item:nth-child(odd),
+    .timeline-item:nth-child(even) {
+        left: 0;
+        text-align: left;
+    }
+    
+    .timeline-item::before {
+        left: 22px;
+    }
+}
+
+@media (max-width: 576px) {
+    .milestone-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+    
+    .year {
+        align-self: flex-start;
+    }
+}

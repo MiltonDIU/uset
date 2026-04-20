@@ -9,7 +9,7 @@ return [
     ],
     'api_enabled' => true,
     'cache' => [
-        'enabled' => true,
+        'enabled' => false,
         'key' => 'filament-menu-builder',
         'ttl' => 60 * 60 * 24,
     ],
