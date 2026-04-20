@@ -8,6 +8,7 @@ use Filament\Actions\EditAction;
 use Filament\Notifications\Notification;
 use Filament\Actions\Action;
 use Filament\Tables\Columns\IconColumn;
+use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Support\Facades\Cache;
@@ -22,8 +23,8 @@ class ThemesTable
                     ->searchable(),
                 TextColumn::make('slug')
                     ->searchable(),
-                TextColumn::make('thumbnail')
-                    ->searchable(),
+                SpatieMediaLibraryImageColumn::make('thumbnail')
+                    ->collection('thumbnail'),
                 IconColumn::make('is_active')
                     ->boolean(),
                 TextColumn::make('created_at')

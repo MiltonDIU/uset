@@ -2,6 +2,7 @@
 
 namespace Modules\Theme\app\Filament\Resources\ThemeResource\Schemas;
 
+use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
@@ -20,7 +21,8 @@ class ThemeForm
                     ->required(),
                 Textarea::make('description')
                     ->columnSpanFull(),
-                TextInput::make('thumbnail'),
+                SpatieMediaLibraryFileUpload::make('thumbnail')
+                    ->collection('thumbnail'),
                 Toggle::make('is_active')
                     ->label('Set as Active Theme')
                     ->afterStateUpdated(function ($state, $record) {
