@@ -2,17 +2,7 @@
 
 @section('content')
     @if(isset($page) && is_array($page->content))
-        @foreach($page->content as $block)
-            @php
-                $blockType = $block['type'];
-                $blockData = $block['data'] ?? $block;
-                $viewPath = app(\Modules\Theme\app\Services\ThemeService::class)->view('sections.' . $blockType);
-            @endphp
-
-            @if(view()->exists($viewPath))
-                @include($viewPath, ['content' => $blockData])
-            @endif
-        @endforeach
+        @include(app(\Modules\Theme\app\Services\ThemeService::class)->view('partials.cms_blocks'), ['content' => $page->content])
     @else
         <!-- Fallback to static content if no CMS page is found -->
         <!-- Hero Section -->

@@ -13,6 +13,8 @@ use Filament\Forms\Components\Toggle;
 use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Components\Group;
 use Filament\Schemas\Components\Section;
+use Filament\Schemas\Components\Tabs;
+use Filament\Schemas\Components\Tabs\Tab;
 use Filament\Schemas\Schema;
 use Illuminate\Support\Str;
 
@@ -21,47 +23,192 @@ class PageForm
     public static function configure(Schema $schema): Schema
     {
         return $schema
-            ->columns(12) // পুরো লেআউটের জন্য 12 কলাম সিস্টেম
+            ->columns(1)
             ->components([
-                // Left Side - Content Builder (Full width হবে এখন)
-                Group::make([
-                    Section::make('Content Builder')
-                        ->schema([
-                            Builder::make('content')
-                                ->blocks([
-                                    self::getHeroBlock(),
-                                    self::getWhyChooseBlock(),
-                                    self::getFeaturedProgramsBlock(),
-                                    self::getStatsBlock(),
-                                    self::getNewsEventsBlock(),
-                                    self::getCTABlock(),
-                                ])
-                                ->collapsible()
-                                ->cloneable()
-                                ->columnSpanFull(), // FULL WIDTH করার জন্য
-                        ]),
-                ])->columnSpan(9), // 12 এর মধ্যে 9 অংশ নেবে
+                Tabs::make('Page Content Builder')
+                    ->tabs([
+                        Tab::make('Designer')
+                            ->icon('heroicon-o-cursor-arrow-rays')
+                            ->schema([
+                                Section::make('Designer Workspace')
+                                    ->description('Build your page layout here. Use Sections and Columns to structure your content.')
+                                    ->schema([
+                                        Builder::make('content')
+                                            ->label('Sections')
+                                            ->blocks([
+                                                self::getSectionBlock(),
+                                            ])
+                                            ->collapsible()
+                                            ->cloneable()
+                                            ->columnSpanFull()
+                                            ->addActionLabel('Add New Section'),
+                                    ]),
+                            ]),
+                        Tab::make('Settings & SEO')
+                            ->icon('heroicon-o-cog-6-tooth')
+                            ->schema([
+                                Grid::make(2)
+                                    ->schema([
+                                        Section::make('Page Information')
+                                            ->schema([
+                                                TextInput::make('title')
+                                                    ->required()
+                                                    ->live(onBlur: true)
+                                                    ->afterStateUpdated(fn($state, callable $set) => $set('slug', Str::slug($state))),
+                                                TextInput::make('slug')
+                                                    ->required()
+                                                    ->unique('pages', 'slug', ignoreRecord: true),
+                                                Select::make('template')
+                                                    ->options([
+                                                        'home' => 'Home Template',
+                                                        'default' => 'Default (Full Width)',
+                                                        'with_sidebar' => 'Page with Sidebar',
+                                                        'contact' => 'Contact Page',
+                                                    ])
+                                                    ->default('default')
+                                                    ->required(),
+                                                Toggle::make('is_published')
+                                                    ->default(true),
+                                            ])->columnSpan(1),
+                                        Section::make('SEO Settings')
+                                            ->schema([
+                                                TextInput::make('meta_title'),
+                                                Textarea::make('meta_description')
+                                                    ->rows(5),
+                                            ])->columnSpan(1),
+                                    ]),
+                            ]),
+                    ])
+                    ->columnSpanFull(),
+            ]);
+    }
 
-                // Right Side - Page Information & SEO
-                Group::make([
-                    Section::make('Page Information')
-                        ->schema([
-                            TextInput::make('title')
-                                ->required()
-                                ->live(onBlur: true)
-                                ->afterStateUpdated(fn($state, callable $set) => $set('slug', Str::slug($state))),
-                            TextInput::make('slug')
-                                ->required()
-                                ->unique('pages', 'slug', ignoreRecord: true),
-                            Toggle::make('is_published')
-                                ->default(true),
-                        ]),
-                    Section::make('SEO')
-                        ->schema([
-                            TextInput::make('meta_title'),
-                            Textarea::make('meta_description'),
-                        ])->collapsed(),
-                ])->columnSpan(3), // 12 এর মধ্যে 3 অংশ নেবে
+    protected static function getSectionBlock(): Block
+    {
+        return Block::make('layout_section')
+            ->label('Section')
+            ->icon('heroicon-o-squares-plus')
+            ->schema([
+                Grid::make(3)
+                    ->schema([
+                        Select::make('background_color')
+                            ->options([
+                                'bg-white' => 'White',
+                                'bg-light' => 'Light Gray',
+                                'bg-success-light' => 'Success Light',
+                                'bg-primary-700' => 'Dark Blue',
+                            ])->default('bg-white'),
+                        TextInput::make('padding_y')
+                            ->label('Vertical Padding')
+                            ->default('py-5'),
+                        Toggle::make('is_full_width')
+                            ->label('Full Width Page?')
+                            ->default(false),
+                    ]),
+                
+                Grid::make(2)
+                    ->schema([
+                        Select::make('layout')
+                            ->label('Quick Layout')
+                            ->options([
+                                '12' => '1 Column (100%)',
+                                '6,6' => '2 Columns (50% | 50%)',
+                                '4,4,4' => '3 Columns (33% | 33% | 33%)',
+                                '3,3,3,3' => '4 Columns (25% | 25% | 25% | 25%)',
+                                '8,4' => '2 Columns (75% | 25%)',
+                                '4,8' => '2 Columns (25% | 75%)',
+                            ])
+                            ->live()
+                            ->afterStateUpdated(function ($state, callable $set) {
+                                if (! $state) return;
+                                $widths = explode(',', $state);
+                                $columns = [];
+                                foreach ($widths as $width) {
+                                    $columns[] = ['width' => "col-md-{$width}", 'content' => []];
+                                }
+                                $set('columns', $columns);
+                                $set('column_count', count($widths));
+                            }),
+                        TextInput::make('column_count')
+                            ->label('Total Columns')
+                            ->numeric()
+                            ->live()
+                            ->afterStateUpdated(function ($state, callable $set) {
+                                if (! $state || ! is_numeric($state)) return;
+                                $count = (int) $state;
+                                if ($count <= 0 || $count > 12) return;
+                                
+                                $widthPerCol = floor(12 / $count);
+                                if ($widthPerCol < 1) $widthPerCol = 1;
+
+                                $columns = [];
+                                for ($i = 0; $i < $count; $i++) {
+                                    $columns[] = [
+                                        'width' => "col-md-{$widthPerCol}",
+                                        'content' => [],
+                                    ];
+                                }
+                                $set('columns', $columns);
+                                $set('layout', null);
+                            }),
+                    ]),
+
+                Repeater::make('columns')
+                    ->label('Columns')
+                    ->schema([
+                        Builder::make('content')
+                            ->label('Column Content')
+                            ->blocks([
+                                self::getRichTextBlock(),
+                                self::getImageBlock(),
+                                self::getHeroBlock(),
+                                self::getWhyChooseBlock(),
+                                self::getFeaturedProgramsBlock(),
+                                self::getStatsBlock(),
+                                self::getNewsEventsBlock(),
+                                self::getCTABlock(),
+                            ])
+                            ->collapsible()
+                            ->cloneable()
+                            ->addActionLabel('Add Block'),
+                    ])
+                    ->grid(fn($get) => min(4, (int) ($get('column_count') ?: 1)))
+                    ->collapsible()
+                    ->itemLabel(fn(array $state): ?string => $state['width'] ?? 'Column')
+                    ->addActionLabel('Add New Column'),
+            ]);
+    }
+
+    protected static function getRichTextBlock(): Block
+    {
+        return Block::make('rich_text')
+            ->label('Rich Text Content')
+            ->icon('heroicon-o-document-text')
+            ->schema([
+                Textarea::make('content')
+                    ->label('HTML/Text Content')
+                    ->rows(10)
+                    ->required(),
+            ]);
+    }
+
+    protected static function getImageBlock(): Block
+    {
+        return Block::make('single_image')
+            ->label('Single Image')
+            ->icon('heroicon-o-camera')
+            ->schema([
+                FileUpload::make('image')
+                    ->image()
+                    ->directory('pages')
+                    ->required(),
+                TextInput::make('caption'),
+                Select::make('alignment')
+                    ->options([
+                        'text-left' => 'Left',
+                        'text-center' => 'Center',
+                        'text-right' => 'Right',
+                    ])->default('text-center'),
             ]);
     }
 
@@ -92,7 +239,7 @@ class PageForm
                             ])->columnSpanFull(),
                     ])
                     ->collapsible()
-                    ->itemLabel(fn(array $state): ?string => $state['heading'] ?? null),
+                    ->itemLabel(fn (array $state): ?string => $state['heading'] ?? null),
             ]);
     }
 
@@ -102,15 +249,15 @@ class PageForm
             ->label('Why Choose Section')
             ->icon('heroicon-o-question-mark-circle')
             ->schema([
-                Grid::make(12) // 12 কলাম গ্রিড সিস্টেম
-                ->schema([
-                    TextInput::make('badge')
-                        ->default('Why USET?')
-                        ->columnSpan(3),
-                    TextInput::make('title')
-                        ->required()
-                        ->columnSpan(9),
-                ]),
+                Grid::make(12)
+                    ->schema([
+                        TextInput::make('badge')
+                            ->default('Why USET?')
+                            ->columnSpan(3),
+                        TextInput::make('title')
+                            ->required()
+                            ->columnSpan(9),
+                    ]),
                 Textarea::make('description')
                     ->columnSpanFull(),
                 Repeater::make('items')
