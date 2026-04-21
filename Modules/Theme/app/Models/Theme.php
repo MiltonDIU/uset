@@ -12,7 +12,7 @@ class Theme extends Model implements HasMedia
 {
     use InteractsWithMedia;
 
-    protected $fillable = ['name', 'slug', 'description', 'thumbnail', 'is_active'];
+    protected $fillable = ['name', 'slug', 'description', 'thumbnail', 'is_active', 'framework'];
 
     public function registerMediaConversions(?Media $media = null): void
     {
@@ -36,6 +36,24 @@ class Theme extends Model implements HasMedia
     {
         static::query()->update(['is_active' => false]);
         $this->update(['is_active' => true]);
-        Cache::forget('active_theme_slug');
+        
+        $themeService = app(\Modules\Theme\app\Services\ThemeService::class);
+        $themeService->refresh();
+    }
+
+    /**
+     * Get the CSS grid class for a given span based on the theme's framework.
+     * Automatically handles responsiveness (e.g., col-12 for mobile).
+     */
+    public function getGridClass(string|int $span): string
+    {
+        $span = trim($span);
+        $framework = $this->framework ?? 'bootstrap4';
+
+        return match ($framework) {
+            'bootstrap4', 'bootstrap5' => "col-12 col-md-{$span}",
+            'tailwind' => $span == '12' ? 'w-full' : "w-full md:w-{$span}/12",
+            default => "col-12 col-md-{$span}",
+        };
     }
 }

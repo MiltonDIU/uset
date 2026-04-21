@@ -12,11 +12,11 @@ class ThemeService
     public function current(): Theme
     {
         if (! $this->theme) {
-            $slug = Cache::rememberForever('active_theme_slug', function () {
+            $slug = Cache::remember('active_theme_slug', 3600, function () {
                 if (!\Illuminate\Support\Facades\Schema::hasTable('themes')) {
                     return 'default';
                 }
-                $theme = Theme::active() ?? Theme::where('slug', 'default')->first();
+                $theme = Theme::where('is_active', true)->first() ?? Theme::where('slug', 'default')->first();
 
                 return $theme?->slug ?? 'default';
             });
@@ -24,17 +24,18 @@ class ThemeService
             $this->theme = Theme::where('slug', $slug)->first();
 
             if (! $this->theme) {
-                // Fallback if the slug in cache doesn't exist anymore
-                $this->theme = Theme::where('slug', 'default')->first();
-            }
-
-            if (! $this->theme) {
-                // Hard fallback if nothing in DB
-                $this->theme = new Theme(['name' => 'Default', 'slug' => 'default']);
+                $this->theme = Theme::where('slug', 'default')->first() ?: new Theme(['name' => 'Default', 'slug' => 'default', 'is_active' => true]);
             }
         }
 
         return $this->theme;
+    }
+
+    public function refresh(): void
+    {
+        Cache::forget('active_theme_slug');
+        $this->theme = null;
+        $this->current();
     }
 
     public function slug(): string

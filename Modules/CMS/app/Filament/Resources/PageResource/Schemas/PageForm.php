@@ -101,9 +101,14 @@ class PageForm
                         TextInput::make('padding_y')
                             ->label('Vertical Padding')
                             ->default('py-5'),
-                        Toggle::make('is_full_width')
-                            ->label('Full Width Page?')
-                            ->default(false),
+                        Select::make('container_type')
+                            ->label('Container Type')
+                            ->options([
+                                'container' => 'Standard (Centered)',
+                                'container-fluid' => 'Fluid (Full Width Edge-to-Edge)',
+                                'no-wrapper' => 'Strip Wrappers (Direct Output)',
+                            ])
+                            ->default('container'),
                     ]),
                 
                 Section::make('Layout Configuration')

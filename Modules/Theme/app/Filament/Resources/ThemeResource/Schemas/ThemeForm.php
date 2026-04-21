@@ -23,6 +23,14 @@ class ThemeForm
                     ->columnSpanFull(),
                 SpatieMediaLibraryFileUpload::make('thumbnail')
                     ->collection('thumbnail'),
+                \Filament\Forms\Components\Select::make('framework')
+                    ->options([
+                        'bootstrap4' => 'Bootstrap 4',
+                        'bootstrap5' => 'Bootstrap 5',
+                        'tailwind' => 'Tailwind CSS',
+                    ])
+                    ->default('bootstrap4')
+                    ->required(),
                 Toggle::make('is_active')
                     ->label('Set as Active Theme')
                     ->afterStateUpdated(function ($state, $record) {
