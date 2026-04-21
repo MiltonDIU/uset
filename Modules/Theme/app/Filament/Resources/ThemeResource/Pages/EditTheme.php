@@ -2,9 +2,9 @@
 
 namespace Modules\Theme\app\Filament\Resources\ThemeResource\Pages;
 
-use Modules\Theme\app\Filament\Resources\ThemeResource;
 use Filament\Actions\DeleteAction;
 use Filament\Resources\Pages\EditRecord;
+use Modules\Theme\app\Filament\Resources\ThemeResource\ThemeResource;
 
 class EditTheme extends EditRecord
 {

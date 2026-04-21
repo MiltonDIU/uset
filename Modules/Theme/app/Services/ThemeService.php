@@ -2,8 +2,9 @@
 
 namespace Modules\Theme\app\Services;
 
-use Modules\Theme\app\Models\Theme;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Schema;
+use Modules\Theme\app\Models\Theme;
 
 class ThemeService
 {
@@ -13,7 +14,7 @@ class ThemeService
     {
         if (! $this->theme) {
             $slug = Cache::remember('active_theme_slug', 3600, function () {
-                if (!\Illuminate\Support\Facades\Schema::hasTable('themes')) {
+                if (! Schema::hasTable('themes')) {
                     return 'default';
                 }
                 $theme = Theme::where('is_active', true)->first() ?? Theme::where('slug', 'default')->first();

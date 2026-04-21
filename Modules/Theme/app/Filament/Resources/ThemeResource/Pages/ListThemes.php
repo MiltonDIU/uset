@@ -2,9 +2,9 @@
 
 namespace Modules\Theme\app\Filament\Resources\ThemeResource\Pages;
 
-use Modules\Theme\app\Filament\Resources\ThemeResource;
 use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
+use Modules\Theme\app\Filament\Resources\ThemeResource\ThemeResource;
 
 class ListThemes extends ListRecords
 {

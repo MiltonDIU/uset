@@ -2,6 +2,7 @@
 
 namespace Modules\Theme\app\Filament\Resources\ThemeResource\Schemas;
 
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
@@ -23,7 +24,7 @@ class ThemeForm
                     ->columnSpanFull(),
                 SpatieMediaLibraryFileUpload::make('thumbnail')
                     ->collection('thumbnail'),
-                \Filament\Forms\Components\Select::make('framework')
+                Select::make('framework')
                     ->options([
                         'bootstrap4' => 'Bootstrap 4',
                         'bootstrap5' => 'Bootstrap 5',

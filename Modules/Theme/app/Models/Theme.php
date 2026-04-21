@@ -3,7 +3,7 @@
 namespace Modules\Theme\app\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Cache;
+use Modules\Theme\app\Services\ThemeService;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
@@ -36,8 +36,8 @@ class Theme extends Model implements HasMedia
     {
         static::query()->update(['is_active' => false]);
         $this->update(['is_active' => true]);
-        
-        $themeService = app(\Modules\Theme\app\Services\ThemeService::class);
+
+        $themeService = app(ThemeService::class);
         $themeService->refresh();
     }
 

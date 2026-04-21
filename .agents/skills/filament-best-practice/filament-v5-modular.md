@@ -49,6 +49,11 @@ Modules/{ModuleName}/
 
 ---
 
+when create a module then 1st command for this then update everything 
+##Scaffold a new module
+php artisan module:make {Name}
+
+
 ## 2. Resource.php — Main Hook Only
 
 ```php

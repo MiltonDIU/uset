@@ -2,8 +2,8 @@
 
 namespace Modules\Theme\app\Filament\Resources\ThemeResource\Pages;
 
-use Modules\Theme\app\Filament\Resources\ThemeResource;
 use Filament\Resources\Pages\CreateRecord;
+use Modules\Theme\app\Filament\Resources\ThemeResource\ThemeResource;
 
 class CreateTheme extends CreateRecord
 {

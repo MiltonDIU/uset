@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace Modules\Theme\app\Policies;
 
+use Illuminate\Auth\Access\HandlesAuthorization;
 use Illuminate\Foundation\Auth\User as AuthUser;
 use Modules\Theme\app\Models\Theme;
-use Illuminate\Auth\Access\HandlesAuthorization;
 
 class ThemePolicy
 {
     use HandlesAuthorization;
-    
+
     public function viewAny(AuthUser $authUser): bool
     {
         return $authUser->can('view_any:theme');
@@ -71,5 +71,4 @@ class ThemePolicy
     {
         return $authUser->can('reorder:theme');
     }
-
 }

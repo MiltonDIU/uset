@@ -3,7 +3,6 @@
 namespace Modules\Theme\Database\Seeders;
 
 use Illuminate\Database\Seeder;
-
 use Modules\Theme\app\Models\Theme;
 
 class ThemeDatabaseSeeder extends Seeder

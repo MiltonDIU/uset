@@ -19,7 +19,7 @@ class CMSServiceProvider extends ModuleServiceProvider
     public function boot(): void
     {
         parent::boot();
-        $this->loadMigrationsFrom(__DIR__ . '/../../database/migrations');
+        $this->loadMigrationsFrom(__DIR__.'/../../database/migrations');
         $this->registerViews();
     }
 
@@ -29,10 +29,10 @@ class CMSServiceProvider extends ModuleServiceProvider
     protected function registerConfig(): void
     {
         $this->publishes([
-            __DIR__ . '/../../config/config.php' => config_path($this->nameLower . '.php'),
+            __DIR__.'/../../config/config.php' => config_path($this->nameLower.'.php'),
         ], 'config');
         $this->mergeConfigFrom(
-            __DIR__ . '/../../config/config.php', $this->nameLower
+            __DIR__.'/../../config/config.php', $this->nameLower
         );
     }
 
@@ -41,13 +41,13 @@ class CMSServiceProvider extends ModuleServiceProvider
      */
     public function registerViews(): void
     {
-        $viewPath = resource_path('views/modules/' . $this->nameLower);
+        $viewPath = resource_path('views/modules/'.$this->nameLower);
 
-        $sourcePath = __DIR__ . '/../../resources/views';
+        $sourcePath = __DIR__.'/../../resources/views';
 
         $this->publishes([
-            $sourcePath => $viewPath
-        ], ['views', $this->nameLower . '-module-views']);
+            $sourcePath => $viewPath,
+        ], ['views', $this->nameLower.'-module-views']);
 
         $this->loadViewsFrom(array_merge($this->getPublishableViewPaths(), [$sourcePath]), $this->nameLower);
     }
@@ -56,10 +56,11 @@ class CMSServiceProvider extends ModuleServiceProvider
     {
         $paths = [];
         foreach (config('view.paths') as $path) {
-            if (is_dir($path . '/modules/' . $this->nameLower)) {
-                $paths[] = $path . '/modules/' . $this->nameLower;
+            if (is_dir($path.'/modules/'.$this->nameLower)) {
+                $paths[] = $path.'/modules/'.$this->nameLower;
             }
         }
+
         return $paths;
     }
 }

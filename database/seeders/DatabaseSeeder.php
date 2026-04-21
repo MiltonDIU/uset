@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             UniversityMenuSeeder::class,
+            \Modules\Academic\Database\Seeders\AcademicDatabaseSeeder::class,
         ]);
         // User::factory(10)->create();
 

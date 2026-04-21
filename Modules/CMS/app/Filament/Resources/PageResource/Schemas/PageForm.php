@@ -11,7 +11,6 @@ use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Schemas\Components\Grid;
-use Filament\Schemas\Components\Group;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Components\Tabs;
 use Filament\Schemas\Components\Tabs\Tab;
@@ -54,7 +53,7 @@ class PageForm
                                                 TextInput::make('title')
                                                     ->required()
                                                     ->live(onBlur: true)
-                                                    ->afterStateUpdated(fn($state, callable $set) => $set('slug', Str::slug($state))),
+                                                    ->afterStateUpdated(fn ($state, callable $set) => $set('slug', Str::slug($state))),
                                                 TextInput::make('slug')
                                                     ->required()
                                                     ->unique('pages', 'slug', ignoreRecord: true),
@@ -110,7 +109,7 @@ class PageForm
                             ])
                             ->default('container'),
                     ]),
-                
+
                 Section::make('Layout Configuration')
                     ->schema([
                         Select::make('layout')
@@ -135,7 +134,7 @@ class PageForm
                         $layout = $get('layout') ?? '12';
                         $spans = explode(',', $layout);
                         $fields = [];
-                        
+
                         foreach ($spans as $index => $span) {
                             $colIndex = $index + 1;
                             $fields[] = Builder::make("col{$colIndex}_content")
@@ -146,7 +145,7 @@ class PageForm
                                 ->columnSpan((int) $span)
                                 ->addActionLabel('Add Block');
                         }
-                        
+
                         return $fields;
                     })
                     ->live(),
