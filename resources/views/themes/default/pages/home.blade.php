@@ -8,7 +8,7 @@
                 $blockData = $block['data'] ?? $block;
                 $viewPath = app(\Modules\Theme\app\Services\ThemeService::class)->view('sections.' . $blockType);
             @endphp
-            
+
             @if(view()->exists($viewPath))
                 @include($viewPath, ['content' => $blockData])
             @endif
@@ -159,147 +159,151 @@
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             // Load value propositions
-            fetch("{{ theme_asset('data/university_info.json') }}")
-                .then((response) => response.json())
-                .then((data) => {
-                    const valueProps = data.valuePropositions.slice(0, 3);
-                    const valuePropscontainer =
-                        document.getElementById("value-propositions");
-
-                    valueProps.forEach((prop) => {
-                        const column = document.createElement("div");
-                        column.className = "col-md-6 col-lg-4 mb-4";
-
-                        column.innerHTML = `
-                            <div class="card value-proposition h-100">
-                                <div class="card-body">
-                                    <div class="value-icon mb-3">
-                                        ${getIconForValueProposition(prop.icon)}
-                                    </div>
-                                    <h3 class="h5 font-weight-bold mb-3">${prop.title}</h3>
-                                    <p class="text-muted mb-0">${prop.description}</p>
-                                </div>
-                            </div>
-                        `;
-
-                        valuePropscontainer.appendChild(column);
-                    });
-                })
-                .catch((error) =>
-                    console.error("Error loading value propositions:", error),
-                );
-
-            // Load featured programs
-            fetch("{{ theme_asset('data/programs.json') }}")
-                .then((response) => response.json())
-                .then((data) => {
-                    const faculties = data.faculties;
-                    const programscontainer =
-                        document.getElementById("featured-programs");
-
-                    // Select one program from each faculty for featured display
-                    faculties.forEach((faculty) => {
-                        if (faculty.programs.length > 0) {
-                            const program = faculty.programs[0];
-
+            const valuePropscontainer = document.getElementById("value-propositions");
+            if (valuePropscontainer && valuePropscontainer.children.length === 0) {
+                fetch("{{ theme_asset('data/university_info.json') }}")
+                    .then((response) => response.json())
+                    .then((data) => {
+                        const valueProps = data.valuePropositions.slice(0, 3);
+                        valueProps.forEach((prop) => {
                             const column = document.createElement("div");
                             column.className = "col-md-6 col-lg-4 mb-4";
-
                             column.innerHTML = `
-                                <div class="card program-card h-100">
-                                    <div class="program-header">
-                                        <h3 class="h5 font-weight-bold mb-0">${program.name}</h3>
-                                    </div>
+                                <div class="card value-proposition h-100">
                                     <div class="card-body">
-                                        <p class="text-muted mb-4">${program.description.substring(0, 150)}...</p>
-                                        <a href="/program-detail.html?faculty=${faculty.id}&program=${program.id}" class="btn btn-success btn-block">
-                                            View Program Details
-                                        </a>
+                                        <div class="value-icon mb-3">
+                                            ${getIconForValueProposition(prop.icon)}
+                                        </div>
+                                        <h3 class="h5 font-weight-bold mb-3">${prop.title}</h3>
+                                        <p class="text-muted mb-0">${prop.description}</p>
                                     </div>
                                 </div>
                             `;
+                            valuePropscontainer.appendChild(column);
+                        });
+                    })
+                    .catch((error) =>
+                        console.error("Error loading value propositions:", error),
+                    );
+            }
 
-                            programscontainer.appendChild(column);
-                        }
-                    });
-                })
-                .catch((error) => console.error("Error loading programs:", error));
+            // Load featured programs
+            const programscontainer = document.getElementById("featured-programs");
+            if (programscontainer && programscontainer.children.length === 0) {
+                fetch("{{ theme_asset('data/programs.json') }}")
+                    .then((response) => response.json())
+                    .then((data) => {
+                        const faculties = data.faculties;
+
+                        // Select one program from each faculty for featured display
+                        faculties.forEach((faculty) => {
+                            if (faculty.programs.length > 0) {
+                                const program = faculty.programs[0];
+
+                                const column = document.createElement("div");
+                                column.className = "col-md-6 col-lg-4 mb-4";
+
+                                column.innerHTML = `
+                                    <div class="card program-card h-100">
+                                        <div class="program-header">
+                                            <h3 class="h5 font-weight-bold mb-0">${program.name}</h3>
+                                        </div>
+                                        <div class="card-body">
+                                            <p class="text-muted mb-4">${program.description.substring(0, 150)}...</p>
+                                            <a href="/program-detail.html?faculty=${faculty.id}&program=${program.id}" class="btn btn-success btn-block">
+                                                View Program Details
+                                            </a>
+                                        </div>
+                                    </div>
+                                `;
+
+                                programscontainer.appendChild(column);
+                            }
+                        });
+                    })
+                    .catch((error) => console.error("Error loading programs:", error));
+            }
 
             // Load news and events
-            fetch("{{ theme_asset('data/news.json') }}")
-                .then((response) => response.json())
-                .then((data) => {
-                    // Load news
-                    const newscontainer = document.getElementById("recent-news");
-                    const news = data.news.slice(0, 3);
+            const newscontainer = document.getElementById("recent-news");
+            const eventscontainer = document.getElementById("upcoming-events");
 
-                    news.forEach((item) => {
-                        const newsItem = document.createElement("div");
-                        newsItem.className = "card news-item mb-4";
+            if ((newscontainer && newscontainer.children.length === 0) || (eventscontainer && eventscontainer.children.length === 0)) {
+                fetch("{{ theme_asset('data/news.json') }}")
+                    .then((response) => response.json())
+                    .then((data) => {
+                        // Load news
+                        if (newscontainer && newscontainer.children.length === 0) {
+                            const news = data.news.slice(0, 3);
+                            news.forEach((item) => {
+                                const newsItem = document.createElement("div");
+                                newsItem.className = "card news-item mb-4";
 
-                        const formattedDate = new Date(item.date).toLocaleDateString(
-                            "en-US",
-                            {
-                                year: "numeric",
-                                month: "short",
-                                day: "numeric",
-                            },
-                        );
+                                const formattedDate = new Date(item.date).toLocaleDateString(
+                                    "en-US",
+                                    {
+                                        year: "numeric",
+                                        month: "short",
+                                        day: "numeric",
+                                    },
+                                );
 
-                        newsItem.innerHTML = `
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-3">
-                                        <img src="{{ theme_asset('') }}${item.image}" alt="${item.title}" class="img-fluid rounded">
+                                newsItem.innerHTML = `
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-3">
+                                                <img src="{{ theme_asset('') }}${item.image}" alt="${item.title}" class="img-fluid rounded">
+                                            </div>
+                                            <div class="col-9">
+                                                <div class="text-success small mb-1">${formattedDate}</div>
+                                                <h4 class="h6 font-weight-bold mb-2">${item.title}</h4>
+                                                <p class="small text-muted mb-0">${item.excerpt.substring(0, 100)}...</p>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="col-9">
-                                        <div class="text-success small mb-1">${formattedDate}</div>
-                                        <h4 class="h6 font-weight-bold mb-2">${item.title}</h4>
-                                        <p class="small text-muted mb-0">${item.excerpt.substring(0, 100)}...</p>
+                                `;
+
+                                newscontainer.appendChild(newsItem);
+                            });
+                        }
+
+                        // Load events
+                        if (eventscontainer && eventscontainer.children.length === 0) {
+                            const events = data.events.slice(0, 3);
+                            events.forEach((event) => {
+                                const eventItem = document.createElement("div");
+                                eventItem.className = "card event-item mb-4";
+
+                                const eventDate = new Date(event.startDate);
+                                const day = eventDate.getDate();
+                                const month = eventDate.toLocaleDateString("en-US", {
+                                    month: "short",
+                                });
+
+                                eventItem.innerHTML = `
+                                    <div class="card-body">
+                                        <div class="d-flex">
+                                            <div class="event-date mr-3">
+                                                <span class="event-day">${day}</span>
+                                                <span class="event-month">${month}</span>
+                                            </div>
+                                            <div>
+                                                <h4 class="h6 font-weight-bold mb-2">${event.title}</h4>
+                                                <p class="small text-muted mb-1"><i class="fas fa-map-marker-alt mr-2"></i>${event.location}</p>
+                                                <p class="small text-muted mb-0">${event.description.substring(0, 100)}...</p>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                        `;
+                                `;
 
-                        newscontainer.appendChild(newsItem);
-                    });
-
-                    // Load events
-                    const eventscontainer = document.getElementById("upcoming-events");
-                    const events = data.events.slice(0, 3);
-
-                    events.forEach((event) => {
-                        const eventItem = document.createElement("div");
-                        eventItem.className = "card event-item mb-4";
-
-                        const eventDate = new Date(event.startDate);
-                        const day = eventDate.getDate();
-                        const month = eventDate.toLocaleDateString("en-US", {
-                            month: "short",
-                        });
-
-                        eventItem.innerHTML = `
-                            <div class="card-body">
-                                <div class="d-flex">
-                                    <div class="event-date mr-3">
-                                        <span class="event-day">${day}</span>
-                                        <span class="event-month">${month}</span>
-                                    </div>
-                                    <div>
-                                        <h4 class="h6 font-weight-bold mb-2">${event.title}</h4>
-                                        <p class="small text-muted mb-1"><i class="fas fa-map-marker-alt mr-2"></i>${event.location}</p>
-                                        <p class="small text-muted mb-0">${event.description.substring(0, 100)}...</p>
-                                    </div>
-                                </div>
-                            </div>
-                        `;
-
-                        eventscontainer.appendChild(eventItem);
-                    });
-                })
-                .catch((error) =>
-                    console.error("Error loading news and events:", error),
-                );
+                                eventscontainer.appendChild(eventItem);
+                            });
+                        }
+                    })
+                    .catch((error) =>
+                        console.error("Error loading news and events:", error),
+                    );
+            }
         });
 
         // Helper function to render icons for value propositions
