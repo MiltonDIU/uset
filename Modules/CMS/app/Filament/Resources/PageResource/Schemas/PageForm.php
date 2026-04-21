@@ -31,7 +31,7 @@ class PageForm
                             ->icon('heroicon-o-cursor-arrow-rays')
                             ->schema([
                                 Section::make('Designer Workspace')
-                                    ->description('Build your page layout here. Use Sections and Columns to structure your content.')
+                                    ->description('Build your page layout here. Each Section represents a row. Columns within sections can have custom widths.')
                                     ->schema([
                                         Builder::make('content')
                                             ->label('Sections')
@@ -106,107 +106,60 @@ class PageForm
                             ->default(false),
                     ]),
                 
-                Grid::make(1)
+                Section::make('Layout Configuration')
                     ->schema([
-                        Grid::make(2)
-                            ->schema([
-                                Select::make('layout')
-                                    ->label('Quick Layout')
-                                    ->options([
-                                        '12' => '1 Column (100%)',
-                                        '6,6' => '2 Columns (50% | 50%)',
-                                        '4,4,4' => '3 Columns (33% | 33% | 33%)',
-                                        '3,3,3,3' => '4 Columns (25% | 25% | 25% | 25%)',
-                                        '9,3' => '2 Columns (75% | 25%)',
-                                        '3,9' => '2 Columns (25% | 75%)',
-                                    ])
-                                    ->live()
-                                    ->afterStateUpdated(function ($state, callable $set, callable $get) {
-                                        if (! $state) return;
-                                        $widths = explode(',', $state);
-                                        $currentColumns = $get('columns') ?? [];
-                                        $newColumns = [];
-                                        $i = 0;
-                                        foreach ($currentColumns as $key => $column) {
-                                            if (isset($widths[$i])) {
-                                                $newColumns[$key] = $column;
-                                                $newColumns[$key]['width'] = "col-md-{$widths[$i]}";
-                                                $i++;
-                                            }
-                                        }
-                                        while ($i < count($widths)) {
-                                            $newColumns[] = [
-                                                'width' => "col-md-{$widths[$i]}",
-                                                'content' => []
-                                            ];
-                                            $i++;
-                                        }
-                                        $set('columns', $newColumns);
-                                        $set('column_count', count($widths));
-                                    }),
-                                TextInput::make('column_count')
-                                    ->label('Total Columns')
-                                    ->numeric()
-                                    ->live()
-                                    ->afterStateUpdated(function ($state, callable $set, callable $get) {
-                                        if (! $state || ! is_numeric($state)) return;
-                                        $count = (int) $state;
-                                        if ($count <= 0 || $count > 12) return;
-                                        
-                                        $widthPerCol = floor(12 / $count);
-                                        if ($widthPerCol < 1) $widthPerCol = 1;
-
-                                        $currentColumns = $get('columns') ?? [];
-                                        $newColumns = [];
-                                        $i = 0;
-                                        foreach ($currentColumns as $key => $column) {
-                                            if ($i < $count) {
-                                                $newColumns[$key] = $column;
-                                                $newColumns[$key]['width'] = "col-md-{$widthPerCol}";
-                                                $i++;
-                                            }
-                                        }
-                                        while ($i < $count) {
-                                            $newColumns[] = [
-                                                'width' => "col-md-{$widthPerCol}",
-                                                'content' => [],
-                                            ];
-                                            $i++;
-                                        }
-                                        $set('columns', $newColumns);
-                                        $set('layout', null);
-                                    }),
-                            ]),
-                    ]),
-
-                Repeater::make('columns')
-                    ->label('Columns')
-                    ->schema([
-                        Builder::make('content')
-                            ->label('Column Content')
-                            ->blocks([
-                                self::getRichTextBlock(),
-                                self::getImageBlock(),
-                                self::getHeroBlock(),
-                                self::getWhyChooseBlock(),
-                                self::getFeaturedProgramsBlock(),
-                                self::getStatsBlock(),
-                                self::getNewsEventsBlock(),
-                                self::getCTABlock(),
+                        Select::make('layout')
+                            ->label('Layout Type')
+                            ->options([
+                                '12' => '1 Column (100%)',
+                                '6,6' => '2 Columns (50% | 50%)',
+                                '4,4,4' => '3 Columns (33% | 33% | 33%)',
+                                '3,3,3,3' => '4 Columns (25% | 25% | 25% | 25%)',
+                                '2,2,2,2,2,2' => '6 Columns (16% Each)',
+                                '9,3' => '2 Columns (75% | 25%)',
+                                '3,9' => '2 Columns (25% | 75%)',
+                                '8,4' => '2 Columns (66% | 33%)',
+                                '4,8' => '2 Columns (33% | 66%)',
                             ])
-                            ->collapsible()
-                            ->cloneable()
-                            ->addActionLabel('Add Block'),
-                    ])
-                    ->grid(fn($get) => min(4, (int) ($get('column_count') ?: 1)))
-                    ->collapsible()
-                    ->itemLabel(function (array $state): ?string {
-                        $width = $state['width'] ?? 'col-md-12';
-                        $span = str_replace('col-md-', '', $width);
-                        return "Column ({$span}/12)";
+                            ->default('12')
+                            ->live(),
+                    ])->collapsible(),
+
+                Grid::make(12)
+                    ->schema(function ($get) {
+                        $layout = $get('layout') ?? '12';
+                        $spans = explode(',', $layout);
+                        $fields = [];
+                        
+                        foreach ($spans as $index => $span) {
+                            $colIndex = $index + 1;
+                            $fields[] = Builder::make("col{$colIndex}_content")
+                                ->label("Column {$colIndex} ({$span}/12)")
+                                ->blocks(self::contentBlocks())
+                                ->collapsible()
+                                ->cloneable()
+                                ->columnSpan((int) $span)
+                                ->addActionLabel('Add Block');
+                        }
+                        
+                        return $fields;
                     })
-                    ->addActionLabel('Add New Column'),
+                    ->live(),
             ]);
+    }
+
+    protected static function contentBlocks(): array
+    {
+        return [
+            self::getRichTextBlock(),
+            self::getImageBlock(),
+            self::getHeroBlock(),
+            self::getWhyChooseBlock(),
+            self::getFeaturedProgramsBlock(),
+            self::getStatsBlock(),
+            self::getNewsEventsBlock(),
+            self::getCTABlock(),
+        ];
     }
 
     protected static function getRichTextBlock(): Block
