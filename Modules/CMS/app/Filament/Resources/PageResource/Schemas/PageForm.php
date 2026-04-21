@@ -106,51 +106,79 @@ class PageForm
                             ->default(false),
                     ]),
                 
-                Grid::make(2)
+                Grid::make(1)
                     ->schema([
-                        Select::make('layout')
-                            ->label('Quick Layout')
-                            ->options([
-                                '12' => '1 Column (100%)',
-                                '6,6' => '2 Columns (50% | 50%)',
-                                '4,4,4' => '3 Columns (33% | 33% | 33%)',
-                                '3,3,3,3' => '4 Columns (25% | 25% | 25% | 25%)',
-                                '8,4' => '2 Columns (75% | 25%)',
-                                '4,8' => '2 Columns (25% | 75%)',
-                            ])
-                            ->live()
-                            ->afterStateUpdated(function ($state, callable $set) {
-                                if (! $state) return;
-                                $widths = explode(',', $state);
-                                $columns = [];
-                                foreach ($widths as $width) {
-                                    $columns[] = ['width' => "col-md-{$width}", 'content' => []];
-                                }
-                                $set('columns', $columns);
-                                $set('column_count', count($widths));
-                            }),
-                        TextInput::make('column_count')
-                            ->label('Total Columns')
-                            ->numeric()
-                            ->live()
-                            ->afterStateUpdated(function ($state, callable $set) {
-                                if (! $state || ! is_numeric($state)) return;
-                                $count = (int) $state;
-                                if ($count <= 0 || $count > 12) return;
-                                
-                                $widthPerCol = floor(12 / $count);
-                                if ($widthPerCol < 1) $widthPerCol = 1;
+                        Grid::make(2)
+                            ->schema([
+                                Select::make('layout')
+                                    ->label('Quick Layout')
+                                    ->options([
+                                        '12' => '1 Column (100%)',
+                                        '6,6' => '2 Columns (50% | 50%)',
+                                        '4,4,4' => '3 Columns (33% | 33% | 33%)',
+                                        '3,3,3,3' => '4 Columns (25% | 25% | 25% | 25%)',
+                                        '8,4' => '2 Columns (75% | 25%)',
+                                        '4,8' => '2 Columns (25% | 75%)',
+                                    ])
+                                    ->live()
+                                    ->afterStateUpdated(function ($state, callable $set, callable $get) {
+                                        if (! $state) return;
+                                        $widths = explode(',', $state);
+                                        $currentColumns = $get('columns') ?? [];
+                                        $newColumns = [];
+                                        $i = 0;
+                                        // Preserve existing keys (UUIDs) for items to keep their state
+                                        foreach ($currentColumns as $key => $column) {
+                                            if (isset($widths[$i])) {
+                                                $newColumns[$key] = $column;
+                                                $newColumns[$key]['width'] = "col-md-{$widths[$i]}";
+                                                $i++;
+                                            }
+                                        }
+                                        // Add new columns if needed
+                                        while ($i < count($widths)) {
+                                            $newColumns[] = [
+                                                'width' => "col-md-{$widths[$i]}",
+                                                'content' => []
+                                            ];
+                                            $i++;
+                                        }
+                                        $set('columns', $newColumns);
+                                        $set('column_count', count($widths));
+                                    }),
+                                TextInput::make('column_count')
+                                    ->label('Total Columns')
+                                    ->numeric()
+                                    ->live()
+                                    ->afterStateUpdated(function ($state, callable $set, callable $get) {
+                                        if (! $state || ! is_numeric($state)) return;
+                                        $count = (int) $state;
+                                        if ($count <= 0 || $count > 12) return;
+                                        
+                                        $widthPerCol = floor(12 / $count);
+                                        if ($widthPerCol < 1) $widthPerCol = 1;
 
-                                $columns = [];
-                                for ($i = 0; $i < $count; $i++) {
-                                    $columns[] = [
-                                        'width' => "col-md-{$widthPerCol}",
-                                        'content' => [],
-                                    ];
-                                }
-                                $set('columns', $columns);
-                                $set('layout', null);
-                            }),
+                                        $currentColumns = $get('columns') ?? [];
+                                        $newColumns = [];
+                                        $i = 0;
+                                        foreach ($currentColumns as $key => $column) {
+                                            if ($i < $count) {
+                                                $newColumns[$key] = $column;
+                                                $newColumns[$key]['width'] = "col-md-{$widthPerCol}";
+                                                $i++;
+                                            }
+                                        }
+                                        while ($i < $count) {
+                                            $newColumns[] = [
+                                                'width' => "col-md-{$widthPerCol}",
+                                                'content' => [],
+                                            ];
+                                            $i++;
+                                        }
+                                        $set('columns', $newColumns);
+                                        $set('layout', null);
+                                    }),
+                            ]),
                     ]),
 
                 Repeater::make('columns')
