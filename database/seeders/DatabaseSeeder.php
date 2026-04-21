@@ -5,6 +5,9 @@ namespace Database\Seeders;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Modules\Academic\database\seeders\AcademicDatabaseSeeder;
+use Modules\CMS\database\seeders\CMSDatabaseSeeder;
+use Modules\Theme\database\seeders\ThemeDatabaseSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -17,7 +20,9 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             UniversityMenuSeeder::class,
-            \Modules\Academic\Database\Seeders\AcademicDatabaseSeeder::class,
+            AcademicDatabaseSeeder::class,
+            CMSDatabaseSeeder::class,
+            ThemeDatabaseSeeder::class,
         ]);
         // User::factory(10)->create();
 

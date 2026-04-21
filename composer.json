@@ -37,6 +37,8 @@
             "Modules\\CMS\\Database\\Seeders\\": "Modules/CMS/database/seeders/",
             "Modules\\Academic\\Database\\Factories\\": "Modules/Academic/database/factories/",
             "Modules\\Academic\\Database\\Seeders\\": "Modules/Academic/database/seeders/",
+            "Modules\\Theme\\Database\\Factories\\": "Modules/Theme/database/factories/",
+            "Modules\\Theme\\Database\\Seeders\\": "Modules/Theme/database/seeders/",
             "Modules\\": "Modules/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
