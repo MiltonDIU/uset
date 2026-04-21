@@ -117,8 +117,8 @@ class PageForm
                                         '6,6' => '2 Columns (50% | 50%)',
                                         '4,4,4' => '3 Columns (33% | 33% | 33%)',
                                         '3,3,3,3' => '4 Columns (25% | 25% | 25% | 25%)',
-                                        '8,4' => '2 Columns (75% | 25%)',
-                                        '4,8' => '2 Columns (25% | 75%)',
+                                        '9,3' => '2 Columns (75% | 25%)',
+                                        '3,9' => '2 Columns (25% | 75%)',
                                     ])
                                     ->live()
                                     ->afterStateUpdated(function ($state, callable $set, callable $get) {
@@ -127,7 +127,6 @@ class PageForm
                                         $currentColumns = $get('columns') ?? [];
                                         $newColumns = [];
                                         $i = 0;
-                                        // Preserve existing keys (UUIDs) for items to keep their state
                                         foreach ($currentColumns as $key => $column) {
                                             if (isset($widths[$i])) {
                                                 $newColumns[$key] = $column;
@@ -135,7 +134,6 @@ class PageForm
                                                 $i++;
                                             }
                                         }
-                                        // Add new columns if needed
                                         while ($i < count($widths)) {
                                             $newColumns[] = [
                                                 'width' => "col-md-{$widths[$i]}",
@@ -202,7 +200,11 @@ class PageForm
                     ])
                     ->grid(fn($get) => min(4, (int) ($get('column_count') ?: 1)))
                     ->collapsible()
-                    ->itemLabel(fn(array $state): ?string => $state['width'] ?? 'Column')
+                    ->itemLabel(function (array $state): ?string {
+                        $width = $state['width'] ?? 'col-md-12';
+                        $span = str_replace('col-md-', '', $width);
+                        return "Column ({$span}/12)";
+                    })
                     ->addActionLabel('Add New Column'),
             ]);
     }
