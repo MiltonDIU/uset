@@ -31,8 +31,6 @@
     "autoload": {
         "psr-4": {
             "App\\": "app/",
-            "Modules\\Blog\\Database\\Factories\\": "Modules/Blog/database/factories/",
-            "Modules\\Blog\\Database\\Seeders\\": "Modules/Blog/database/seeders/",
             "Modules\\CMS\\Database\\Factories\\": "Modules/CMS/database/factories/",
             "Modules\\CMS\\Database\\Seeders\\": "Modules/CMS/database/seeders/",
             "Modules\\Academic\\Database\\Factories\\": "Modules/Academic/database/factories/",
