@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Modules\Academic\app\Enums\ActiveStatus;
 
 class Department extends Model
 {
@@ -34,5 +35,12 @@ class Department extends Model
     public function programs(): HasMany
     {
         return $this->hasMany(Program::class);
+    }
+
+    protected function casts(): array
+    {
+        return [
+            'is_active' => ActiveStatus::class,
+        ];
     }
 }

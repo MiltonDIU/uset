@@ -1,11 +1,11 @@
 <?php
 
-namespace Modules\CMS\app\Filament\Resources\PageResource\Pages;
+namespace Modules\CMS\app\Filament\Resources\Page\Pages;
 
 use Filament\Actions\DeleteAction;
 use Filament\Resources\Pages\EditRecord;
 use Filament\Support\Enums\Width;
-use Modules\CMS\app\Filament\Resources\PageResource\PageResource;
+use Modules\CMS\app\Filament\Resources\Page\PageResource;
 
 class EditPage extends EditRecord
 {

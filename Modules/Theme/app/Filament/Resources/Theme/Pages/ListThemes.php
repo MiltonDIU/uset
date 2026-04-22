@@ -1,10 +1,10 @@
 <?php
 
-namespace Modules\Theme\app\Filament\Resources\ThemeResource\Pages;
+namespace Modules\Theme\app\Filament\Resources\Theme\Pages;
 
 use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
-use Modules\Theme\app\Filament\Resources\ThemeResource\ThemeResource;
+use Modules\Theme\app\Filament\Resources\Theme\ThemeResource;
 
 class ListThemes extends ListRecords
 {

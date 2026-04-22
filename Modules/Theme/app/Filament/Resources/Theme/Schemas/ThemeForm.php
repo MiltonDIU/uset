@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Theme\app\Filament\Resources\ThemeResource\Schemas;
+namespace Modules\Theme\app\Filament\Resources\Theme\Schemas;
 
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;

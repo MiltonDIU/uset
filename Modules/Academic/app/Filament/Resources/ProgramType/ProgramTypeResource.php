@@ -5,6 +5,7 @@ namespace Modules\Academic\app\Filament\Resources\ProgramType;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Tables\Table;
+use Modules\Academic\app\Filament\Resources\ProgramType\Infolists\ProgramTypeInfolist;
 use Modules\Academic\app\Filament\Resources\ProgramType\Schemas\ProgramTypeForm;
 use Modules\Academic\app\Filament\Resources\ProgramType\Tables\ProgramTypeTable;
 use Modules\Academic\app\Models\ProgramType;
@@ -27,6 +28,11 @@ class ProgramTypeResource extends Resource
     public static function table(Table $table): Table
     {
         return ProgramTypeTable::schema($table);
+    }
+
+    public static function infolist(Schema $schema): Schema
+    {
+        return ProgramTypeInfolist::schema($schema);
     }
 
     public static function getPages(): array

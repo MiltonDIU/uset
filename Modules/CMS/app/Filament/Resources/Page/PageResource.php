@@ -1,12 +1,13 @@
 <?php
 
-namespace Modules\CMS\app\Filament\Resources\PageResource;
+namespace Modules\CMS\app\Filament\Resources\Page;
 
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Tables\Table;
-use Modules\CMS\app\Filament\Resources\PageResource\Schemas\PageForm;
-use Modules\CMS\app\Filament\Resources\PageResource\Tables\PageTable;
+use Modules\CMS\app\Filament\Resources\Page\Infolists\PageInfolist;
+use Modules\CMS\app\Filament\Resources\Page\Schemas\PageForm;
+use Modules\CMS\app\Filament\Resources\Page\Tables\PageTable;
 use Modules\CMS\app\Models\Page;
 
 class PageResource extends Resource
@@ -29,11 +30,17 @@ class PageResource extends Resource
         return PageTable::schema($table);
     }
 
+    public static function infolist(Schema $schema): Schema
+    {
+        return PageInfolist::schema($schema);
+    }
+
     public static function getPages(): array
     {
         return [
             'index' => Pages\ListPages::route('/'),
             'create' => Pages\CreatePage::route('/create'),
+            'view' => Pages\ViewPage::route('/{record}'),
             'edit' => Pages\EditPage::route('/{record}/edit'),
         ];
     }

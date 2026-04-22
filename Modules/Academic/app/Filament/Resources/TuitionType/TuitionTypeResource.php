@@ -5,6 +5,7 @@ namespace Modules\Academic\app\Filament\Resources\TuitionType;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Tables\Table;
+use Modules\Academic\app\Filament\Resources\TuitionType\Infolists\TuitionTypeInfolist;
 use Modules\Academic\app\Filament\Resources\TuitionType\Schemas\TuitionTypeForm;
 use Modules\Academic\app\Filament\Resources\TuitionType\Tables\TuitionTypeTable;
 use Modules\Academic\app\Models\TuitionType;
@@ -27,6 +28,11 @@ class TuitionTypeResource extends Resource
     public static function table(Table $table): Table
     {
         return TuitionTypeTable::schema($table);
+    }
+
+    public static function infolist(Schema $schema): Schema
+    {
+        return TuitionTypeInfolist::schema($schema);
     }
 
     public static function getPages(): array

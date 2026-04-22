@@ -1,17 +1,18 @@
 <?php
 
-namespace Modules\Theme\app\Filament\Resources\ThemeResource;
+namespace Modules\Theme\app\Filament\Resources\Theme;
 
 use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
-use Modules\Theme\app\Filament\Resources\ThemeResource\Pages\CreateTheme;
-use Modules\Theme\app\Filament\Resources\ThemeResource\Pages\EditTheme;
-use Modules\Theme\app\Filament\Resources\ThemeResource\Pages\ListThemes;
-use Modules\Theme\app\Filament\Resources\ThemeResource\Schemas\ThemeForm;
-use Modules\Theme\app\Filament\Resources\ThemeResource\Tables\ThemesTable;
+use Modules\Theme\app\Filament\Resources\Theme\Infolists\ThemeInfolist;
+use Modules\Theme\app\Filament\Resources\Theme\Pages\CreateTheme;
+use Modules\Theme\app\Filament\Resources\Theme\Pages\EditTheme;
+use Modules\Theme\app\Filament\Resources\Theme\Pages\ListThemes;
+use Modules\Theme\app\Filament\Resources\Theme\Schemas\ThemeForm;
+use Modules\Theme\app\Filament\Resources\Theme\Tables\ThemesTable;
 use Modules\Theme\app\Models\Theme;
 
 class ThemeResource extends Resource
@@ -28,6 +29,11 @@ class ThemeResource extends Resource
     public static function table(Table $table): Table
     {
         return ThemesTable::configure($table);
+    }
+
+    public static function infolist(Schema $schema): Schema
+    {
+        return ThemeInfolist::schema($schema);
     }
 
     public static function getRelations(): array

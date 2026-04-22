@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Modules\Academic\app\Enums\ActiveStatus;
 
 class Program extends Model
 {
@@ -50,5 +51,12 @@ class Program extends Model
     public function facilities(): MorphMany
     {
         return $this->morphMany(Facility::class, 'facilityable');
+    }
+
+    protected function casts(): array
+    {
+        return [
+            'is_active' => ActiveStatus::class,
+        ];
     }
 }

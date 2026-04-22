@@ -3,6 +3,7 @@
 namespace Modules\Theme\app\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Modules\Theme\app\Enums\ActiveStatus;
 use Modules\Theme\app\Services\ThemeService;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
@@ -13,6 +14,13 @@ class Theme extends Model implements HasMedia
     use InteractsWithMedia;
 
     protected $fillable = ['name', 'slug', 'description', 'thumbnail', 'is_active', 'framework'];
+
+    protected function casts(): array
+    {
+        return [
+            'is_active' => ActiveStatus::class,
+        ];
+    }
 
     public function registerMediaConversions(?Media $media = null): void
     {

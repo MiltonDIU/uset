@@ -5,6 +5,7 @@ namespace Modules\Academic\app\Filament\Resources\Department;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Tables\Table;
+use Modules\Academic\app\Filament\Resources\Department\Infolists\DepartmentInfolist;
 use Modules\Academic\app\Filament\Resources\Department\Schemas\DepartmentForm;
 use Modules\Academic\app\Filament\Resources\Department\Tables\DepartmentTable;
 use Modules\Academic\app\Models\Department;
@@ -27,6 +28,11 @@ class DepartmentResource extends Resource
     public static function table(Table $table): Table
     {
         return DepartmentTable::schema($table);
+    }
+
+    public static function infolist(Schema $schema): Schema
+    {
+        return DepartmentInfolist::schema($schema);
     }
 
     public static function getPages(): array

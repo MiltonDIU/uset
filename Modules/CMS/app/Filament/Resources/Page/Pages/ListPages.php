@@ -1,11 +1,11 @@
 <?php
 
-namespace Modules\CMS\app\Filament\Resources\PageResource\Pages;
+namespace Modules\CMS\app\Filament\Resources\Page\Pages;
 
 use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
 use Filament\Support\Enums\Width;
-use Modules\CMS\app\Filament\Resources\PageResource\PageResource;
+use Modules\CMS\app\Filament\Resources\Page\PageResource;
 
 class ListPages extends ListRecords
 {

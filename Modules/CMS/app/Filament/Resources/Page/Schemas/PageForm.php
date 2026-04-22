@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\CMS\app\Filament\Resources\PageResource\Schemas;
+namespace Modules\CMS\app\Filament\Resources\Page\Schemas;
 
 use Filament\Forms\Components\Builder;
 use Filament\Forms\Components\Builder\Block;

@@ -78,25 +78,18 @@ Modules/{ModuleName}/
 - ❌ **NEVER** create anything inside `app/Filament/`
 - ✅ **ALWAYS** create resources inside `Modules/{Name}/app/Filament/`
 
-### 2. Mandatory Layered Flow
-```
-Filament Resource / Controller
-        ↓
-    Service
-        ↓
-    Action
-        ↓
-    Model
-```
-- ❌ NO business logic or DB queries inside Resources, Schemas, Tables, or Blade templates
-- ✅ Services handle all business logic
+### 2. Flexible Architectural Flow
+- **Simple CRUD:** Filament Resource / Controller → Model (Permitted for basic Create/Read/Update/Delete)
+- **Complex Business Logic:** Filament Resource / Controller → Service → Action → Model (Mandatory)
+- ❌ NO heavy business logic or complex DB queries inside Resources, Schemas, Tables, or Blade templates
+- ✅ Services handle all complex business logic, triggers, and multi-model operations
 - ✅ Actions handle single-responsibility operations
 
 ### 3. Logic Isolation
 - Filament `Resource.php` → delegates to Form and Table classes only
 - `Schemas/{Model}Form.php` → form field definitions only
 - `Tables/{Model}Table.php` → table column/filter/action definitions only
-- `Services/` → all queries, mutations, and business rules
+- `Services/` → required for all complex queries, mutations, and non-CRUD business rules
 
 ---
 
@@ -551,12 +544,12 @@ php artisan vendor:publish --provider="Spatie\MediaLibrary\MediaLibraryServicePr
 ## ❌ Hard Rules — Never Break These
 
 1. **No global Filament** — everything inside modules
-2. **No logic in Resources** — use Services and Actions
+2. **No complex logic in Resources** — use Services for non-CRUD operations
 3. **No UUIDs** — standard integer IDs only
 4. **No new packages** — without user approval
 5. **No string class references** — always use explicit imports
 6. **No skipping Pint** — always format after PHP changes
 7. **No deleting tests** — without user approval
-8. **No direct DB queries in Filament layers** — use Service layer
+8. **No direct complex DB queries in Filament layers** — use Service layer for non-trivial logic
 9. **Schema is `Filament\Schemas\Schema`** — not `Filament\Forms\Form`
 10. **Table actions from  `Filament\Actions\*`
