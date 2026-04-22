@@ -3,12 +3,12 @@
 namespace Modules\Academic\database\seeders;
 
 use Illuminate\Database\Seeder;
-use Modules\Academic\Models\Department;
-use Modules\Academic\Models\Faculty;
-use Modules\Academic\Models\Program;
-use Modules\Academic\Models\ProgramType;
-use Modules\Academic\Models\Tuition;
-use Modules\Academic\Models\TuitionType;
+use Modules\Academic\app\Models\Department;
+use Modules\Academic\app\Models\Faculty;
+use Modules\Academic\app\Models\Program;
+use Modules\Academic\app\Models\ProgramType;
+use Modules\Academic\app\Models\Tuition;
+use Modules\Academic\app\Models\TuitionType;
 
 class AcademicDatabaseSeeder extends Seeder
 {

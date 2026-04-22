@@ -27,6 +27,7 @@ class CMSDatabaseSeeder extends Seeder
                         'data' => [
                             'background_color' => 'bg-white',
                             'padding_y' => 'py-0',
+                            "container_type" => 'no-wrapper',
                             'is_full_width' => true,
                             'layout' => '12',
                             'col1_content' => [
@@ -69,7 +70,8 @@ class CMSDatabaseSeeder extends Seeder
                         'type' => 'layout_section',
                         'data' => [
                             'background_color' => 'bg-white',
-                            'padding_y' => 'py-5',
+                            'padding_y' => 'py-0',
+                            "container_type" => 'no-wrapper',
                             'layout' => '12',
                             'col1_content' => [
                                 [
@@ -94,7 +96,8 @@ class CMSDatabaseSeeder extends Seeder
                         'type' => 'layout_section',
                         'data' => [
                             'background_color' => 'bg-light',
-                            'padding_y' => 'py-5',
+                            'padding_y' => 'py-0',
+                            "container_type" => 'no-wrapper',
                             'layout' => '12',
                             'col1_content' => [
                                 [
@@ -114,7 +117,8 @@ class CMSDatabaseSeeder extends Seeder
                         'type' => 'layout_section',
                         'data' => [
                             'background_color' => 'bg-primary-700',
-                            'padding_y' => 'py-5',
+                            'padding_y' => 'py-0',
+                            "container_type" => 'no-wrapper',
                             'is_full_width' => true,
                             'layout' => '12',
                             'col1_content' => [
@@ -138,7 +142,8 @@ class CMSDatabaseSeeder extends Seeder
                         'type' => 'layout_section',
                         'data' => [
                             'background_color' => 'bg-white',
-                            'padding_y' => 'py-5',
+                            'padding_y' => 'py-0',
+                            "container_type" => 'no-wrapper',
                             'layout' => '12',
                             'col1_content' => [
                                 [
@@ -156,7 +161,8 @@ class CMSDatabaseSeeder extends Seeder
                         'type' => 'layout_section',
                         'data' => [
                             'background_color' => 'bg-white',
-                            'padding_y' => 'py-5',
+                            'padding_y' => 'py-0',
+                            "container_type" => 'no-wrapper',
                             'layout' => '12',
                             'col1_content' => [
                                 [

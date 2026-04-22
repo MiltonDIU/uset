@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace Modules\CMS\app\Policies;
 
-use Illuminate\Auth\Access\HandlesAuthorization;
 use Illuminate\Foundation\Auth\User as AuthUser;
 use Modules\CMS\app\Models\Page;
+use Illuminate\Auth\Access\HandlesAuthorization;
 
 class PagePolicy
 {
     use HandlesAuthorization;
-
+    
     public function viewAny(AuthUser $authUser): bool
     {
         return $authUser->can('view_any:page');
@@ -71,4 +71,5 @@ class PagePolicy
     {
         return $authUser->can('reorder:page');
     }
+
 }
