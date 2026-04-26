@@ -34,6 +34,8 @@ class CommitteeForm
 
             Repeater::make('members')
                 ->relationship('members')
+                ->reorderable('sort_order')
+                ->defaultItems(0)
                 ->schema([
                     Select::make('faculty_member_id')
                         ->relationship('facultyMember', 'name')
@@ -49,15 +51,24 @@ class CommitteeForm
 
                     TextInput::make('designation')
                         ->required()
-                        ->maxLength(255),
-
-                    TextInput::make('sort_order')
-                        ->numeric()
-                        ->default(0),
+                        ->maxLength(255)
+                        ->live(onBlur: true),
 
                     Toggle::make('is_active')
                         ->default(true),
                 ])
+                ->itemLabel(function (array $state): ?string {
+                    $name = $state['name'] ?? null;
+                    if (! $name && ($state['faculty_member_id'] ?? null)) {
+                        $name = \Modules\Academic\app\Models\FacultyMember::find($state['faculty_member_id'])?->name;
+                    }
+                    
+                    $designation = $state['designation'] ?? null;
+                    
+                    return $name 
+                        ? ($designation ? "{$name} - {$designation}" : $name)
+                        : null;
+                })
                 ->columns(2)
                 ->columnSpanFull()
                 ->collapsible(),

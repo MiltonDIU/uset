@@ -20,7 +20,7 @@ class Committee extends Model
 
     public function members(): HasMany
     {
-        return $this->hasMany(CommitteeMember::class);
+        return $this->hasMany(CommitteeMember::class)->orderBy('sort_order');
     }
 
     protected function casts(): array

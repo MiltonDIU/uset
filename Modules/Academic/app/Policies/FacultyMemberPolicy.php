@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace Modules\Academic\app\Policies;
 
-use Illuminate\Auth\Access\HandlesAuthorization;
 use Illuminate\Foundation\Auth\User as AuthUser;
 use Modules\Academic\app\Models\FacultyMember;
+use Illuminate\Auth\Access\HandlesAuthorization;
 
 class FacultyMemberPolicy
 {
     use HandlesAuthorization;
-
+    
     public function viewAny(AuthUser $authUser): bool
     {
         return $authUser->can('view_any:faculty_member');
@@ -71,4 +71,5 @@ class FacultyMemberPolicy
     {
         return $authUser->can('reorder:faculty_member');
     }
+
 }
