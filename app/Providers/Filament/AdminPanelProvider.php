@@ -21,6 +21,19 @@ use Illuminate\Foundation\Http\Middleware\PreventRequestForgery;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Modules\Academic\app\Filament\Resources\AcademicEvent\AcademicEventResource;
+use Modules\Academic\app\Filament\Resources\AcademicSession\AcademicSessionResource;
+use Modules\Academic\app\Filament\Resources\Committee\CommitteeResource;
+use Modules\Academic\app\Filament\Resources\Course\CourseResource;
+use Modules\Academic\app\Filament\Resources\Department\DepartmentResource;
+use Modules\Academic\app\Filament\Resources\Faculty\FacultyResource;
+use Modules\Academic\app\Filament\Resources\FacultyMember\FacultyMemberResource;
+use Modules\Academic\app\Filament\Resources\Program\ProgramResource;
+use Modules\Academic\app\Filament\Resources\ProgramType\ProgramTypeResource;
+use Modules\Academic\app\Filament\Resources\ResearchInterest\ResearchInterestResource;
+use Modules\Academic\app\Filament\Resources\TuitionType\TuitionTypeResource;
+use Modules\CMS\app\Filament\Resources\Page\PageResource;
+use Modules\Theme\app\Filament\Resources\Theme\ThemeResource;
 use Nwidart\Modules\Facades\Module;
 
 class AdminPanelProvider extends PanelProvider
@@ -59,6 +72,21 @@ class AdminPanelProvider extends PanelProvider
             ->plugins([
                 FilamentShieldPlugin::make(),
                 FilamentMenuBuilderPlugin::make(),
+            ])
+            ->resources([
+                CourseResource::class,
+                FacultyMemberResource::class,
+                DepartmentResource::class,
+                FacultyResource::class,
+                ProgramResource::class,
+                ProgramTypeResource::class,
+                TuitionTypeResource::class,
+                ResearchInterestResource::class,
+                AcademicSessionResource::class,
+                AcademicEventResource::class,
+                CommitteeResource::class,
+                PageResource::class,
+                ThemeResource::class,
             ])
             ->authMiddleware([
                 Authenticate::class,

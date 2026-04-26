@@ -3,7 +3,12 @@
 namespace Modules\CMS\database\seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
+use Modules\CMS\app\Models\Category;
 use Modules\CMS\app\Models\Page;
+use Modules\CMS\app\Models\Post;
 
 class CMSDatabaseSeeder extends Seeder
 {
@@ -11,10 +16,22 @@ class CMSDatabaseSeeder extends Seeder
     {
         $this->seedHomePage();
         $this->seedAboutPage();
+        $this->seedNews();
     }
 
     protected function seedHomePage(): void
     {
+        $dataPath = public_path('themes/default/assets/data/');
+        $uniInfo = json_decode(File::get($dataPath.'university_info.json'), true);
+
+        $valueProps = array_map(function ($prop) {
+            return [
+                'title' => $prop['title'],
+                'description' => $prop['description'],
+                'icon' => $prop['icon'] ?? 'check-circle',
+            ];
+        }, $uniInfo['valuePropositions']);
+
         Page::updateOrCreate(
             ['slug' => 'home'],
             [
@@ -27,7 +44,7 @@ class CMSDatabaseSeeder extends Seeder
                         'data' => [
                             'background_color' => 'bg-white',
                             'padding_y' => 'py-0',
-                            "container_type" => 'no-wrapper',
+                            'container_type' => 'no-wrapper',
                             'is_full_width' => true,
                             'layout' => '12',
                             'col1_content' => [
@@ -47,14 +64,14 @@ class CMSDatabaseSeeder extends Seeder
                                             [
                                                 'image' => 'hero/AcademicCM.jpg',
                                                 'heading' => '1st Academic Council Meeting of USET',
-                                                'subheading' => 'The first Academic Council Meeting of the University of Science and Engineering Technology (USET) marked a significant milestone.',
+                                                'subheading' => 'The first Academic Council Meeting of the University marked a significant milestone.',
                                                 'primary_button_text' => 'Learn More',
                                                 'primary_button_url' => '/AcademicCouncil.html',
                                             ],
                                             [
                                                 'image' => 'hero/10001.jpeg',
-                                                'heading' => 'University of Skill Enrichment & Technology',
-                                                'subheading' => "Bangladesh's First Skill-Based University",
+                                                'heading' => $uniInfo['name'],
+                                                'subheading' => $uniInfo['slogan'],
                                                 'primary_button_text' => 'Apply Now',
                                                 'primary_button_url' => '/admission.html',
                                                 'secondary_button_text' => 'Explore Programs',
@@ -71,20 +88,16 @@ class CMSDatabaseSeeder extends Seeder
                         'data' => [
                             'background_color' => 'bg-white',
                             'padding_y' => 'py-0',
-                            "container_type" => 'no-wrapper',
+                            'container_type' => 'no-wrapper',
                             'layout' => '12',
                             'col1_content' => [
                                 [
                                     'type' => 'why_choose',
                                     'data' => [
                                         'badge' => 'Why USET?',
-                                        'title' => 'What Makes Us Different',
+                                        'title' => $uniInfo['slogan'],
                                         'description' => 'USET offers a unique approach to higher education in Bangladesh, focusing on practical skills and industry relevance. Discover what sets us apart.',
-                                        'items' => [
-                                            ['title' => 'Industry Relevant', 'description' => 'Programs designed in collaboration with industry leaders.', 'icon' => 'briefcase'],
-                                            ['title' => 'Skill Focused', 'description' => 'Emphasis on practical training and hands-on experience.', 'icon' => 'academic-cap'],
-                                            ['title' => 'Global Standards', 'description' => 'Curriculum following international best practices.', 'icon' => 'globe-alt'],
-                                        ],
+                                        'items' => $valueProps,
                                         'button_text' => 'Learn More About USET',
                                         'button_url' => '/about',
                                     ],
@@ -97,7 +110,7 @@ class CMSDatabaseSeeder extends Seeder
                         'data' => [
                             'background_color' => 'bg-light',
                             'padding_y' => 'py-0',
-                            "container_type" => 'no-wrapper',
+                            'container_type' => 'no-wrapper',
                             'layout' => '12',
                             'col1_content' => [
                                 [
@@ -118,7 +131,7 @@ class CMSDatabaseSeeder extends Seeder
                         'data' => [
                             'background_color' => 'bg-primary-700',
                             'padding_y' => 'py-0',
-                            "container_type" => 'no-wrapper',
+                            'container_type' => 'no-wrapper',
                             'is_full_width' => true,
                             'layout' => '12',
                             'col1_content' => [
@@ -128,7 +141,7 @@ class CMSDatabaseSeeder extends Seeder
                                         'title' => 'USET By The Numbers',
                                         'subtitle' => 'Our growth and impact in numbers',
                                         'items' => [
-                                            ['label' => 'Established', 'value' => '2020'],
+                                            ['label' => 'Established', 'value' => $uniInfo['established']],
                                             ['label' => 'Students', 'value' => '1000+'],
                                             ['label' => 'Faculty Members', 'value' => '50+'],
                                             ['label' => 'Academic Departments', 'value' => '4'],
@@ -143,7 +156,7 @@ class CMSDatabaseSeeder extends Seeder
                         'data' => [
                             'background_color' => 'bg-white',
                             'padding_y' => 'py-0',
-                            "container_type" => 'no-wrapper',
+                            'container_type' => 'no-wrapper',
                             'layout' => '12',
                             'col1_content' => [
                                 [
@@ -162,7 +175,7 @@ class CMSDatabaseSeeder extends Seeder
                         'data' => [
                             'background_color' => 'bg-white',
                             'padding_y' => 'py-0',
-                            "container_type" => 'no-wrapper',
+                            'container_type' => 'no-wrapper',
                             'layout' => '12',
                             'col1_content' => [
                                 [
@@ -235,24 +248,33 @@ class CMSDatabaseSeeder extends Seeder
                             ],
                         ],
                     ],
-                    [
-                        'type' => 'layout_section',
-                        'data' => [
-                            'background_color' => 'bg-light',
-                            'padding_y' => 'py-5',
-                            'layout' => '12',
-                            'col1_content' => [
-                                [
-                                    'type' => 'rich_text',
-                                    'data' => [
-                                        'content' => '<h2 class="text-center mb-4">Our History</h2><div class="row"><div class="col-md-3"><h4>2018</h4><p>Conceptualization</p></div><div class="col-md-3"><h4>2019</h4><p>Planning & Approvals</p></div><div class="col-md-3"><h4>2020</h4><p>Foundation & Launch</p></div><div class="col-md-3"><h4>Present</h4><p>Growth & Recognition</p></div></div>',
-                                    ],
-                                ],
-                            ],
-                        ],
-                    ],
                 ],
             ]
         );
+    }
+
+    protected function seedNews(): void
+    {
+        $dataPath = public_path('themes/default/assets/data/');
+        $newsData = json_decode(File::get($dataPath.'news.json'), true);
+
+        foreach ($newsData['news'] as $nData) {
+            $category = Category::updateOrCreate(
+                ['slug' => Str::slug($nData['category'])],
+                ['name' => $nData['category']]
+            );
+
+            Post::updateOrCreate(
+                ['slug' => $nData['id']],
+                [
+                    'category_id' => $category->id,
+                    'title' => $nData['title'],
+                    'excerpt' => $nData['excerpt'],
+                    'content' => $nData['content'],
+                    'is_published' => true,
+                    'published_at' => Carbon::parse(str_replace('2025', '2026', $nData['date'])),
+                ]
+            );
+        }
     }
 }
