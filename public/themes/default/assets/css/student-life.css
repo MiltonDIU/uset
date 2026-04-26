@@ -9,7 +9,7 @@
     padding: 0.5rem 1.25rem;
     border-radius: 30px;
     font-weight: 500;
-    color: #28a745;
+    color: var(--primary);
 }
 
 .section-divider {
@@ -21,7 +21,7 @@
 .divider-line {
     height: 2px;
     width: 40px;
-    background-color: #28a745;
+    background-color: var(--primary);
     display: inline-block;
 }
 
@@ -72,7 +72,7 @@
 }
 
 .life-features i {
-    color: #28a745;
+    color: var(--primary);
     margin-right: 0.75rem;
     font-size: 0.9rem;
 }
@@ -85,7 +85,7 @@
 .stat-item h4 {
     font-size: 2.5rem;
     font-weight: 600;
-    color: #28a745;
+    color: var(--primary);
     margin-bottom: 0.5rem;
 }
 
@@ -363,14 +363,14 @@
 }
 
 .custom-pills .nav-link.active {
-    background-color: #28a745;
+    background-color: var(--primary);
     color: white;
     box-shadow: 0 2px 8px rgba(40, 167, 69, 0.2);
 }
 
 .custom-pills .nav-link:hover:not(.active) {
     background-color: rgba(40, 167, 69, 0.1);
-    color: #28a745;
+    color: var(--primary);
 }
 
 @media (max-width: 768px) {
@@ -482,7 +482,7 @@
     display: inline-block;
     width: 50px;
     height: 3px;
-    background: #28a745;
+    background: var(--primary);
     vertical-align: middle;
     transition: width 0.3s ease;
 }
@@ -518,20 +518,20 @@
     height: 50px;
     border-radius: 50%;
     object-fit: cover;
-    border: 2px solid #28a745;
+    border: 2px solid var(--primary);
     transition: border-color 0.3s ease;
     flex-shrink: 0;
 }
 
 .testimonial-card:hover .testimonial-img {
-    border-color: #218838;
+    border-color: var(--primary-dark);
 }
 
 .quote-icon {
     position: absolute;
     right: 10px;
     top: 10px;
-    background: #28a745;
+    background: var(--primary);
     color: #fff;
     border-radius: 50%;
     width: 30px;
@@ -544,7 +544,7 @@
 }
 
 .testimonial-card:hover .quote-icon {
-    background: #218838;
+    background: var(--primary-dark);
 }
 
 .testimonial-header {
@@ -580,7 +580,7 @@
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: #28a745;
+    background: var(--primary);
     color: #fff;
     border: none;
     border-radius: 50%;
@@ -595,7 +595,7 @@
 
 .slick-prev:hover,
 .slick-next:hover {
-    background: #218838;
+    background: var(--primary-dark);
 }
 
 .slick-prev {
@@ -617,12 +617,12 @@
 
 .slick-dots li button:before {
     font-size: 10px;
-    color: #28a745;
+    color: var(--primary);
     opacity: 0.5;
 }
 
 .slick-dots li.slick-active button:before {
-    color: #28a745;
+    color: var(--primary);
     opacity: 1;
 }
 

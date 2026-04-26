@@ -1,0 +1,11 @@
+{
+    "name": "FAQ",
+    "alias": "faq",
+    "description": "FAQ Management Module",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\FAQ\\app\\Providers\\FAQServiceProvider"
+    ],
+    "files": []
+}

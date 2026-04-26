@@ -8,6 +8,10 @@ use Illuminate\Database\Seeder;
 use Modules\Academic\database\seeders\AcademicDatabaseSeeder;
 use Modules\CMS\database\seeders\CMSDatabaseSeeder;
 use Modules\Theme\database\seeders\ThemeDatabaseSeeder;
+use Modules\News\database\seeders\NewsDatabaseSeeder;
+use Modules\Events\database\seeders\EventsDatabaseSeeder;
+use Modules\Testimonials\database\seeders\TestimonialsDatabaseSeeder;
+use Modules\Labs\database\seeders\LabsDatabaseSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -19,10 +23,14 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call([
-            UniversityMenuSeeder::class,
-            AcademicDatabaseSeeder::class,
-            CMSDatabaseSeeder::class,
-            ThemeDatabaseSeeder::class,
+//             UniversityMenuSeeder::class,
+//             AcademicDatabaseSeeder::class,
+//             CMSDatabaseSeeder::class,
+//             ThemeDatabaseSeeder::class,
+//            NewsDatabaseSeeder::class,
+//            EventsDatabaseSeeder::class,
+            TestimonialsDatabaseSeeder::class,
+            LabsDatabaseSeeder::class,
         ]);
         // User::factory(10)->create();
 

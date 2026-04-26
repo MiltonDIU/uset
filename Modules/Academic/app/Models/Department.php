@@ -37,6 +37,16 @@ class Department extends Model
         return $this->hasMany(Program::class);
     }
 
+    public function testimonials(): \Illuminate\Database\Eloquent\Relations\MorphMany
+    {
+        return $this->morphMany(\Modules\Testimonials\app\Models\Testimonial::class, 'testimonialable');
+    }
+
+    public function labs(): \Illuminate\Database\Eloquent\Relations\MorphMany
+    {
+        return $this->morphMany(\Modules\Labs\app\Models\Lab::class, 'labbable');
+    }
+
     protected function casts(): array
     {
         return [

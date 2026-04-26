@@ -13,7 +13,7 @@
 }
 
 .nav-pills .nav-link.active {
-    background-color: #28a745;
+    background-color: var(--primary);
     box-shadow: 0 4px 15px rgba(40, 167, 69, 0.2);
 }
 
@@ -33,7 +33,7 @@
 .faculty-img {
     height: 250px;
     object-fit: contain;
-    border-bottom: 3px solid #28a745;
+    border-bottom: 3px solid var(--primary);
 }
 
 .card-body {
@@ -47,7 +47,7 @@
 }
 
 .text-success {
-    color: #28a745 !important;
+    color: var(--primary) !important;
     font-weight: 500;
 }
 
@@ -60,7 +60,7 @@
 }
 
 .btn-outline-success:hover {
-    background-color: #28a745;
+    background-color: var(--primary);
     color: white;
     transform: translateY(-2px);
     box-shadow: 0 4px 6px rgba(40, 167, 69, 0.2);
@@ -86,7 +86,7 @@
     transform: translateX(-50%);
     width: 60px;
     height: 3px;
-    background: #28a745;
+    background: var(--primary);
     border-radius: 3px;
 }
 
@@ -296,13 +296,13 @@
 .divider-line {
     height: 2px;
     width: 40px;
-    background-color: #28a745;
+    background-color: var(--primary);
     display: inline-block;
 }
 
 .message-divider i {
     font-size: 1.25rem;
-    color: #28a745;
+    color: var(--primary);
 }
 
 .message-content {

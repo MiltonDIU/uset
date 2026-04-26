@@ -2,7 +2,11 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-white py-3 fixed-top">
         <div class="container">
             <a class="navbar-brand d-flex align-items-center" href="{{ route('home') }}">
-                <img src="{{ theme_asset('img/LOGO.png') }}" alt="USET Logo" class="mr-2" />
+                @php
+                    $activeTheme = app(\Modules\Theme\app\Services\ThemeService::class)->current();
+                    $logo = $activeTheme->getFirstMediaUrl('main_logo');
+                @endphp
+                <img src="{{ $logo ?: theme_asset('img/LOGO.png') }}" alt="USET Logo" class="mr-2" style="max-height: 50px; width: auto;" />
                 <div class="d-none d-md-block">
                     <!-- <small class="text-muted university-slogan">Bangladesh's First Skill-Based University</small> -->
                 </div>

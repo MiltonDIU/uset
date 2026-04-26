@@ -1,0 +1,21 @@
+{
+    "name": "nwidart/labs",
+    "description": "",
+    "authors": [
+        {
+            "name": "Antigravity",
+            "email": "antigravity@example.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [],
+            "aliases": {}
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\Labs\\": ""
+        }
+    }
+}

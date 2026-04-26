@@ -27,6 +27,26 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{{ theme_asset('css/styles.css') }}" />
     
+    @php
+        $activeTheme = app(\Modules\Theme\app\Services\ThemeService::class)->current();
+        $themeSettings = $activeTheme->settings ?? [];
+        $primaryColor = $themeSettings['primary_color'] ?? '#008558';
+    @endphp
+
+    @if(!empty($themeSettings))
+    <style>
+        :root {
+            --primary: {{ $primaryColor }};
+            --primary-dark: {{ $themeSettings['primary_dark_color'] ?? '#00724a' }};
+            --primary-light: {{ $themeSettings['primary_light_color'] ?? '#66b59a' }};
+            --secondary: {{ $themeSettings['secondary_color'] ?? '#f8f9fa' }};
+            --accent: {{ $themeSettings['accent_color'] ?? '#ffc107' }};
+            --body-text: {{ $themeSettings['body_text_color'] ?? '#333333' }};
+        }
+        body { color: var(--body-text); }
+    </style>
+    @endif
+    
     @stack('styles')
 </head>
 

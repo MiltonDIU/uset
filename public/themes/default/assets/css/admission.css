@@ -1,6 +1,6 @@
 /* Base Styles */
 :root {
-    --primary: #28a745;
+    --primary: var(--primary);
     --primary-dark: #198754;
     --secondary: #6c757d;
     --dark: #1a3c6d;
@@ -332,7 +332,7 @@
 /* Feature Cards */
 
 .feature-icon {
-    color: #28a745;
+    color: var(--primary);
     /* Bootstrap 4.3.2 success green */
 }
 
@@ -353,7 +353,7 @@
 
 .section-badge {
     background: rgba(40, 167, 69, 0.1);
-    color: #28a745;
+    color: var(--primary);
     font-size: 1rem;
     font-weight: 600;
     padding: 0.5rem 1.5rem;
@@ -364,7 +364,7 @@
 }
 
 .section-badge:hover {
-    background: #28a745;
+    background: var(--primary);
     color: white;
     transform: translateY(-2px);
 }
@@ -383,7 +383,7 @@
 .feature-card:hover {
     transform: translateY(-10px);
     box-shadow: 0 15px 30px rgba(40, 167, 69, 0.1);
-    border-color: #28a745;
+    border-color: var(--primary);
 }
 
 .feature-card::before {
@@ -393,7 +393,7 @@
     left: 0;
     width: 100%;
     height: 4px;
-    background: #28a745;
+    background: var(--primary);
     transform: scaleX(0);
     transition: transform 0.3s ease;
     transform-origin: left;
@@ -416,13 +416,13 @@
 }
 
 .feature-card:hover .feature-icon {
-    background: #28a745;
+    background: var(--primary);
     transform: rotateY(360deg);
 }
 
 .feature-icon i {
     font-size: 1.8rem;
-    color: #28a745;
+    color: var(--primary);
     transition: all 0.3s ease;
 }
 
@@ -465,11 +465,11 @@
     .program-card:hover {
         transform: translateY(-5px);
         box-shadow: 0 6px 12px rgba(40, 167, 69, 0.15);
-        border-color: #28a745;
+        border-color: var(--primary);
     }
 
     .program-header {
-        background: linear-gradient(45deg, #28a745, #218838);
+        background: linear-gradient(45deg, var(--primary), var(--primary-dark));
     }
 
     .program-title {
@@ -592,7 +592,7 @@
 }
 
 .estimated-cost {
-    border-left: 4px solid #28a745;
+    border-left: 4px solid var(--primary);
 }
 
 .scholarship-type {
@@ -615,7 +615,7 @@
 
 .scholarship-item:hover {
     transform: translateX(5px);
-    border-left: 3px solid #28a745;
+    border-left: 3px solid var(--primary);
 }
 
 .badge {
@@ -670,7 +670,7 @@
     display: inline-flex;
     align-items: center;
     gap: 0.75rem;
-    background: linear-gradient(45deg, #28a745, #20c997);
+    background: linear-gradient(45deg, var(--primary), #20c997);
     color: white;
     padding: 1rem 2rem;
     border-radius: 50px;
@@ -736,8 +736,8 @@
     right: 1.5rem;
     width: 10px;
     height: 10px;
-    border-right: 2px solid #28a745;
-    border-bottom: 2px solid #28a745;
+    border-right: 2px solid var(--primary);
+    border-bottom: 2px solid var(--primary);
     transform: rotate(45deg);
     transition: transform 0.3s ease;
     top: calc(50% - 6px);
@@ -749,7 +749,7 @@
 }
 
 .accordion-button:hover::after {
-    border-color: #218838;
+    border-color: var(--primary-dark);
 }
 
 /* Remove the icon-box styles since we're not using them anymore */
@@ -765,11 +765,11 @@
 
 .accordion-button[aria-expanded="true"] {
     background: #f8f9fa;
-    color: #28a745;
+    color: var(--primary);
 }
 
 .accordion-button[aria-expanded="true"] span {
-    color: #28a745;
+    color: var(--primary);
 }
 
 /* Add smooth transition for text color change */
@@ -778,7 +778,7 @@
 }
 
 .accordion-button:hover span {
-    color: #28a745;
+    color: var(--primary);
 }
 
 @media (max-width: 768px) {
@@ -821,7 +821,7 @@
 }
 
 .accordion-button .icon-box i {
-    color: #28a745;
+    color: var(--primary);
     font-size: 1.1rem;
 }
 
@@ -836,7 +836,7 @@
 }
 
 .accordion-button[aria-expanded="true"] .icon-box {
-    background: #28a745;
+    background: var(--primary);
     transform: scale(1.1);
 }
 
@@ -850,7 +850,7 @@
 }
 
 .accordion-button:hover::after {
-    border-color: #28a745;
+    border-color: var(--primary);
 }
 
 .accordion-body {
@@ -871,7 +871,7 @@
 
 .custom-list li::before {
     content: '•';
-    color: #28a745;
+    color: var(--primary);
     position: absolute;
     left: 0;
 }
@@ -910,7 +910,7 @@
 
 .requirement-item i {
     font-size: 2rem;
-    color: #28a745;
+    color: var(--primary);
     margin-bottom: 1rem;
 }
 
@@ -934,7 +934,7 @@
 }
 
 .info-item h6 {
-    color: #28a745;
+    color: var(--primary);
     margin-bottom: 1rem;
 }
 
@@ -942,7 +942,7 @@
     display: inline-flex;
     align-items: center;
     padding: 1rem 2rem;
-    background: linear-gradient(45deg, #28a745, #20c997);
+    background: linear-gradient(45deg, var(--primary), #20c997);
     color: #fff;
     border-radius: 50px;
     text-decoration: none;

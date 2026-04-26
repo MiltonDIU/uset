@@ -1,0 +1,11 @@
+{
+    "name": "News",
+    "alias": "news",
+    "description": "University News Module",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\News\\app\\Providers\\NewsServiceProvider"
+    ],
+    "files": []
+}

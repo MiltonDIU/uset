@@ -1,0 +1,11 @@
+{
+    "name": "Events",
+    "alias": "events",
+    "description": "University Events Module",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Events\\app\\Providers\\EventsServiceProvider"
+    ],
+    "files": []
+}

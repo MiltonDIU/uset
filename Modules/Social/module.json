@@ -1,0 +1,11 @@
+{
+    "name": "Social",
+    "alias": "social",
+    "description": "Social Media Links Module",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Social\\app\\Providers\\SocialServiceProvider"
+    ],
+    "files": []
+}

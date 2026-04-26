@@ -4,7 +4,11 @@
             <!-- University Info -->
             <div class="col-lg-4 mb-5 mb-lg-0">
                 <div class="footer-brand mb-4">
-                    <img src="{{ theme_asset('img/LOGO.png') }}" alt="USET Logo" class="footer-logo mb-3" />
+                    @php
+                        $activeTheme = app(\Modules\Theme\app\Services\ThemeService::class)->current();
+                        $footerLogo = $activeTheme->getFirstMediaUrl('footer_logo');
+                    @endphp
+                    <img src="{{ $footerLogo ?: theme_asset('img/LOGO.png') }}" alt="USET Logo" class="footer-logo mb-3" />
                     <h5 class="text-white mb-3">
                         University of Skill Enrichment and Technology (USET)
                     </h5>
@@ -15,18 +19,26 @@
                     today's workplace.
                 </p>
                 <div class="social-icons">
-                    <a href="#" class="social-icon" target="_blank" aria-label="Facebook">
-                        <i class="fab fa-facebook-f"></i>
-                    </a>
-                    <a href="#" class="social-icon" target="_blank" aria-label="Twitter">
-                        <i class="fab fa-twitter"></i>
-                    </a>
-                    <a href="#" class="social-icon" target="_blank" aria-label="LinkedIn">
-                        <i class="fab fa-linkedin-in"></i>
-                    </a>
-                    <a href="#" class="social-icon" target="_blank" aria-label="Instagram">
-                        <i class="fab fa-instagram"></i>
-                    </a>
+                    @php
+                        $socialService = app(\Modules\Social\app\Services\SocialService::class);
+                        $socialLinks = $socialService->getActiveLinks();
+                        
+                        $platformIcons = \Modules\Social\app\Models\SocialLink::getPlatformIcons();
+                    @endphp
+
+                    @forelse($socialLinks as $link)
+                        <a href="{{ $link->url }}" class="social-icon" target="_blank" aria-label="{{ ucfirst($link->platform) }}">
+                            <i class="{{ $link->icon ?: ($platformIcons[$link->platform] ?? 'fas fa-link') }}"></i>
+                        </a>
+                    @empty
+                        <!-- Fallback icons if none set in backend -->
+                        <a href="#" class="social-icon" target="_blank" aria-label="Facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="social-icon" target="_blank" aria-label="LinkedIn">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    @endforelse
                 </div>
             </div>
 

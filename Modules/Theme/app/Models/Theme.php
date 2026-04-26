@@ -13,12 +13,13 @@ class Theme extends Model implements HasMedia
 {
     use InteractsWithMedia;
 
-    protected $fillable = ['name', 'slug', 'description', 'thumbnail', 'is_active', 'framework'];
+    protected $fillable = ['name', 'slug', 'description', 'thumbnail', 'is_active', 'framework', 'settings'];
 
     protected function casts(): array
     {
         return [
             'is_active' => ActiveStatus::class,
+            'settings' => 'array',
         ];
     }
 

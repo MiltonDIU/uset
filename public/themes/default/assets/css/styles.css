@@ -38,13 +38,13 @@ body {
 
 .navbar-light .navbar-nav .nav-link.active,
 .navbar-light .navbar-nav .nav-link:hover {
-    color: #28a745;
+    color: var(--primary);
     background-color: rgba(40, 167, 69, 0.1);
 }
 
 /* Add specific active state styles */
 .navbar-light .navbar-nav .nav-link.active {
-    color: #28a745;
+    color: var(--primary);
     background-color: rgba(40, 167, 69, 0.1);
     font-weight: 600;
     position: relative;
@@ -58,7 +58,7 @@ body {
     transform: translateX(-50%);
     width: 24px;
     height: 3px;
-    background-color: #28a745;
+    background-color: var(--primary);
     border-radius: 2px;
 }
 
@@ -144,14 +144,14 @@ body {
 }
 
 .dropdown-item i {
-    color: #28a745;
+    color: var(--primary);
     width: 20px;
     transition: transform 0.3s ease;
 }
 
 .dropdown-item:hover {
     background: linear-gradient(135deg, rgba(40, 167, 69, 0.1) 0%, rgba(40, 167, 69, 0.05) 100%);
-    color: #28a745;
+    color: var(--primary);
     padding-left: 1.5rem;
 }
 
@@ -162,7 +162,7 @@ body {
 .dropdown-item:focus,
 .dropdown-item:active {
     background-color: rgba(40, 167, 69, 0.15);
-    color: #28a745;
+    color: var(--primary);
 }
 
 .dropdown-divider {
@@ -338,7 +338,7 @@ body {
 }
 
 .program-header {
-    background: linear-gradient(135deg, #28a745 0%, #218838 100%);
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
     padding: 1.5rem;
     color: white;
     position: relative;
@@ -352,7 +352,7 @@ body {
     transform: translateX(-50%);
     border-left: 10px solid transparent;
     border-right: 10px solid transparent;
-    border-top: 10px solid #218838;
+    border-top: 10px solid var(--primary-dark);
 }
 
 .program-card .card-body {
@@ -376,7 +376,7 @@ body {
 
 .program-meta-item i {
     margin-right: 0.5rem;
-    color: #28a745;
+    color: var(--primary);
 }
 
 .program-card .btn-success {
@@ -394,7 +394,7 @@ body {
 
 /* Stats */
 .stats-section {
-    background-color: #006e3b;
+    background-color: var(--primary-dark);
     position: relative;
 }
 
@@ -512,12 +512,12 @@ body {
 }
 
 .news-meta i {
-    color: #28a745;
+    color: var(--primary);
     margin-right: 0.5rem;
 }
 
 .event-date {
-    background: linear-gradient(135deg, #28a745 0%, #218838 100%);
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
     color: white;
     text-align: center;
     padding: 10px 15px;
@@ -552,7 +552,7 @@ body {
 }
 
 .event-meta i {
-    color: #28a745;
+    color: var(--primary);
     margin-right: 0.5rem;
     width: 16px;
 }
@@ -571,7 +571,7 @@ body {
 }
 
 .section-header a:hover {
-    color: #218838;
+    color: var(--primary-dark);
 }
 
 /* Footer */
@@ -579,7 +579,7 @@ body {
     background: linear-gradient(to bottom, #1a1a1a, #000000);
     color: #ffffff;
     position: relative;
-    border-top: 4px solid #28a745;
+    border-top: 4px solid var(--primary);
 }
 
 .footer::before {
@@ -627,7 +627,7 @@ body {
 }
 
 .social-icon:hover {
-    background-color: #28a745;
+    background-color: var(--primary);
     color: #ffffff;
     transform: translateY(-4px) rotate(8deg);
     box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
@@ -662,7 +662,7 @@ body {
     left: 0;
     opacity: 0;
     transition: all 0.3s ease;
-    color: #28a745;
+    color: var(--primary);
 }
 
 .footer-links a:hover {
@@ -686,7 +686,7 @@ body {
 }
 
 .contact-icon {
-    color: #28a745;
+    color: var(--primary);
     font-size: 1.2rem;
     margin-right: 1rem;
     min-width: 20px;
@@ -743,7 +743,7 @@ body {
 }
 
 .footer-bottom-links a:hover {
-    color: #28a745;
+    color: var(--primary);
 }
 
 /* Why Choose Section Styles */
@@ -773,7 +773,7 @@ body {
 .value-icon {
     width: 70px;
     height: 70px;
-    background: linear-gradient(135deg, #28a745 0%, #218838 100%);
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -790,7 +790,7 @@ body {
 
 .badge-success {
     background-color: #e8f5e9;
-    color: #28a745;
+    color: var(--primary);
     font-weight: 500;
     font-size: 0.9rem;
 }
@@ -823,7 +823,7 @@ body {
 
 .cta-section .badge {
     background: rgba(255, 255, 255, 0.9);
-    color: #28a745;
+    color: var(--primary);
     font-weight: 500;
     font-size: 0.9rem;
     text-transform: uppercase;
@@ -880,7 +880,7 @@ body {
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    background: linear-gradient(135deg, #28a745 0%, #218838 100%);
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
     color: white;
     border: none;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
@@ -1054,7 +1054,7 @@ body {
 
 /* Academic Council Page CSS  */
 .AcademicheroSection {
-    background-color: #006e3b;
+    background-color: var(--primary-dark);
     color: white;
     padding: 4rem 0;
 }
@@ -1120,9 +1120,9 @@ body {
 .academic-council-table .badge {
     color: white;
     padding: 5px 10px;
-    background: #006e3b;
+    background: var(--primary-dark);
 }
 
 .card-header {
-    background: #006e3b;
+    background: var(--primary-dark);
 }

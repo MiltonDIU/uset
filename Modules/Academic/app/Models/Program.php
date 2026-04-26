@@ -90,6 +90,16 @@ class Program extends Model implements HasMedia
         return $this->hasMany(AdmissionRequirement::class);
     }
 
+    public function testimonials(): MorphMany
+    {
+        return $this->morphMany(\Modules\Testimonials\app\Models\Testimonial::class, 'testimonialable');
+    }
+
+    public function labs(): MorphMany
+    {
+        return $this->morphMany(\Modules\Labs\app\Models\Lab::class, 'labbable');
+    }
+
     protected function casts(): array
     {
         return [

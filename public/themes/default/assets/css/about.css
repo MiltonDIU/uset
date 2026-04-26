@@ -75,11 +75,11 @@
 
 .tab-btn:hover {
     background: rgba(40,167,69,0.1);
-    color: #28a745;
+    color: var(--primary);
 }
 
 .tab-btn.active {
-    background: #28a745;
+    background: var(--primary);
     color: #fff;
     box-shadow: 0 4px 15px rgba(40,167,69,0.2);
 }
@@ -135,11 +135,11 @@
     left: 0;
     width: 100%;
     height: 4px;
-    background: linear-gradient(to right, #28a745, #34ce57);
+    background: linear-gradient(to right, var(--primary), #34ce57);
 }
 
 .mission-box h2, .vision-box h2 {
-    color: #28a745;
+    color: var(--primary);
     font-size: 1.75rem;
     margin-bottom: 1.5rem;
     position: relative;
@@ -214,7 +214,7 @@
 
 .facility-icon i {
     font-size: 2rem;
-    color: #28a745;
+    color: var(--primary);
 }
 
 .facility-card h3 {
@@ -242,7 +242,7 @@
     left: 50%;
     width: 2px;
     height: 100%;
-    background: #28a745;
+    background: var(--primary);
     transform: translateX(-50%);
 }
 
@@ -269,7 +269,7 @@
     width: 16px;
     height: 16px;
     border-radius: 50%;
-    border: 2px solid #28a745;
+    border: 2px solid var(--primary);
     background: #fff;
     z-index: 1;
 }
@@ -298,7 +298,7 @@
 }
 
 .year {
-    background: #28a745;
+    background: var(--primary);
     color: #fff;
     padding: 4px 12px;
     border-radius: 20px;
@@ -317,7 +317,7 @@
 }
 
 .milestone-icon i {
-    color: #28a745;
+    color: var(--primary);
     font-size: 20px;
 }
 
@@ -385,12 +385,12 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #28a745;
+    color: var(--primary);
     transition: all 0.3s ease;
 }
 
 .social-link:hover {
-    background: #28a745;
+    background: var(--primary);
     color: #fff;
     transform: translateY(-3px);
 }
@@ -401,7 +401,7 @@
 }
 
 .leader-role {
-    color: #28a745;
+    color: var(--primary);
     font-weight: 600;
     font-size: 0.9rem;
     text-transform: uppercase;
@@ -436,7 +436,7 @@
 }
 
 .leader-quote i {
-    color: #28a745;
+    color: var(--primary);
     font-size: 1.5rem;
     opacity: 0.3;
     position: absolute;
@@ -504,7 +504,7 @@
 
 .info-icon i {
     font-size: 1.5rem;
-    color: #28a745;
+    color: var(--primary);
 }
 
 .info-title {
@@ -535,7 +535,7 @@
 
 .contact-item i {
     width: 24px;
-    color: #28a745;
+    color: var(--primary);
     margin-right: 1rem;
 }
 
@@ -576,13 +576,13 @@
 }
 
 .btn-primary {
-    background: #28a745;
+    background: var(--primary);
     color: white;
 }
 
 .btn-outline {
-    border: 2px solid #28a745;
-    color: #28a745;
+    border: 2px solid var(--primary);
+    color: var(--primary);
 }
 
 .direction-btn:hover {
@@ -592,13 +592,13 @@
 }
 
 .btn-primary:hover {
-    background: #218838;
+    background: var(--primary-dark);
     color: white;
 }
 
 .btn-outline:hover {
     background: rgba(40, 167, 69, 0.1);
-    border-color: #218838;
+    border-color: var(--primary-dark);
 }
 
 @media (max-width: 768px) {

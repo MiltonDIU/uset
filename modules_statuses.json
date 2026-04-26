@@ -1,5 +1,11 @@
 {
     "CMS": true,
     "Theme": true,
-    "Academic": true
+    "Academic": true,
+    "News": true,
+    "Events": true,
+    "Testimonials": true,
+    "Labs": true,
+    "FAQ": true,
+    "Social": true
 }

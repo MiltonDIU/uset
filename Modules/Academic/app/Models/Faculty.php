@@ -31,6 +31,16 @@ class Faculty extends Model
         return $this->hasMany(Department::class);
     }
 
+    public function testimonials(): \Illuminate\Database\Eloquent\Relations\MorphMany
+    {
+        return $this->morphMany(\Modules\Testimonials\app\Models\Testimonial::class, 'testimonialable');
+    }
+
+    public function labs(): \Illuminate\Database\Eloquent\Relations\MorphMany
+    {
+        return $this->morphMany(\Modules\Labs\app\Models\Lab::class, 'labbable');
+    }
+
     protected function casts(): array
     {
         return [
