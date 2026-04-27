@@ -161,6 +161,7 @@ class PageForm
             self::getPageHeroBlock(),
             self::getTabsBlock(),
             self::getTeamsBlock(),
+            self::getVisitUsBlock(),
             self::getHeroBlock(),
             self::getWhyChooseBlock(),
             self::getFeaturedProgramsBlock(),
@@ -361,6 +362,44 @@ class PageForm
                     ->collapsible()
                     ->itemLabel(fn (array $state): ?string => $state['name'] ?? null)
                     ->defaultItems(3),
+            ]);
+    }
+
+    protected static function getVisitUsBlock(): Block
+    {
+        return Block::make('visit_us')
+            ->label('Visit Us / Location')
+            ->icon('heroicon-o-map-pin')
+            ->schema([
+                Grid::make(2)->schema([
+                    TextInput::make('badge')->default('Visit Us'),
+                    TextInput::make('title')->default('Our Location'),
+                ]),
+                Textarea::make('subtitle')
+                    ->default('Our campus is strategically located in Narayanganj, providing easy access from Dhaka and surrounding areas')
+                    ->columnSpanFull(),
+                Grid::make(2)->schema([
+                    Section::make('Contact Info')
+                        ->schema([
+                            Textarea::make('address')
+                                ->default('672, Kazi Bari Bus Stand, Bhuigar, Fatullah, Narayanganj-1421')
+                                ->required(),
+                            TextInput::make('phone')->default('+8801733-360664'),
+                            TextInput::make('email')->default('info@uset.ac'),
+                            TextInput::make('timing')->default('Friday - Saturday. 9.00 AM to 9.00 PM'),
+                        ])->columnSpan(1),
+                    Section::make('Maps & Links')
+                        ->schema([
+                            TextInput::make('google_maps_url')
+                                ->label('Google Maps URL (for Button)')
+                                ->placeholder('https://maps.google.com/...'),
+                            TextInput::make('google_maps_embed_url')
+                                ->label('Google Maps Embed URL (for Map)')
+                                ->placeholder('https://www.google.com/maps/embed?...')
+                                ->required(),
+                            TextInput::make('contact_page_link')->default('/contact'),
+                        ])->columnSpan(1),
+                ]),
             ]);
     }
 
