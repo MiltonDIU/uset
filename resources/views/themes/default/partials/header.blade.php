@@ -16,9 +16,17 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
-                <x-filament-menu-builder::menu slug="main-menu" view="themes.default.partials.main-menu" />
+                @php
+                    $menuSlug = $activeTheme->settings['header_menu_slug'] ?? 'main-menu';
+                    $showApplyNow = $activeTheme->settings['header_show_apply_now'] ?? true;
+                    $applyNowUrl = $activeTheme->settings['header_apply_now_url'] ?? '#';
+                    $applyNowText = $activeTheme->settings['header_apply_now_text'] ?? 'Apply Now';
+                @endphp
+                <x-filament-menu-builder::menu :slug="$menuSlug" view="themes.default.partials.main-menu" />
                 
-                <a href="#" class="btn btn-success d-none d-md-block">Apply Now</a>
+                @if($showApplyNow)
+                    <a href="{{ $applyNowUrl }}" class="btn btn-success d-none d-md-block">{{ $applyNowText }}</a>
+                @endif
             </div>
         </div>
     </nav>
