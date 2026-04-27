@@ -41,6 +41,7 @@
             --primary-light: {{ $themeSettings['primary_light_color'] ?? '#66b59a' }};
             --secondary: {{ $themeSettings['secondary_color'] ?? '#f8f9fa' }};
             --accent: {{ $themeSettings['accent_color'] ?? '#ffc107' }};
+            --success: {{ $themeSettings['success_color'] ?? '#28a745' }};
             --body-text: {{ $themeSettings['body_text_color'] ?? '#333333' }};
         }
         body { color: var(--body-text); }

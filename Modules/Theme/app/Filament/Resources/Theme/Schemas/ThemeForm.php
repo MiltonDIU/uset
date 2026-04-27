@@ -81,6 +81,10 @@ class ThemeForm
                                             ->label('Accent Color')
                                             ->default('#ffc107')
                                             ->helperText('Default: #ffc107'),
+                                        ColorPicker::make('settings.success_color')
+                                            ->label('Success/Green Color')
+                                            ->default('#28a745')
+                                            ->helperText('Default: #28a745'),
                                         ColorPicker::make('settings.secondary_color')
                                             ->label('Secondary Background')
                                             ->default('#f8f9fa')
