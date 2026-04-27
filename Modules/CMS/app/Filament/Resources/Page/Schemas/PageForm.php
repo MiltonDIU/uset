@@ -162,6 +162,7 @@ class PageForm
             self::getTabsBlock(),
             self::getTeamsBlock(),
             self::getVisitUsBlock(),
+            self::getMessageBlock(),
             self::getHeroBlock(),
             self::getWhyChooseBlock(),
             self::getFeaturedProgramsBlock(),
@@ -399,6 +400,40 @@ class PageForm
                                 ->required(),
                             TextInput::make('contact_page_link')->default('/contact'),
                         ])->columnSpan(1),
+                ]),
+            ]);
+    }
+
+    protected static function getMessageBlock(): Block
+    {
+        return Block::make('message')
+            ->label('Leader Message')
+            ->icon('heroicon-o-chat-bubble-bottom-center-text')
+            ->schema([
+                Grid::make(2)->schema([
+                    FileUpload::make('image')
+                        ->image()
+                        ->directory('messages')
+                        ->required(),
+                    Grid::make(1)->schema([
+                        TextInput::make('name')->required()->default('Mr. Shakhawat Hossain'),
+                        TextInput::make('designation')->default('Chairman, Board of Trustees'),
+                        TextInput::make('organization')->default('University of Skill Enrichment & Technology'),
+                    ])->columnSpan(1),
+                ]),
+                TextInput::make('message_title')
+                    ->label('Title/Heading')
+                    ->required()
+                    ->default('A Vision for Global Standards and Future-Ready Skills')
+                    ->columnSpanFull(),
+                RichEditor::make('content')
+                    ->label('Message Content')
+                    ->required()
+                    ->columnSpanFull(),
+                Grid::make(3)->schema([
+                    TextInput::make('signature_text')->label('Signature Name')->default('Mr. Shakhawat Hossain'),
+                    TextInput::make('footer_designation')->label('Footer Designation')->default('Chairman'),
+                    TextInput::make('footer_organization')->label('Footer Organization')->default('University of Skill Enrichment & Technology (USET)'),
                 ]),
             ]);
     }

@@ -16,6 +16,7 @@ class CMSDatabaseSeeder extends Seeder
     {
         $this->seedHomePage();
         $this->seedAboutPage();
+        $this->seedChairmanMessagePage();
         $this->seedNews();
     }
 
@@ -395,6 +396,64 @@ class CMSDatabaseSeeder extends Seeder
                                         'google_maps_embed_url' => 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3653.8722752740264!2d90.48268259999999!3d23.680525199999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755b7ebf3764ead%3A0x7538b8f41cd19c5b!2sUniversity%20of%20Skill%20Enrichment%20and%20Technology%20(USET)!5e0!3m2!1sen!2sbd!4v1777289290704!5m2!1sen!2sbd',
                                     ],
                                     'type' => 'visit_us',
+                                ],
+                            ],
+                            'container_type' => 'no-wrapper',
+                            'background_color' => 'bg-white',
+                        ],
+                        'type' => 'layout_section',
+                    ],
+                ],
+            ]
+        );
+    }
+
+    protected function seedChairmanMessagePage(): void
+    {
+        Page::updateOrCreate(
+            ['slug' => 'chairman-message'],
+            [
+                'title' => 'Message from the Chairman',
+                'template' => 'default',
+                'is_published' => true,
+                'content' => [
+                    [
+                        'data' => [
+                            'layout' => 12,
+                            'padding_y' => 'py-0',
+                            'col1_content' => [
+                                [
+                                    'data' => [
+                                        'title' => 'Message from the Chairman',
+                                        'description' => 'Empowering the next generation of innovators through transformative, skill-based education.',
+                                        'show_breadcrumbs' => false,
+                                    ],
+                                    'type' => 'page_hero',
+                                ],
+                            ],
+                            'container_type' => 'no-wrapper',
+                            'background_color' => 'bg-white',
+                        ],
+                        'type' => 'layout_section',
+                    ],
+                    [
+                        'data' => [
+                            'layout' => 12,
+                            'padding_y' => 'py-0',
+                            'col1_content' => [
+                                [
+                                    'data' => [
+                                        'name' => 'Mr. Shakhawat Hossain',
+                                        'image' => 'messages/01KQ7CW1CEX0ZW1AEZW68NQ5XB.jpeg',
+                                        'content' => '<p>Since its inception, the mission of the University of Skill Enrichment &amp; Technology (USET) has been to impart quality higher education, positioning itself as Bangladesh&#039;s first dedicated skill-based university. At USET, students are nurtured to harness competencies that meet global standards. The core objective of USET is to ensure students graduate as highly employable professionals, enriched with industry-relevant skills, leadership qualities, and an entrepreneurial mindset.</p><p>By adopting successful European technical models, integrating hands-on laboratory training, and fostering strong ties with industry partners, USET equips its students with a &quot;future-ready&quot; mentality and practical capabilities. Our students thrive within a collaborative environment involving a three-dimensional relationship between students, guardians, and faculty. We are committed to developing the university with a global mindset, emphasizing international academic collaborations, industry-academia relationships, lecture series, and a culture of innovation.</p><p>Supported by our dedicated students, visionary founders, and expert faculty members, USET is rapidly positioning itself as a cornerstone of technical excellence in Bangladesh. Our approach—balancing theoretical knowledge with intensive practical experience—ensures that our graduates are not just learners, but innovators capable of addressing real-world challenges. Involvement with various international platforms and the commitment to sustainable, technology-driven education keep us on the right track.</p><p>To keep pace with the changing trends of the global education system, USET is continuously adopting sustainable measures through digital integration, modern automation, and an ever-evolving curriculum designed to meet the demands of the modern workplace and the Fifth Industrial Era.</p>',
+                                        'designation' => 'Chairman, Board of Trustees',
+                                        'organization' => 'University of Skill Enrichment & Technology',
+                                        'message_title' => 'A Vision for Global Standards and Future-Ready Skills',
+                                        'signature_text' => 'Mr. Shakhawat Hossain',
+                                        'footer_designation' => 'Chairman',
+                                        'footer_organization' => 'University of Skill Enrichment & Technology (USET)',
+                                    ],
+                                    'type' => 'message',
                                 ],
                             ],
                             'container_type' => 'no-wrapper',
