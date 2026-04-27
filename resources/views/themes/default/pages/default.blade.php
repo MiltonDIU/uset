@@ -3,18 +3,32 @@
 @section('title', $page->meta_title ?? $page->title)
 
 @section('content')
-    <!-- Page Header -->
-    <section class="page-header bg-light py-5">
-        <div class="container text-center">
-            <h1 class="display-4 font-weight-bold">{{ $page->title }}</h1>
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb justify-content-center bg-transparent p-0 mb-0">
-                    <li class="breadcrumb-item"><a href="/" class="text-success">Home</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">{{ $page->title }}</li>
-                </ol>
-            </nav>
-        </div>
-    </section>
+    @php
+        $hasPageHero = false;
+        if (isset($page->content) && is_array($page->content)) {
+            foreach ($page->content as $block) {
+                if ($block['type'] === 'page_hero') {
+                    $hasPageHero = true;
+                    break;
+                }
+            }
+        }
+    @endphp
+
+    @if(!$hasPageHero)
+        <!-- Page Header (Fallback) -->
+        <section class="page-header bg-light py-5">
+            <div class="container text-center">
+                <h1 class="display-4 font-weight-bold">{{ $page->title }}</h1>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb justify-content-center bg-transparent p-0 mb-0">
+                        <li class="breadcrumb-item"><a href="/" class="text-success">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">{{ $page->title }}</li>
+                    </ol>
+                </nav>
+            </div>
+        </section>
+    @endif
 
     <!-- Page Content -->
     <div class="page-content">

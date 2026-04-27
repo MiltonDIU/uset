@@ -6,6 +6,7 @@ use Filament\Forms\Components\Builder;
 use Filament\Forms\Components\Builder\Block;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Repeater;
+use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
@@ -157,6 +158,9 @@ class PageForm
         return [
             self::getRichTextBlock(),
             self::getImageBlock(),
+            self::getPageHeroBlock(),
+            self::getTabsBlock(),
+            self::getTeamsBlock(),
             self::getHeroBlock(),
             self::getWhyChooseBlock(),
             self::getFeaturedProgramsBlock(),
@@ -196,6 +200,167 @@ class PageForm
                         'text-center' => 'Center',
                         'text-right' => 'Right',
                     ])->default('text-center'),
+            ]);
+    }
+
+    protected static function getPageHeroBlock(): Block
+    {
+        return Block::make('page_hero')
+            ->label('Page Hero (Static)')
+            ->icon('heroicon-o-photo')
+            ->schema([
+                TextInput::make('title')
+                    ->required()
+                    ->helperText('Defaults to Page Title if empty'),
+                Textarea::make('description'),
+                Toggle::make('show_breadcrumbs')
+                    ->label('Show Breadcrumbs')
+                    ->default(true),
+            ]);
+    }
+
+    protected static function getTabsBlock(): Block
+    {
+        return Block::make('tabs_component')
+            ->label('Interactive Tabs')
+            ->icon('heroicon-o-queue-list')
+            ->schema([
+                Repeater::make('tabs')
+                    ->schema([
+                        Grid::make(2)->schema([
+                            TextInput::make('title')
+                                ->required()
+                                ->columnSpan(1),
+                            Select::make('type')
+                                ->options([
+                                    'mission_vision' => 'Mission & Vision (2 Boxes)',
+                                    'timeline' => 'Timeline (History)',
+                                    'facilities' => 'Facilities (Icon Grid)',
+                                    'leadership' => 'Leadership (Profile Cards)',
+                                    'location' => 'Location (Info + Map)',
+                                    'rich_text' => 'Simple Rich Text',
+                                ])
+                                ->reactive()
+                                ->required()
+                                ->columnSpan(1),
+                        ]),
+
+                        // Mission & Vision Fields
+                        Grid::make(2)
+                            ->visible(fn ($get) => $get('type') === 'mission_vision')
+                            ->schema([
+                                Section::make('Mission')
+                                    ->schema([
+                                        TextInput::make('mission_title')->default('Our Mission'),
+                                        Textarea::make('mission_content'),
+                                    ])->columnSpan(1),
+                                Section::make('Vision')
+                                    ->schema([
+                                        TextInput::make('vision_title')->default('Our Vision'),
+                                        Textarea::make('vision_content'),
+                                    ])->columnSpan(1),
+                            ]),
+
+                        // Timeline Fields
+                        Repeater::make('timeline_items')
+                            ->label('History Timeline Items')
+                            ->visible(fn ($get) => $get('type') === 'timeline')
+                            ->schema([
+                                Grid::make(3)->schema([
+                                    TextInput::make('year')->placeholder('e.g. 2020'),
+                                    TextInput::make('title')->placeholder('e.g. Foundation'),
+                                    TextInput::make('icon')->default('fas fa-lightbulb'),
+                                ]),
+                                Textarea::make('description'),
+                            ])
+                            ->collapsible()
+                            ->itemLabel(fn (array $state): ?string => ($state['year'] ?? '').' '.($state['title'] ?? '')),
+
+                        // Facilities Fields
+                        Repeater::make('facility_items')
+                            ->label('Facility Grid Items')
+                            ->visible(fn ($get) => $get('type') === 'facilities')
+                            ->schema([
+                                Grid::make(2)->schema([
+                                    TextInput::make('title')->required(),
+                                    TextInput::make('icon')->default('fas fa-laptop-code'),
+                                ]),
+                                Textarea::make('description'),
+                            ])
+                            ->columns(2)
+                            ->collapsible(),
+
+                        // Leadership Fields
+                        Repeater::make('leader_items')
+                            ->label('Leadership Cards')
+                            ->visible(fn ($get) => $get('type') === 'leadership')
+                            ->schema([
+                                FileUpload::make('image')
+                                    ->image()
+                                    ->directory('leaders'),
+                                TextInput::make('name')->required(),
+                                TextInput::make('role'),
+                                TextInput::make('education'),
+                                Textarea::make('description'),
+                            ])
+                            ->collapsible()
+                            ->itemLabel(fn (array $state): ?string => $state['name'] ?? null),
+
+                        // Location Fields
+                        Grid::make(2)
+                            ->visible(fn ($get) => $get('type') === 'location')
+                            ->schema([
+                                TextInput::make('location_title')->default('Visit USET'),
+                                TextInput::make('phone'),
+                                TextInput::make('email'),
+                                Textarea::make('address')->columnSpanFull(),
+                                TextInput::make('map_iframe_url')
+                                    ->label('Google Maps Embed URL')
+                                    ->helperText('Paste the "src" attribute from the Google Maps embed code')
+                                    ->columnSpanFull(),
+                            ]),
+
+                        // Rich Text Fields
+                        RichEditor::make('rich_content')
+                            ->visible(fn ($get) => $get('type') === 'rich_text')
+                            ->columnSpanFull(),
+                    ])
+                    ->itemLabel(fn (array $state): ?string => $state['title'] ?? null)
+                    ->collapsible()
+                    ->defaultItems(1),
+            ]);
+    }
+
+    protected static function getTeamsBlock(): Block
+    {
+        return Block::make('teams')
+            ->label('Team / Leadership')
+            ->icon('heroicon-o-users')
+            ->schema([
+                Grid::make(2)->schema([
+                    TextInput::make('badge')->default('Our Team'),
+                    TextInput::make('title')->default('Our Leadership'),
+                ]),
+                Textarea::make('subtitle')
+                    ->default('Meet the visionaries shaping the future of skill-based education in Bangladesh')
+                    ->columnSpanFull(),
+                Repeater::make('members')
+                    ->schema([
+                        FileUpload::make('image')
+                            ->image()
+                            ->directory('teams')
+                            ->required(),
+                        TextInput::make('name')->required(),
+                        TextInput::make('role')->required(),
+                        TextInput::make('link')->label('Profile Link (Optional)'),
+                        Grid::make(2)->schema([
+                            TextInput::make('linkedin_url')->label('LinkedIn URL'),
+                            TextInput::make('twitter_url')->label('Twitter URL'),
+                        ]),
+                    ])
+                    ->collapsible()
+                    ->itemLabel(fn (array $state): ?string => $state['name'] ?? null)
+                    ->defaultItems(3),
             ]);
     }
 
