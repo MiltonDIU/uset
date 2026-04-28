@@ -1,0 +1,18 @@
+{
+    "name": "USET - University of Skill Enrichment & Technology",
+    "shortName": "USET",
+    "slogan": "Skill-Based Education for a Better Future",
+    "location": {
+        "address": "Purbachal, beside the Asian Highway",
+        "city": "Dhaka",
+        "country": "Bangladesh"
+    },
+    "contact": {
+        "phone": "+880 1234 567890",
+        "email": "info@uset.edu.bd",
+        "facebook": "https://facebook.com/uset",
+        "twitter": "https://twitter.com/uset",
+        "linkedin": "https://linkedin.com/school/uset",
+        "instagram": "https://instagram.com/uset"
+    }
+}

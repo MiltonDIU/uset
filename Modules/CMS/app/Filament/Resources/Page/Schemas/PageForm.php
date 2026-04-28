@@ -64,6 +64,9 @@ class PageForm
                                                         'default' => 'Default (Full Width)',
                                                         'with_sidebar' => 'Page with Sidebar',
                                                         'contact' => 'Contact Page',
+                                                        'news_listing' => '📰 News Listing',
+                                                        'event_listing' => '📅 Event Listing',
+                                                        'news_events' => '📰📅 News & Events (Combined)',
                                                     ])
                                                     ->default('default')
                                                     ->required(),
@@ -167,6 +170,9 @@ class PageForm
             self::getWhyChooseBlock(),
             self::getFeaturedProgramsBlock(),
             self::getStatsBlock(),
+            self::getNewsFeaturedBlock(),
+            self::getNewsGridBlock(),
+            self::getEventListBlock(),
             self::getNewsEventsBlock(),
             self::getCTABlock(),
         ];
@@ -560,11 +566,140 @@ class PageForm
             ]);
     }
 
+    protected static function getNewsFeaturedBlock(): Block
+    {
+        return Block::make('news_featured')
+            ->label('📰 News Featured')
+            ->icon('heroicon-o-star')
+            ->schema([
+                Grid::make(12)
+                    ->schema([
+                        TextInput::make('badge')
+                            ->default('Featured')
+                            ->columnSpan(3),
+                        TextInput::make('title')
+                            ->default('Featured News')
+                            ->columnSpan(9),
+                    ]),
+                Grid::make(2)
+                    ->schema([
+                        Select::make('layout')
+                            ->options([
+                                'large_card' => 'Large Card with Image',
+                                'banner' => 'Full-Width Banner',
+                                'side_by_side' => 'Side by Side (Image + Content)',
+                            ])
+                            ->default('large_card'),
+                        TextInput::make('count')
+                            ->numeric()
+                            ->default(1)
+                            ->minValue(1)
+                            ->maxValue(3),
+                    ]),
+                Toggle::make('show_breaking')
+                    ->label('Show Breaking News Ticker')
+                    ->default(true),
+                Toggle::make('show_newsletter')
+                    ->label('Show Newsletter Signup Sidebar')
+                    ->default(true),
+            ]);
+    }
+
+    protected static function getNewsGridBlock(): Block
+    {
+        return Block::make('news_grid')
+            ->label('📰 News Grid/List')
+            ->icon('heroicon-o-newspaper')
+            ->schema([
+                Grid::make(12)
+                    ->schema([
+                        TextInput::make('badge')
+                            ->default('Latest News')
+                            ->columnSpan(3),
+                        TextInput::make('title')
+                            ->default('Recent News & Updates')
+                            ->columnSpan(9),
+                    ]),
+                Grid::make(3)
+                    ->schema([
+                        Select::make('layout')
+                            ->options([
+                                'cards' => 'Card Grid',
+                                'list' => 'List View',
+                                'bento' => 'Bento / Magazine (1 big + small)',
+                            ])
+                            ->default('cards'),
+                        TextInput::make('count')
+                            ->numeric()
+                            ->default(6)
+                            ->minValue(3)
+                            ->maxValue(12)
+                            ->label('Items per page'),
+                        Select::make('columns')
+                            ->options([
+                                '2' => '2 Columns',
+                                '3' => '3 Columns',
+                                '4' => '4 Columns',
+                            ])
+                            ->default('3'),
+                    ]),
+                Toggle::make('show_category_filter')
+                    ->label('Show Category Filter Buttons')
+                    ->default(true),
+                Toggle::make('show_pagination')
+                    ->label('Show Pagination')
+                    ->default(true),
+            ]);
+    }
+
+    protected static function getEventListBlock(): Block
+    {
+        return Block::make('event_list')
+            ->label('📅 Event List')
+            ->icon('heroicon-o-calendar-days')
+            ->schema([
+                Grid::make(12)
+                    ->schema([
+                        TextInput::make('badge')
+                            ->default('Mark Your Calendar')
+                            ->columnSpan(3),
+                        TextInput::make('title')
+                            ->default('Upcoming Events')
+                            ->columnSpan(9),
+                    ]),
+                Grid::make(3)
+                    ->schema([
+                        Select::make('layout')
+                            ->options([
+                                'timeline' => 'Timeline Style',
+                                'cards' => 'Card Grid',
+                                'compact' => 'Compact List',
+                            ])
+                            ->default('timeline'),
+                        TextInput::make('count')
+                            ->numeric()
+                            ->default(6)
+                            ->minValue(3)
+                            ->maxValue(12),
+                        Select::make('show_type')
+                            ->options([
+                                'upcoming' => 'Upcoming Only',
+                                'past' => 'Past Only',
+                                'all' => 'All Events',
+                            ])
+                            ->default('upcoming'),
+                    ]),
+                Toggle::make('show_past_events')
+                    ->label('Show Recent/Past Events Section Below')
+                    ->default(true),
+            ]);
+    }
+
     protected static function getNewsEventsBlock(): Block
     {
         return Block::make('news_events')
-            ->label('News & Events')
-            ->icon('heroicon-o-newspaper')
+            ->label('📰📅 News & Events Combined')
+            ->icon('heroicon-o-rectangle-group')
             ->schema([
                 Grid::make(12)
                     ->schema([
@@ -577,6 +712,17 @@ class PageForm
                     ]),
                 Textarea::make('description')
                     ->columnSpanFull(),
+                Grid::make(2)
+                    ->schema([
+                        TextInput::make('news_count')
+                            ->numeric()
+                            ->default(3)
+                            ->label('News Items'),
+                        TextInput::make('event_count')
+                            ->numeric()
+                            ->default(3)
+                            ->label('Event Items'),
+                    ]),
             ]);
     }
 

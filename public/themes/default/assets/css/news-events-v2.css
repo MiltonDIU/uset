@@ -1,0 +1,308 @@
+/* News & Events V2 - Theme Integrated Design */
+
+:root {
+    --ne-card-bg: #ffffff;
+    --ne-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    --ne-shadow-hover: 0 15px 45px rgba(0, 0, 0, 0.12);
+    --ne-border-radius: 12px;
+    --ne-transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* Page Hero Overrides */
+.ne-hero {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    padding: 160px 0 80px;
+    color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+.ne-hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -10%;
+    width: 500px;
+    height: 500px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.ne-hero-content {
+    position: relative;
+    z-index: 2;
+}
+
+.ne-hero h1 {
+    font-weight: 800;
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    letter-spacing: -1px;
+}
+
+.ne-hero .breadcrumb {
+    background: transparent;
+    padding: 0;
+}
+
+.ne-hero .breadcrumb-item, 
+.ne-hero .breadcrumb-item a {
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 500;
+}
+
+.ne-hero .breadcrumb-item.active {
+    color: var(--accent);
+}
+
+/* Featured News Card */
+.ne-featured-card {
+    background: var(--ne-card-bg);
+    border-radius: var(--ne-border-radius);
+    box-shadow: var(--ne-shadow);
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 3rem;
+    transition: var(--ne-transition);
+    border: 1px solid rgba(0,0,0,0.05);
+}
+
+@media (max-width: 991px) {
+    .ne-featured-card { flex-direction: column; }
+}
+
+.ne-featured-img {
+    flex: 0 0 50%;
+    position: relative;
+    overflow: hidden;
+}
+
+.ne-featured-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: var(--ne-transition);
+}
+
+.ne-featured-card:hover .ne-featured-img img {
+    transform: scale(1.05);
+}
+
+.ne-featured-body {
+    padding: 3rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.ne-badge {
+    display: inline-block;
+    padding: 5px 15px;
+    background: var(--primary);
+    color: white;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+}
+
+.ne-featured-title {
+    font-size: 2.25rem;
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+    color: var(--primary-dark);
+}
+
+/* News Grid Cards */
+.ne-card {
+    background: var(--ne-card-bg);
+    border-radius: var(--ne-border-radius);
+    box-shadow: var(--ne-shadow);
+    transition: var(--ne-transition);
+    height: 100%;
+    border: 1px solid rgba(0,0,0,0.05);
+    display: flex;
+    flex-direction: column;
+}
+
+.ne-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--ne-shadow-hover);
+}
+
+.ne-card-img {
+    height: 220px;
+    overflow: hidden;
+    position: relative;
+}
+
+.ne-card-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.ne-card-body {
+    padding: 1.5rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.ne-card-date {
+    font-size: 0.85rem;
+    color: #888;
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+}
+
+.ne-card-date i {
+    margin-right: 8px;
+    color: var(--primary);
+}
+
+.ne-card-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: #222;
+    line-height: 1.4;
+    transition: var(--ne-transition);
+}
+
+.ne-card:hover .ne-card-title {
+    color: var(--primary);
+}
+
+/* Event List Styles */
+.ne-event-card {
+    display: flex;
+    background: white;
+    padding: 1.5rem;
+    border-radius: var(--ne-border-radius);
+    box-shadow: var(--ne-shadow);
+    margin-bottom: 1.5rem;
+    transition: var(--ne-transition);
+    border-left: 5px solid var(--primary);
+}
+
+.ne-event-card:hover {
+    transform: translateX(10px);
+    box-shadow: var(--ne-shadow-hover);
+}
+
+.ne-event-date-box {
+    background: var(--secondary);
+    min-width: 80px;
+    height: 80px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-right: 1.5rem;
+    border: 1px solid #eee;
+}
+
+.ne-event-day {
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: var(--primary);
+    line-height: 1;
+}
+
+.ne-event-month {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #666;
+}
+
+.ne-event-info h5 {
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+/* Detail Page Specific */
+.ne-detail-header {
+    margin-bottom: 3rem;
+}
+
+.ne-detail-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid #eee;
+}
+
+.ne-meta-item {
+    display: flex;
+    align-items: center;
+    font-size: 0.95rem;
+    color: #666;
+}
+
+.ne-meta-item i {
+    margin-right: 10px;
+    color: var(--primary);
+}
+
+.ne-content {
+    font-size: 1.15rem;
+    line-height: 1.8;
+    color: #444;
+}
+
+.ne-content p {
+    margin-bottom: 1.5rem;
+}
+
+.ne-content img {
+    max-width: 100%;
+    border-radius: var(--ne-border-radius);
+    margin: 2rem 0;
+}
+
+.ne-sidebar-widget {
+    background: white;
+    padding: 1.5rem;
+    border-radius: var(--ne-border-radius);
+    box-shadow: var(--ne-shadow);
+    margin-bottom: 2rem;
+}
+
+.ne-widget-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid var(--primary);
+    display: inline-block;
+}
+
+/* Section Headings */
+.ne-section-title {
+    position: relative;
+    padding-bottom: 15px;
+    margin-bottom: 30px;
+    font-weight: 800;
+}
+
+.ne-section-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 60px;
+    height: 4px;
+    background: var(--primary);
+    border-radius: 2px;
+}

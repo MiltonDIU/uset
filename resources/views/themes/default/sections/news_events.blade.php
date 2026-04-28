@@ -1,34 +1,71 @@
-<section class="news-events-section py-5">
-    <div class="container">
-        <div class="text-center mb-5">
-            <span class="badge badge-success px-3 py-2 mb-3">{{ $content['badge'] ?? 'Stay Updated' }}</span>
-            <h2 class="section-title h1 mb-3">{{ $content['title'] ?? 'Latest News & Events' }}</h2>
-            <p class="lead text-muted mb-0 mx-auto" style="max-width: 700px">
-                {{ $content['description'] ?? '' }}
-            </p>
-        </div>
+@php
+    $newsService = app(\Modules\News\app\Services\NewsService::class);
+    $eventService = app(\Modules\Events\app\Services\EventService::class);
+    $newsCount = (int) ($content['news_count'] ?? 3);
+    $eventCount = (int) ($content['event_count'] ?? 3);
+    $recentNews = $newsService->getLatestNews($newsCount);
+    $upcomingEvents = $eventService->getUpcomingEvents($eventCount);
+@endphp
 
+<section class="py-5 bg-white">
+    <div class="container">
         <div class="row">
-            <!-- News Column -->
+            {{-- News Column --}}
             <div class="col-lg-6 mb-5 mb-lg-0">
-                <div class="section-header d-flex justify-content-between align-items-center mb-4">
-                    <h3 class="h4 mb-0">Recent News</h3>
-                    <a href="#" class="text-success">View All News</a>
+                <h2 class="section-heading mb-4">Latest News</h2>
+                @forelse($recentNews as $news)
+                <div class="card mb-3 fade-in-up ne-animate-item">
+                    <div class="card-body p-3">
+                        <div class="d-flex align-items-center">
+                            @if($news->getFirstMediaUrl('featured_image'))
+                                <img src="{{ $news->getFirstMediaUrl('featured_image') }}" alt="{{ $news->title }}" class="rounded mr-3" style="width: 80px; height: 80px; object-fit: cover;">
+                            @else
+                                <div class="bg-light rounded mr-3 d-flex align-items-center justify-content-center" style="width: 80px; height: 80px;">
+                                    <i class="fas fa-newspaper text-muted"></i>
+                                </div>
+                            @endif
+                            <div>
+                                <div class="text-success small font-weight-bold mb-1">{{ $news->news_date?->format('M d, Y') }}</div>
+                                <h6 class="font-weight-bold mb-1">
+                                    <a href="/news/{{ $news->slug }}" class="text-dark">{{ Str::limit($news->title, 60) }}</a>
+                                </h6>
+                                <p class="small text-muted mb-0">{{ Str::limit(strip_tags($news->content), 80) }}</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div id="recent-news">
-                    <!-- News items will be loaded here via JavaScript -->
-                </div>
+                @empty
+                <p class="text-muted">No news available.</p>
+                @endforelse
+                <a href="/news" class="btn btn-link text-success p-0 mt-2 font-weight-bold">View All News <i class="fas fa-arrow-right ml-1"></i></a>
             </div>
 
-            <!-- Events Column -->
+            {{-- Events Column --}}
             <div class="col-lg-6">
-                <div class="section-header d-flex justify-content-between align-items-center mb-4">
-                    <h3 class="h4 mb-0">Upcoming Events</h3>
-                    <a href="#" class="text-success">View All Events</a>
+                <h2 class="section-heading mb-4">Upcoming Events</h2>
+                @forelse($upcomingEvents as $event)
+                <div class="card mb-3 fade-in-up ne-animate-item">
+                    <div class="card-body p-3">
+                        <div class="calendar-item">
+                            <div class="calendar-date mr-3 text-center" style="min-width: 60px;">
+                                <span class="h4 font-weight-bold mb-0 d-block">{{ $event->event_date->format('d') }}</span>
+                                <span class="small text-uppercase">{{ $event->event_date->format('M') }}</span>
+                            </div>
+                            <div class="border-left pl-3">
+                                <h6 class="font-weight-bold mb-1">
+                                    <a href="/events/{{ $event->slug }}" class="text-dark">{{ Str::limit($event->title, 60) }}</a>
+                                </h6>
+                                <p class="small text-muted mb-0">
+                                    <i class="fas fa-map-marker-alt mr-1"></i> {{ $event->venue ?? 'Main Campus' }}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div id="upcoming-events">
-                    <!-- Event items will be loaded here via JavaScript -->
-                </div>
+                @empty
+                <p class="text-muted">No upcoming events.</p>
+                @endforelse
+                <a href="/events" class="btn btn-link text-success p-0 mt-2 font-weight-bold">View All Events <i class="fas fa-arrow-right ml-1"></i></a>
             </div>
         </div>
     </div>

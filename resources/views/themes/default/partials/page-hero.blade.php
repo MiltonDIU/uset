@@ -6,12 +6,10 @@
 
 <section class="page-hero">
     <div class="container">
-        <div class="text-center mb-4">
-            <h1>{{ $title }}</h1>
-            @if($description)
-                <p>{{ $description }}</p>
-            @endif
-        </div>
+        <h1>{{ $title }}</h1>
+        @if($description)
+            <p>{{ $description }}</p>
+        @endif
         
         @if($show_breadcrumbs ?? true)
             <nav aria-label="breadcrumb">

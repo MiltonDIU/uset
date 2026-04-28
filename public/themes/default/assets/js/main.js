@@ -3,58 +3,41 @@
 document.addEventListener('DOMContentLoaded', function() {
   // Load university information for footer and other components
   fetch('/data/university_info.json')
-    .then(response => response.json())
+    .then(response => {
+      if (!response.ok) throw new Error('Network response was not ok');
+      return response.json();
+    })
     .then(data => {
       // Update elements with university info
-      // Name, address, contact, etc.
-      const universityName = document.querySelectorAll('.university-name');
-      const universityShortName = document.querySelectorAll('.university-short-name');
-      const universitySlogan = document.querySelectorAll('.university-slogan');
-      const universityAddress = document.querySelectorAll('.university-address');
-      const universityPhone = document.querySelectorAll('.university-phone');
-      const universityEmail = document.querySelectorAll('.university-email');
-      
-      // Social media links
-      const facebookLinks = document.querySelectorAll('.facebook-link');
-      const twitterLinks = document.querySelectorAll('.twitter-link');
-      const linkedinLinks = document.querySelectorAll('.linkedin-link');
-      const instagramLinks = document.querySelectorAll('.instagram-link');
-      
-      // Update all elements with university information
-      universityName.forEach(el => el.textContent = data.name);
-      universityShortName.forEach(el => el.textContent = data.shortName);
-      universitySlogan.forEach(el => el.textContent = data.slogan);
+      document.querySelectorAll('.university-name').forEach(el => el.textContent = data.name);
+      document.querySelectorAll('.university-short-name').forEach(el => el.textContent = data.shortName);
+      document.querySelectorAll('.university-slogan').forEach(el => el.textContent = data.slogan);
       
       const fullAddress = `${data.location.address}, ${data.location.city}, ${data.location.country}`;
-      universityAddress.forEach(el => el.textContent = fullAddress);
+      document.querySelectorAll('.university-address').forEach(el => el.textContent = fullAddress);
       
-      universityPhone.forEach(el => {
+      document.querySelectorAll('.university-phone').forEach(el => {
         el.textContent = data.contact.phone;
-        if (el.tagName === 'A') {
-          el.href = `tel:${data.contact.phone}`;
-        }
+        if (el.tagName === 'A') el.href = `tel:${data.contact.phone}`;
       });
       
-      universityEmail.forEach(el => {
+      document.querySelectorAll('.university-email').forEach(el => {
         el.textContent = data.contact.email;
-        if (el.tagName === 'A') {
-          el.href = `mailto:${data.contact.email}`;
-        }
+        if (el.tagName === 'A') el.href = `mailto:${data.contact.email}`;
       });
       
-      // Update social media links
-      facebookLinks.forEach(el => el.href = data.contact.facebook);
-      twitterLinks.forEach(el => el.href = data.contact.twitter);
-      linkedinLinks.forEach(el => el.href = data.contact.linkedin);
-      instagramLinks.forEach(el => el.href = data.contact.instagram);
+      document.querySelectorAll('.facebook-link').forEach(el => el.href = data.contact.facebook);
+      document.querySelectorAll('.twitter-link').forEach(el => el.href = data.contact.twitter);
+      document.querySelectorAll('.linkedin-link').forEach(el => el.href = data.contact.linkedin);
+      document.querySelectorAll('.instagram-link').forEach(el => el.href = data.contact.instagram);
       
-      // Set copyright year in footer
       const copyrightYear = document.querySelector('.copyright-year');
-      if (copyrightYear) {
-        copyrightYear.textContent = new Date().getFullYear();
-      }
+      if (copyrightYear) copyrightYear.textContent = new Date().getFullYear();
     })
-    .catch(error => console.error('Error loading university info:', error));
+    .catch(error => {
+        console.warn('University info not loaded, using defaults:', error);
+        // Fallback to static info or leave as is
+    });
     
   // Initialize tooltips
   $('[data-toggle="tooltip"]').tooltip();
