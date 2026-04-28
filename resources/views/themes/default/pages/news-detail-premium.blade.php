@@ -11,24 +11,19 @@
 @endpush
 
 @section('content')
-    <!-- Premium Article Hero -->
-    <section class="premium-hero" style="padding: 120px 0 80px;">
-        <div class="container text-center">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb justify-content-center bg-transparent p-0 mb-4">
-                    <li class="breadcrumb-item"><a href="/">Home</a></li>
-                    <li class="breadcrumb-item"><a href="/news-events">News & Events</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Article</li>
-                </ol>
-            </nav>
-            <h1 class="display-4 font-weight-bold mb-4 mx-auto" style="max-width: 900px;">{{ $news->title }}</h1>
-            <div class="d-flex justify-content-center align-items-center gap-4 text-white opacity-75">
-                <span><i class="far fa-calendar-alt mr-2"></i> {{ $news->news_date?->format('F d, Y') }}</span>
-                <span><i class="far fa-folder mr-2"></i> {{ $news->category->name ?? 'General' }}</span>
-                <span><i class="far fa-user mr-2"></i> Admin</span>
-            </div>
+    @component('themes.default.partials.page-hero', [
+        'title' => $news->title,
+        'breadcrumbs' => [
+            ['name' => $page->title, 'url' => '/' . $page->slug],
+            ['name' => 'Article', 'url' => '']
+        ]
+    ])
+        <div class="d-flex justify-content-center align-items-center gap-4 text-white opacity-75">
+            <span><i class="far fa-calendar-alt mr-2"></i> {{ $news->news_date?->format('F d, Y') }}</span>
+            <span><i class="far fa-folder mr-2"></i> {{ $news->category->name ?? 'General' }}</span>
+            <span><i class="far fa-user mr-2"></i> Admin</span>
         </div>
-    </section>
+    @endcomponent
 
     <div class="container py-5 mt-n5">
         <div class="row">
@@ -82,7 +77,7 @@
                     <!-- Search Widget -->
                     <div class="glass-card p-4 mb-4 fade-in-up" style="animation-delay: 0.1s">
                         <h4 class="widget-title">Search</h4>
-                        <form action="/news" method="GET">
+                        <form action="/{{ $page->slug }}" method="GET">
                             <div class="input-group">
                                 <input type="text" name="search" class="form-control rounded-left border-right-0" placeholder="Search news...">
                                 <div class="input-group-append">
@@ -100,7 +95,7 @@
                         <div class="d-flex mb-4 align-items-center">
                             <img src="{{ $recent->getFirstMediaUrl('featured_image') ?: 'https://via.placeholder.com/80x80' }}" class="rounded mr-3" style="width: 70px; height: 70px; object-fit: cover;">
                             <div>
-                                <h6 class="mb-1 line-clamp-2"><a href="/news/{{ $recent->slug }}" class="text-dark font-weight-bold">{{ $recent->title }}</a></h6>
+                                <h6 class="mb-1 line-clamp-2"><a href="/{{ $page->slug }}/{{ $recent->slug }}" class="text-dark font-weight-bold">{{ $recent->title }}</a></h6>
                                 <small class="text-muted"><i class="far fa-calendar-alt mr-1"></i> {{ $recent->news_date?->format('M d') }}</small>
                             </div>
                         </div>
@@ -113,7 +108,7 @@
                         <ul class="list-unstyled mb-0">
                             @foreach(\Modules\News\app\Models\NewsCategory::where('is_active', true)->get() as $cat)
                             <li class="mb-2 pb-2 border-bottom last-child-no-border">
-                                <a href="/news?category={{ $cat->slug }}" class="text-dark d-flex justify-content-between align-items-center">
+                                <a href="/{{ $page->slug }}?category={{ $cat->slug }}" class="text-dark d-flex justify-content-between align-items-center">
                                     {{ $cat->name }}
                                     <span class="badge badge-light badge-pill px-2">{{ $cat->news()->count() }}</span>
                                 </a>

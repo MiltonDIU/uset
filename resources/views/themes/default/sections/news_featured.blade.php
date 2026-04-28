@@ -3,6 +3,10 @@
     $count = (int) ($content['count'] ?? 1);
     $featuredNews = $newsService->getFeaturedNews($count);
     $showNewsletter = $content['show_newsletter'] ?? true;
+    
+    // Find the page that acts as the news listing to use its slug for details routing
+    $newsPage = \Modules\CMS\app\Models\Page::whereIn('template', ['news_listing', 'news_events'])->where('is_published', true)->first();
+    $newsRouteSlug = $newsPage ? $newsPage->slug : 'news';
 @endphp
 
 <section class="py-5 bg-light">
@@ -26,7 +30,7 @@
                             {{ Str::limit($news->short_description ?? strip_tags($news->content), 350) }}
                         </p>
                         <div class="d-flex flex-wrap">
-                            <a href="/news/{{ $news->slug }}" class="btn btn-success mr-3 mb-2">
+                            <a href="/{{ $newsRouteSlug }}/{{ $news->slug }}" class="btn btn-success mr-3 mb-2">
                                 <i class="fas fa-book-open mr-2"></i>Read Full Story
                             </a>
                         </div>

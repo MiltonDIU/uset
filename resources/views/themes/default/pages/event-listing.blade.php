@@ -13,18 +13,13 @@
         $pastEvents = $eventService->getRecentEvents(6);
     @endphp
 
-    <!-- Premium Hero Section -->
-    <section class="ne-hero">
-        <div class="container ne-hero-content">
-            <h1>Events & Activities</h1>
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="/">Home</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Events</li>
-                </ol>
-            </nav>
-        </div>
-    </section>
+    @component('themes.default.partials.page-hero', [
+        'title' => $page->title,
+        'breadcrumbs' => [
+            ['name' => $page->title, 'url' => '']
+        ]
+    ])
+    @endcomponent
 
     <div class="container py-5">
         <div class="row">
@@ -47,7 +42,7 @@
                             <p class="text-muted small mb-3">
                                 {{ Str::limit(strip_tags($event->description), 150) }}
                             </p>
-                            <a href="/events/{{ $event->slug }}" class="btn btn-sm btn-outline-primary rounded-pill px-3">View Details</a>
+                            <a href="{{ url($page->slug . '/' . $event->slug) }}" class="btn btn-sm btn-outline-primary rounded-pill px-3">View Details</a>
                         </div>
                     </div>
                 @empty
@@ -72,7 +67,7 @@
                                     </div>
                                     <h5 class="font-weight-bold">{{ Str::limit($event->title, 50) }}</h5>
                                     <p class="text-muted small mb-3">{{ Str::limit(strip_tags($event->description), 100) }}</p>
-                                    <a href="/events/{{ $event->slug }}" class="text-primary font-weight-bold small">Read Summary <i class="fas fa-arrow-right ml-1"></i></a>
+                                    <a href="{{ url($page->slug . '/' . $event->slug) }}" class="text-primary font-weight-bold small">Read Summary <i class="fas fa-arrow-right ml-1"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -94,7 +89,7 @@
                         <ul class="list-unstyled mb-0">
                             @foreach(\Modules\Events\app\Models\EventCategory::where('is_active', true)->get() as $cat)
                                 <li class="mb-2 pb-2 border-bottom last-child-no-border">
-                                    <a href="/events?category={{ $cat->slug }}" class="text-dark d-flex justify-content-between align-items-center">
+                                    <a href="/{{ $page->slug }}?category={{ $cat->slug }}" class="text-dark d-flex justify-content-between align-items-center">
                                         {{ $cat->name }}
                                         <span class="badge badge-light badge-pill">{{ $cat->events()->count() }}</span>
                                     </a>

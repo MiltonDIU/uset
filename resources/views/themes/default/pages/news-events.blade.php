@@ -27,10 +27,14 @@
     @endphp
 
     <!-- Page Hero -->
-    @include('themes.default.partials.page-hero', [
-        'title' => 'News & Events',
-        'description' => 'Stay updated with the latest happenings, academic news, and upcoming events at USET.'
+    @component('themes.default.partials.page-hero', [
+        'title' => $page->title,
+        'description' => 'Stay updated with the latest happenings, academic news, and upcoming events at USET.',
+        'breadcrumbs' => [
+            ['name' => $page->title, 'url' => '']
+        ]
     ])
+    @endcomponent
 
     <!-- Featured News -->
     @include('themes.default.sections.news_featured', ['content' => ['count' => 1, 'show_newsletter' => true]])

@@ -11,21 +11,21 @@
 @endpush
 
 @section('content')
-    <!-- Premium Hero Section -->
-    <section class="premium-hero">
-        <div class="container text-center">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb justify-content-center bg-transparent p-0 mb-4">
-                    <li class="breadcrumb-item"><a href="/">Home</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">News & Events</li>
-                </ol>
-            </nav>
-            <h1 class="display-4 font-weight-bold mb-3">Campus Buzz & Global Updates</h1>
-            <p class="lead opacity-75 mx-auto" style="max-width: 700px;">
-                Stay connected with the latest academic breakthroughs, campus events, and student success stories at USET.
-            </p>
-        </div>
-    </section>
+    @php
+        $newsPage = \Modules\CMS\app\Models\Page::whereIn('template', ['news_listing', 'news_events'])->where('is_published', true)->first();
+        $newsRouteSlug = $newsPage ? $newsPage->slug : 'news';
+        
+        $eventPage = \Modules\CMS\app\Models\Page::whereIn('template', ['event_listing', 'news_events'])->where('is_published', true)->first();
+        $eventRouteSlug = $eventPage ? $eventPage->slug : 'events';
+    @endphp
+    @component('themes.default.partials.page-hero', [
+        'title' => $page->title,
+        'description' => 'Stay connected with the latest academic breakthroughs, campus events, and student success stories at USET.',
+        'breadcrumbs' => [
+            ['name' => $page->title, 'url' => '']
+        ]
+    ])
+    @endcomponent
 
     <div class="container mb-5">
         <div class="featured-split">
@@ -50,7 +50,7 @@
                                     </div>
                                     <h2 class="ne-card-title h3">{{ $featured->title }}</h2>
                                     <p class="text-muted mb-4">{{ Str::limit($featured->short_description, 120) }}</p>
-                                    <a href="/news/{{ $featured->slug }}" class="btn btn-primary align-self-start rounded-pill px-4">Read Full Article</a>
+                                    <a href="{{ url($page->slug . '/' . $featured->slug) }}" class="btn btn-primary align-self-start rounded-pill px-4">Read Full Article</a>
                                 </div>
                             </div>
                         </div>
@@ -85,7 +85,7 @@
                     <span class="text-primary font-weight-bold text-uppercase tracking-wider">Updates</span>
                     <h2 class="font-weight-bold">Latest News</h2>
                 </div>
-                <a href="/news" class="btn btn-outline-primary rounded-pill px-4">View All News</a>
+                <a href="/{{ $newsRouteSlug }}" class="btn btn-outline-primary rounded-pill px-4">View All News</a>
             </div>
             
             <div class="row">
@@ -103,7 +103,7 @@
                             </div>
                             <h3 class="ne-card-title">{{ $news->title }}</h3>
                             <p class="text-muted small mb-4">{{ Str::limit($news->short_description, 90) }}</p>
-                            <a href="/news/{{ $news->slug }}" class="font-weight-bold text-primary">Read More <i class="fas fa-arrow-right ml-1"></i></a>
+                            <a href="{{ url($page->slug . '/' . $news->slug) }}" class="font-weight-bold text-primary">Read More <i class="fas fa-arrow-right ml-1"></i></a>
                         </div>
                     </div>
                 </div>
@@ -120,7 +120,7 @@
                     <span class="text-primary font-weight-bold text-uppercase tracking-wider">Calendar</span>
                     <h2 class="font-weight-bold">Upcoming Events</h2>
                 </div>
-                <a href="/events" class="btn btn-outline-primary rounded-pill px-4">View All Events</a>
+                <a href="/{{ $eventRouteSlug }}" class="btn btn-outline-primary rounded-pill px-4">View All Events</a>
             </div>
 
             <div class="row">
@@ -142,7 +142,7 @@
                                     </div>
                                     <h3 class="ne-card-title h5">{{ $event->title }}</h3>
                                     <p class="text-muted small mb-3"><i class="fas fa-map-marker-alt mr-1"></i> {{ $event->venue }}</p>
-                                    <a href="/events/{{ $event->slug }}" class="btn btn-sm btn-outline-primary rounded-pill px-3">Join Event</a>
+                                    <a href="{{ url($page->slug . '/' . $event->slug) }}" class="btn btn-sm btn-outline-primary rounded-pill px-3">Join Event</a>
                                 </div>
                             </div>
                         </div>

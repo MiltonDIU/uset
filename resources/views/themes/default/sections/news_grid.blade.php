@@ -14,6 +14,10 @@
 
     $newsList = $showPagination ? $newsQuery->paginate($count) : $newsQuery->limit($count)->get();
     $categories = $showFilter ? \Modules\News\app\Models\NewsCategory::where('is_active', true)->get() : collect();
+    
+    // Find the page that acts as the news listing to use its slug for details routing
+    $newsPage = \Modules\CMS\app\Models\Page::whereIn('template', ['news_listing', 'news_events'])->where('is_published', true)->first();
+    $newsRouteSlug = $newsPage ? $newsPage->slug : 'news';
 @endphp
 
 <section class="py-5 bg-light" id="news-section">
@@ -61,7 +65,7 @@
                         <p class="card-text">
                             {{ Str::limit($news->short_description ?? strip_tags($news->content), 120) }}
                         </p>
-                        <a href="/news/{{ $news->slug }}" class="text-success font-weight-bold">Read More...</a>
+                        <a href="/{{ $newsRouteSlug }}/{{ $news->slug }}" class="text-success font-weight-bold">Read More...</a>
                     </div>
                 </div>
             </div>

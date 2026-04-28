@@ -35,10 +35,11 @@ class PageController extends Controller
         }
 
         // Try to find a view matching the template in the current theme
-        $view = app(\Modules\Theme\app\Services\ThemeService::class)->view('pages.' . $template);
+        $templateViewName = str_replace('_', '-', $template);
+        $view = app(\Modules\Theme\app\Services\ThemeService::class)->view('pages.' . $templateViewName);
 
         if (view()->exists($view)) {
-            return theme_view('pages.' . $template, compact('page'));
+            return theme_view('pages.' . $templateViewName, compact('page'));
         }
 
         // Fallback: try slug-based view

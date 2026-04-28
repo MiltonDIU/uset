@@ -16,18 +16,13 @@
             ->paginate(9);
     @endphp
 
-    <!-- Premium Hero Section -->
-    <section class="ne-hero">
-        <div class="container ne-hero-content">
-            <h1 class="fade-in">News & Updates</h1>
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="/">Home</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">News</li>
-                </ol>
-            </nav>
-        </div>
-    </section>
+    @component('themes.default.partials.page-hero', [
+        'title' => $page->title,
+        'breadcrumbs' => [
+            ['name' => $page->title, 'url' => '']
+        ]
+    ])
+    @endcomponent
 
     <div class="container py-5">
         {{-- Featured News --}}
@@ -52,7 +47,7 @@
                         <i class="fas fa-user mr-2 text-primary"></i> Administration
                     </div>
                     <div>
-                        <a href="/news/{{ $featuredNews->slug }}" class="btn btn-primary btn-lg rounded-pill px-5">
+                        <a href="{{ url($page->slug . '/' . $featuredNews->slug) }}" class="btn btn-primary btn-lg rounded-pill px-5">
                             Read Full Story <i class="fas fa-arrow-right ml-2"></i>
                         </a>
                     </div>
@@ -83,13 +78,13 @@
                                 <i class="fas fa-calendar-alt"></i> {{ $news->news_date?->format('M d, Y') }}
                             </div>
                             <h4 class="ne-card-title">
-                                <a href="/news/{{ $news->slug }}" class="text-dark text-decoration-none">{{ Str::limit($news->title, 70) }}</a>
+                                <a href="{{ url($page->slug . '/' . $news->slug) }}" class="text-dark text-decoration-none">{{ Str::limit($news->title, 70) }}</a>
                             </h4>
                             <p class="text-muted small">
                                 {{ Str::limit($news->short_description ?? strip_tags($news->content), 120) }}
                             </p>
                             <div class="mt-auto pt-3">
-                                <a href="/news/{{ $news->slug }}" class="btn btn-link text-primary p-0 font-weight-bold">
+                                <a href="{{ url($page->slug . '/' . $news->slug) }}" class="btn btn-link text-primary p-0 font-weight-bold">
                                     Read More <i class="fas fa-chevron-right ml-1 small"></i>
                                 </a>
                             </div>

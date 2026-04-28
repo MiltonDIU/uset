@@ -12,19 +12,14 @@
 @endpush
 
 @section('content')
-    <!-- Detail Hero -->
-    <section class="ne-hero">
-        <div class="container ne-hero-content">
-            <nav aria-label="breadcrumb" class="mb-4">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="/">Home</a></li>
-                    <li class="breadcrumb-item"><a href="/news">News</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Article</li>
-                </ol>
-            </nav>
-            <h1 style="font-size: 2.75rem; line-height: 1.2;">{{ $news->title }}</h1>
-        </div>
-    </section>
+    @component('themes.default.partials.page-hero', [
+        'title' => $news->title,
+        'breadcrumbs' => [
+            ['name' => $page->title, 'url' => '/' . $page->slug],
+            ['name' => 'Article', 'url' => '']
+        ]
+    ])
+    @endcomponent
 
     <div class="container py-5">
         <div class="row">
@@ -95,7 +90,7 @@
                     {{-- Search Widget --}}
                     <div class="ne-sidebar-widget">
                         <h4 class="ne-widget-title">Search News</h4>
-                        <form action="/news" method="GET">
+                        <form action="/{{ $page->slug }}" method="GET" class="mb-4">
                             <div class="input-group">
                                 <input type="text" name="search" class="form-control" placeholder="Search articles...">
                                 <div class="input-group-append">
@@ -114,7 +109,7 @@
                                      class="mr-3 rounded" style="width: 70px; height: 70px; object-fit: cover;" alt="{{ $recent->title }}">
                                 <div class="media-body">
                                     <h6 class="mt-0 mb-1 font-weight-bold" style="font-size: 0.9rem; line-height: 1.3;">
-                                        <a href="/news/{{ $recent->slug }}" class="text-dark">{{ Str::limit($recent->title, 45) }}</a>
+                                        <a href="/{{ $page->slug }}/{{ $recent->slug }}" class="text-dark">{{ Str::limit($recent->title, 45) }}</a>
                                     </h6>
                                     <small class="text-muted"><i class="fas fa-calendar-alt mr-1"></i> {{ $recent->news_date?->format('M d') }}</small>
                                 </div>
@@ -128,7 +123,7 @@
                         <ul class="list-unstyled mb-0">
                             @foreach(\Modules\News\app\Models\NewsCategory::where('is_active', true)->get() as $cat)
                                 <li class="mb-2 pb-2 border-bottom last-child-no-border">
-                                    <a href="/news?category={{ $cat->slug }}" class="text-dark d-flex justify-content-between align-items-center">
+                                    <a href="/{{ $page->slug }}?category={{ $cat->slug }}" class="text-dark d-flex justify-content-between align-items-center">
                                         {{ $cat->name }}
                                         <span class="badge badge-light badge-pill">{{ $cat->news()->count() }}</span>
                                     </a>

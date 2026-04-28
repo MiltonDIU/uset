@@ -10,6 +10,10 @@
     };
 
     $categories = \Modules\Events\app\Models\EventCategory::where('is_active', true)->get();
+    
+    // Find the page that acts as the events listing to use its slug for details routing
+    $eventPage = \Modules\CMS\app\Models\Page::whereIn('template', ['event_listing', 'news_events'])->where('is_published', true)->first();
+    $eventRouteSlug = $eventPage ? $eventPage->slug : 'events';
 @endphp
 
 <section class="py-5 bg-white" id="events-section">
@@ -47,7 +51,7 @@
                         <p class="mt-3 text-muted small">
                             {{ Str::limit(strip_tags($event->description), 80) }}
                         </p>
-                        <a href="/events/{{ $event->slug }}" class="btn btn-outline-success btn-block mt-3">View Details</a>
+                        <a href="/{{ $eventRouteSlug }}/{{ $event->slug }}" class="btn btn-outline-success btn-block mt-3">View Details</a>
                     </div>
                 </div>
             </div>

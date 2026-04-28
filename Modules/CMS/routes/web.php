@@ -13,8 +13,3 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::prefix('cms')->group(function () {
-    Route::get('/', function () {
-        return view('cms::index');
-    });
-});

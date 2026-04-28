@@ -7,19 +7,14 @@
 @endpush
 
 @section('content')
-    <!-- Event Detail Hero -->
-    <section class="ne-hero">
-        <div class="container ne-hero-content">
-            <nav aria-label="breadcrumb" class="mb-4">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="/">Home</a></li>
-                    <li class="breadcrumb-item"><a href="/events">Events</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Details</li>
-                </ol>
-            </nav>
-            <h1 style="font-size: 2.75rem; line-height: 1.2;">{{ $event->title }}</h1>
-        </div>
-    </section>
+    @component('themes.default.partials.page-hero', [
+        'title' => $event->title,
+        'breadcrumbs' => [
+            ['name' => $page->title, 'url' => '/' . $page->slug],
+            ['name' => 'Details', 'url' => '']
+        ]
+    ])
+    @endcomponent
 
     <div class="container py-5">
         <div class="row">
@@ -108,7 +103,7 @@
                                 </div>
                                 <div class="media-body">
                                     <h6 class="mt-0 mb-0 font-weight-bold" style="font-size: 0.9rem;">
-                                        <a href="/events/{{ $recent->slug }}" class="text-dark">{{ Str::limit($recent->title, 45) }}</a>
+                                        <a href="/{{ $page->slug }}/{{ $recent->slug }}" class="text-dark">{{ Str::limit($recent->title, 45) }}</a>
                                     </h6>
                                 </div>
                             </div>

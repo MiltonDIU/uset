@@ -11,24 +11,19 @@
 @endpush
 
 @section('content')
-    <!-- Premium Event Hero -->
-    <section class="premium-hero" style="padding: 120px 0 80px;">
-        <div class="container text-center">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb justify-content-center bg-transparent p-0 mb-4">
-                    <li class="breadcrumb-item"><a href="/">Home</a></li>
-                    <li class="breadcrumb-item"><a href="/news-events">News & Events</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Event Details</li>
-                </ol>
-            </nav>
-            <h1 class="display-4 font-weight-bold mb-4 mx-auto" style="max-width: 900px;">{{ $event->title }}</h1>
-            <div class="d-flex justify-content-center align-items-center flex-wrap gap-4 text-white opacity-75">
-                <span><i class="far fa-calendar-alt mr-2"></i> {{ $event->event_date->format('F d, Y') }}</span>
-                <span><i class="far fa-clock mr-2"></i> {{ $event->start_time }} - {{ $event->end_time }}</span>
-                <span><i class="fas fa-map-marker-alt mr-2"></i> {{ $event->venue }}</span>
-            </div>
+    @component('themes.default.partials.page-hero', [
+        'title' => $event->title,
+        'breadcrumbs' => [
+            ['name' => $page->title, 'url' => '/' . $page->slug],
+            ['name' => 'Event Details', 'url' => '']
+        ]
+    ])
+        <div class="d-flex justify-content-center align-items-center flex-wrap gap-4 text-white opacity-75">
+            <span><i class="far fa-calendar-alt mr-2"></i> {{ $event->event_date->format('F d, Y') }}</span>
+            <span><i class="far fa-clock mr-2"></i> {{ $event->start_time }} - {{ $event->end_time }}</span>
+            <span><i class="fas fa-map-marker-alt mr-2"></i> {{ $event->venue }}</span>
         </div>
-    </section>
+    @endcomponent
 
     <div class="container py-5 mt-n5">
         <div class="row">
@@ -99,7 +94,7 @@
                                 <div class="small text-uppercase">{{ $other->event_date->format('M') }}</div>
                             </div>
                             <div>
-                                <h6 class="mb-1 line-clamp-2"><a href="/events/{{ $other->slug }}" class="text-dark font-weight-bold">{{ $other->title }}</a></h6>
+                                <h6 class="mb-1 line-clamp-2"><a href="/{{ $page->slug }}/{{ $other->slug }}" class="text-dark font-weight-bold">{{ $other->title }}</a></h6>
                                 <small class="text-muted"><i class="fas fa-map-marker-alt mr-1"></i> {{ Str::limit($other->venue, 20) }}</small>
                             </div>
                         </div>
