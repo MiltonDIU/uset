@@ -83,7 +83,6 @@ class LabForm
                         ->reorderable()
                         ->image()
                         ->imagePreviewHeight('150')
-                        ->contentGrid(['md' => 4])
                         ->columnSpanFull(),
                 ])
                 ->columns(2),

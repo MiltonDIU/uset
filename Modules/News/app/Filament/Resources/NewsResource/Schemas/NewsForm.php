@@ -101,11 +101,7 @@ class NewsForm
                         ->reorderable()
                         ->image()
                         ->imageEditor()
-                        ->imagePreviewHeight('150')
-                        ->contentGrid([
-                            'md' => 4,
-                            'xl' => 6,
-                        ]),
+                        ->imagePreviewHeight('150'),
                 ])
                 ->columnSpanFull(),
         ])->columns(3);

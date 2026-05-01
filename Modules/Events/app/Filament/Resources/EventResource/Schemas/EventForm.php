@@ -111,10 +111,6 @@ class EventForm
                         ->image()
                         ->imageEditor()
                         ->imagePreviewHeight('150')
-                        ->contentGrid([
-                            'md' => 4,
-                            'xl' => 6,
-                        ])
                         ->columnSpanFull(),
                 ])
                 ->columnSpan(2),
